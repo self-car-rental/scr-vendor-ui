@@ -26,7 +26,7 @@ class _LoginScreenState extends State<LoginScreen> {
           onPressed: () {
             context.goNamed(AppPage.home.name);
           },
-          child: const Text("Home"),
+          child: const Text('Home'),
         ),
       ),
     );

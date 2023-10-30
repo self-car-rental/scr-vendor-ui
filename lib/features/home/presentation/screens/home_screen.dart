@@ -24,9 +24,9 @@ class _HomeScreenState extends State<HomeScreen> {
       body: Center(
         child: ElevatedButton(
           onPressed: () {
-            context.goNamed(AppPage.login.name);
+            context.goNamed(AppPage.user.name);
           },
-          child: const Text("Login"),
+          child: const Text('Login'),
         ),
       ),
     );
