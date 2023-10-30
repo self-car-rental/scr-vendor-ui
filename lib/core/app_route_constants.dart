@@ -1,39 +1,42 @@
-enum AppPage {
-  login,
-  home,
-}
+enum AppPage { login, home, user }
 
 extension AppPageExtension on AppPage {
   String get path {
     switch (this) {
       case AppPage.home:
-        return "/";
+        return '/';
       case AppPage.login:
-        return "/login";
+        return '/login';
+      case AppPage.user:
+        return '/user';
       default:
-        return "/";
+        return '/';
     }
   }
 
   String get name {
     switch (this) {
       case AppPage.home:
-        return "HOME";
+        return 'HOME';
       case AppPage.login:
-        return "LOGIN";
+        return 'LOGIN';
+      case AppPage.user:
+        return 'USER';
       default:
-        return "HOME";
+        return 'HOME';
     }
   }
 
   String get title {
     switch (this) {
       case AppPage.home:
-        return "My Home";
+        return 'My Home';
       case AppPage.login:
-        return "My Login";
+        return 'My Login';
+      case AppPage.user:
+        return 'My USER';
       default:
-        return "My Home";
+        return 'My Home';
     }
   }
 }
