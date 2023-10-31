@@ -11,11 +11,11 @@ extension StringExtension on String {
   }
 
   String get toCapital {
-    return "${this[0].toUpperCase()}${substring(1).toLowerCase()}";
+    return '${this[0].toUpperCase()}${substring(1).toLowerCase()}';
   }
 }
 
-extension IntegetExtension on int? {
+extension IntegerExtension on int? {
   bool get success {
     if (this == 200 || this == 201 || this == 204) {
       return true;

@@ -7,9 +7,6 @@ class ApiConfig {
   static const Duration receiveTimeout = Duration(milliseconds: 15000);
   static const Duration connectionTimeout = Duration(milliseconds: 15000);
   static const String users = '/users';
-  static const String posts = '/posts';
-  static const String comments = '/comments';
-  static const String todos = '/todos';
   static const header = {
     'Authorization': 'Bearer $token',
     'content-Type': 'application/json',
