@@ -39,5 +39,5 @@ jobs:
       - name: Upload APK
         uses: actions/upload-artifact@v3
         with:
-          name: app-release.apk
+          name: scr_vendor-${{ github.sha }}.apk
           path: build/app/outputs/flutter-apk/app-release.apk
