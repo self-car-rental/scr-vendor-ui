@@ -29,9 +29,6 @@ jobs:
         with:
           channel: 'stable' # or: 'beta', 'dev' or 'master'
       - run: flutter --version
-        with:
-          flutter-version: 'latest'
-          channel: 'stable'
 
       - name: Install dependencies
         run: flutter pub get
