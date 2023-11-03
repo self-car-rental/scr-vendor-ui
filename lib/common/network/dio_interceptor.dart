@@ -1,40 +1,38 @@
 // Package imports:
 import 'package:dio/dio.dart';
-import 'package:logger/logger.dart';
 
 // Project imports:
-import 'package:scr_vendor/core/app_extension.dart';
+import 'package:scr_vendor/common/log/log.dart';
 
 class DioInterceptor extends Interceptor {
-  final Logger logger = Logger(
-    printer: PrettyPrinter(
-      methodCount: 0,
-      printTime: false,
-    ),
-  );
+  final log = Log();
 
   @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
-    logger.i('====================START====================');
-    logger.i('HTTP method => ${options.method} ');
-    logger.i(
-        'Request => ${options.baseUrl}${options.path}${options.queryParameters.format}');
-    logger.i('Header  => ${options.headers}');
-    return super.onRequest(options, handler);
+    log.i('===== HTTP Request Start =====');
+    log.d('Method: ${options.method}');
+    log.d('URL: ${options.uri}');
+    log.d('Headers: ${options.headers}');
+    if (options.data != null) {
+      log.d('Body: ${options.data}');
+    }
+    handler.next(options);
   }
 
   @override
   void onError(DioException err, ErrorInterceptorHandler handler) {
     final options = err.requestOptions;
-    logger.e(options.method); // Debug log
-    logger.e('Error: ${err.error}, Message: ${err.message}'); // Error log
-    return super.onError(err, handler);
+    log.e('HTTP Error - Method: ${options.method}, URL: ${options.uri}');
+    log.e(
+        'Error Type: ${err.type}, Error: ${err.error}, Message: ${err.message}');
+    handler.next(err);
   }
 
   @override
   void onResponse(Response response, ResponseInterceptorHandler handler) {
-    logger.d('Response => StatusCode: ${response.statusCode}'); // Debug log
-    logger.d('Response => Body: ${response.data}'); // Debug log
-    return super.onResponse(response, handler);
+    log.i('===== HTTP Response =====');
+    log.d('Status Code: ${response.statusCode}');
+    log.d('Data: ${response.data}');
+    handler.next(response);
   }
 }
