@@ -3,6 +3,7 @@ import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 
 // Project imports:
+import 'package:scr_vendor/common/amplify/amplify_client.dart';
 import 'package:scr_vendor/common/network/dio_client.dart';
 import 'package:scr_vendor/features/user/data/datasources/user_remote_data_source.dart';
 import 'package:scr_vendor/features/user/data/repositories/user_repository_impl.dart';
@@ -16,6 +17,9 @@ import 'package:scr_vendor/features/user/presentation/bloc/user_bloc.dart';
 final getIt = GetIt.instance;
 
 Future<void> init() async {
+  //Amplify
+  getIt.registerLazySingleton<AmplifyClient>(() => AmplifyClient());
+
   //UserBloc
   getIt.registerFactory(
     () => UserBloc(
