@@ -5,13 +5,21 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 // Project imports:
+import 'package:scr_vendor/amplify_initializer.dart';
 import 'package:scr_vendor/core/app_router.dart';
 import 'package:scr_vendor/di.dart';
 import 'package:scr_vendor/features/user/presentation/bloc/user_bloc.dart';
 
 void main() async {
-  await init();
+  WidgetsFlutterBinding
+      .ensureInitialized(); // Ensures plugin services are initialized
+  await initializeApp();
   runApp(const MainApp());
+}
+
+Future<void> initializeApp() async {
+  await initializeAmplify(); // Initialize Amplify
+  await initLocator(); // Your existing DI initialization
 }
 
 class MainApp extends StatelessWidget {
@@ -21,7 +29,7 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider<UserBloc>(create: (context) => getIt<UserBloc>()),
+        BlocProvider<UserBloc>(create: (context) => locator<UserBloc>()),
       ],
       child: MaterialApp.router(
         routerConfig: AppRouter.router,
