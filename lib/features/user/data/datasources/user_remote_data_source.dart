@@ -19,7 +19,7 @@ abstract class UserRemoteDataSource {
 class UserRemoteDataSourceImpl
     with ApiHelper<User>
     implements UserRemoteDataSource {
-  final DioClient dioClient = getIt<DioClient>();
+  final DioClient dioClient = locator<DioClient>();
 
   @override
   Future<bool> createUser(User user) async {

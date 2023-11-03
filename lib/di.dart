@@ -3,7 +3,6 @@ import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 
 // Project imports:
-import 'package:scr_vendor/common/amplify/amplify_client.dart';
 import 'package:scr_vendor/common/network/dio_client.dart';
 import 'package:scr_vendor/features/user/data/datasources/user_remote_data_source.dart';
 import 'package:scr_vendor/features/user/data/repositories/user_repository_impl.dart';
@@ -14,38 +13,39 @@ import 'package:scr_vendor/features/user/domain/usecases/get_users_usecase.dart'
 import 'package:scr_vendor/features/user/domain/usecases/update_user_usecase.dart';
 import 'package:scr_vendor/features/user/presentation/bloc/user_bloc.dart';
 
-final getIt = GetIt.instance;
+final locator = GetIt.instance;
 
-Future<void> init() async {
-  //Amplify
-  getIt.registerLazySingleton<AmplifyClient>(() => AmplifyClient());
-
+Future<void> initLocator() async {
   //UserBloc
-  getIt.registerFactory(
+  locator.registerFactory(
     () => UserBloc(
-      getUsersUseCase: getIt<GetUsersUseCase>(),
-      createUserUseCase: getIt<CreateUserUseCase>(),
-      updateUserUseCase: getIt<UpdateUserUseCase>(),
-      deleteUserUseCase: getIt<DeleteUserUseCase>(),
+      getUsersUseCase: locator<GetUsersUseCase>(),
+      createUserUseCase: locator<CreateUserUseCase>(),
+      updateUserUseCase: locator<UpdateUserUseCase>(),
+      deleteUserUseCase: locator<DeleteUserUseCase>(),
     ),
   );
 
   // User Use cases
-  getIt.registerLazySingleton(() => GetUsersUseCase(getIt<UserRepository>()));
-  getIt.registerLazySingleton(() => CreateUserUseCase(getIt<UserRepository>()));
-  getIt.registerLazySingleton(() => UpdateUserUseCase(getIt<UserRepository>()));
-  getIt.registerLazySingleton(() => DeleteUserUseCase(getIt<UserRepository>()));
+  locator
+      .registerLazySingleton(() => GetUsersUseCase(locator<UserRepository>()));
+  locator.registerLazySingleton(
+      () => CreateUserUseCase(locator<UserRepository>()));
+  locator.registerLazySingleton(
+      () => UpdateUserUseCase(locator<UserRepository>()));
+  locator.registerLazySingleton(
+      () => DeleteUserUseCase(locator<UserRepository>()));
 
   // User repository
-  getIt.registerLazySingleton<UserRepository>(
-    () => UserRepositoryImpl(remoteDataSource: getIt()),
+  locator.registerLazySingleton<UserRepository>(
+    () => UserRepositoryImpl(remoteDataSource: locator()),
   );
 
   // User remote data sources
-  getIt.registerLazySingleton<UserRemoteDataSource>(
+  locator.registerLazySingleton<UserRemoteDataSource>(
       () => UserRemoteDataSourceImpl());
 
   //Dio
-  getIt.registerLazySingleton<DioClient>(() => DioClient(getIt<Dio>()));
-  getIt.registerLazySingleton<Dio>(() => Dio());
+  locator.registerLazySingleton<DioClient>(() => DioClient(locator<Dio>()));
+  locator.registerLazySingleton<Dio>(() => Dio());
 }
