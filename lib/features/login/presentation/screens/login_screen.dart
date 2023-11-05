@@ -22,11 +22,21 @@ class _LoginScreenState extends State<LoginScreen> {
         title: Text(AppPage.login.title),
       ),
       body: Center(
-        child: ElevatedButton(
-          onPressed: () {
-            context.goNamed(AppPage.home.name);
-          },
-          child: const Text('Home'),
+        child: Column(
+          children: [
+            ElevatedButton(
+              onPressed: () {
+                context.goNamed(AppPage.signup.name);
+              },
+              child: const Text('Signup'),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                context.goNamed(AppPage.user.name);
+              },
+              child: const Text('users'),
+            ),
+          ],
         ),
       ),
     );

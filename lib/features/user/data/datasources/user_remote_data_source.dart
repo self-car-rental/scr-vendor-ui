@@ -2,7 +2,7 @@
 import 'package:scr_vendor/common/network/api_config.dart';
 import 'package:scr_vendor/common/network/api_helper.dart';
 import 'package:scr_vendor/common/network/dio_client.dart';
-import 'package:scr_vendor/di.dart';
+import 'package:scr_vendor/core/service_locator.dart';
 import 'package:scr_vendor/features/user/data/models/user.dart';
 import 'package:scr_vendor/features/user/domain/entities/user_entity.dart';
 
@@ -19,7 +19,7 @@ abstract class UserRemoteDataSource {
 class UserRemoteDataSourceImpl
     with ApiHelper<User>
     implements UserRemoteDataSource {
-  final DioClient dioClient = locator<DioClient>();
+  final DioClient dioClient = serviceLocator<DioClient>();
 
   @override
   Future<bool> createUser(User user) async {

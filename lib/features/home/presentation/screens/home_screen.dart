@@ -19,14 +19,14 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(AppPage.home.title),
+        title: Text(AppPage.signup.title),
       ),
       body: Center(
         child: ElevatedButton(
           onPressed: () {
-            context.goNamed(AppPage.user.name);
+            context.goNamed(AppPage.signup.name);
           },
-          child: const Text('Login'),
+          child: const Text('Signup'),
         ),
       ),
     );
