@@ -21,4 +21,14 @@ class AuthRepositoryImpl extends AuthRepository {
   Future<void> signUp(String mobileNumber) async {
     return await remoteDataSource.signUp(mobileNumber);
   }
+
+  @override
+  Future<void> verifyOtp(String otp) async {
+    return await remoteDataSource.verifyOtp(otp);
+  }
+
+  @override
+  Future<void> signOut() async {
+    return await remoteDataSource.signOut();
+  }
 }

@@ -15,4 +15,9 @@ class Validators {
     if (value == null || value.isEmpty) return 'Mobile cannot be empty';
     return null;
   }
+
+  static String? validateOtp(String? value) {
+    if (value == null || value.isEmpty) return 'Otp cannot be empty';
+    return null;
+  }
 }

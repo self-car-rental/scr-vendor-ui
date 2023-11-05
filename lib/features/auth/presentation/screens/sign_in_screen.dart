@@ -39,7 +39,7 @@ class SignInScreen extends StatelessWidget {
                 listener: (context, state) {
                   if (state is SignInSuccess) {
                     WidgetsBinding.instance.addPostFrameCallback((_) {
-                      context.goNamed(AppPage.user.name);
+                      context.goNamed(AppPage.verifyOtp.name);
                     });
                   } else if (state is SignInFailure) {
                     showDialog(

@@ -9,6 +9,7 @@ import 'package:scr_vendor/features/auth/data/repositories/auth_repository_impl.
 import 'package:scr_vendor/features/auth/domain/repositories/auth_repository.dart';
 import 'package:scr_vendor/features/auth/domain/usecases/sign_in_usecase.dart';
 import 'package:scr_vendor/features/auth/domain/usecases/sign_up_usecase.dart';
+import 'package:scr_vendor/features/auth/domain/usecases/verify_otp_usecase.dart';
 import 'package:scr_vendor/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:scr_vendor/features/user/data/datasources/user_remote_data_source.dart';
 import 'package:scr_vendor/features/user/data/repositories/user_repository_impl.dart';
@@ -71,12 +72,15 @@ void _registerAuthFeatures() {
     () => AuthBloc(
       signUpUseCase: serviceLocator(),
       signInUseCase: serviceLocator(),
+      verifyOtpUseCase: serviceLocator(),
     ),
   );
 
   // Use Cases
   serviceLocator.registerLazySingleton(() => SignUpUseCase(serviceLocator()));
   serviceLocator.registerLazySingleton(() => SignInUseCase(serviceLocator()));
+  serviceLocator
+      .registerLazySingleton(() => VerifyOtpUseCase(serviceLocator()));
 
   // Repository
   serviceLocator.registerLazySingleton<AuthRepository>(

@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:scr_vendor/core/app_route_constants.dart';
 import 'package:scr_vendor/features/auth/presentation/screens/sign_in_screen.dart';
 import 'package:scr_vendor/features/auth/presentation/screens/sign_up_screen.dart';
+import 'package:scr_vendor/features/auth/presentation/screens/verify_otp_screen.dart';
 import 'package:scr_vendor/features/home/presentation/screens/home_screen.dart';
 import 'package:scr_vendor/features/login/presentation/screens/login_screen.dart';
 import 'package:scr_vendor/features/user/presentation/screens/user_list_screen.dart';
@@ -29,6 +30,11 @@ class AppRouter {
         path: AppPage.signin.path,
         name: AppPage.signin.name,
         builder: (context, state) => SignInScreen(),
+      ),
+      GoRoute(
+        path: AppPage.verifyOtp.path,
+        name: AppPage.verifyOtp.name,
+        builder: (context, state) => VerifyOtpScreen(),
       ),
       GoRoute(
         path: AppPage.user.path,
