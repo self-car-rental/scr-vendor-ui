@@ -1,7 +1,5 @@
 // Flutter imports:
-
-// Flutter imports:
-import 'package:flutter/foundation.dart' show immutable;
+import 'package:flutter/foundation.dart';
 
 // Package imports:
 import 'package:amplify_auth_cognito/amplify_auth_cognito.dart';
@@ -18,9 +16,10 @@ class SignInUseCase {
 
   Future<void> execute(SignInParams params) async {
     try {
+      await _repository.signOut();
       await _repository.signIn(params.mobileNumber);
     } on UserNotFoundException {
-      // User not found, proceed to sign up and then sign in again
+      // If the user is not found, proceed to sign up and then sign in again
       await _handleUserNotFound(params.mobileNumber);
     } catch (e) {
       // Handle other exceptions

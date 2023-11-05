@@ -1,4 +1,4 @@
-enum AppPage { signup, signin, login, home, user }
+enum AppPage { signup, signin, verifyOtp, login, home, user }
 
 extension AppPageExtension on AppPage {
   String get path {
@@ -9,6 +9,8 @@ extension AppPageExtension on AppPage {
         return '/signup';
       case AppPage.signin:
         return '/signin';
+      case AppPage.verifyOtp:
+        return '/verifyOtp';
       case AppPage.login:
         return '/login';
       case AppPage.user:
@@ -28,6 +30,8 @@ extension AppPageExtension on AppPage {
         return 'SIGNUP';
       case AppPage.signin:
         return 'SIGNIN';
+      case AppPage.verifyOtp:
+        return 'VERIFY-OTP';
       case AppPage.user:
         return 'USER';
       default:
@@ -45,6 +49,8 @@ extension AppPageExtension on AppPage {
         return 'My Signup';
       case AppPage.signin:
         return 'My Signin';
+      case AppPage.verifyOtp:
+        return 'My Verify Otp';
       case AppPage.user:
         return 'My USER';
       default:

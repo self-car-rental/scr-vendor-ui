@@ -28,3 +28,23 @@ class SignInFailure extends AuthState {
   final String error;
   SignInFailure(this.error);
 }
+
+class VerifyOtpLoading extends AuthState {}
+
+class VerifyOtpSuccess extends AuthState {}
+
+class VerifyOtpInvalid extends AuthState {}
+
+class VerifyOtpFailure extends AuthState {
+  final String error;
+  VerifyOtpFailure(this.error);
+}
+
+class SignOutLoading extends AuthState {}
+
+class SignOutSuccess extends AuthState {}
+
+class SignOutFailure extends AuthState {
+  final String error;
+  SignOutFailure(this.error);
+}

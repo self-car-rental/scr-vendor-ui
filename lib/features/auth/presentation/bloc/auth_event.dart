@@ -19,3 +19,13 @@ class SignInRequested extends AuthEvent {
 
   SignInRequested(this.mobileNumber);
 }
+
+class VerifyOtpRequested extends AuthEvent {
+  final String otp;
+
+  VerifyOtpRequested(this.otp);
+}
+
+class SignOutRequested extends AuthEvent {
+  SignOutRequested();
+}
