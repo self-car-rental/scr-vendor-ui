@@ -1,13 +1,13 @@
 // Package imports:
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
-
 // Project imports:
 import 'package:scr_vendor/common/network/dio_client.dart';
 import 'package:scr_vendor/features/auth/data/datasources/auth_remote_data_source.dart';
 import 'package:scr_vendor/features/auth/data/repositories/auth_repository_impl.dart';
 import 'package:scr_vendor/features/auth/domain/repositories/auth_repository.dart';
 import 'package:scr_vendor/features/auth/domain/usecases/sign_in_usecase.dart';
+import 'package:scr_vendor/features/auth/domain/usecases/sign_out_usecase.dart';
 import 'package:scr_vendor/features/auth/domain/usecases/sign_up_usecase.dart';
 import 'package:scr_vendor/features/auth/domain/usecases/verify_otp_usecase.dart';
 import 'package:scr_vendor/features/auth/presentation/bloc/auth_bloc.dart';
@@ -73,6 +73,7 @@ void _registerAuthFeatures() {
       signUpUseCase: serviceLocator(),
       signInUseCase: serviceLocator(),
       verifyOtpUseCase: serviceLocator(),
+      signOutUseCase: serviceLocator(),
     ),
   );
 
@@ -81,6 +82,7 @@ void _registerAuthFeatures() {
   serviceLocator.registerLazySingleton(() => SignInUseCase(serviceLocator()));
   serviceLocator
       .registerLazySingleton(() => VerifyOtpUseCase(serviceLocator()));
+  serviceLocator.registerLazySingleton(() => SignOutUseCase(serviceLocator()));
 
   // Repository
   serviceLocator.registerLazySingleton<AuthRepository>(
