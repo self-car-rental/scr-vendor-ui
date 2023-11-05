@@ -7,6 +7,7 @@ import 'package:scr_vendor/common/network/dio_client.dart';
 import 'package:scr_vendor/features/auth/data/datasources/auth_remote_data_source.dart';
 import 'package:scr_vendor/features/auth/data/repositories/auth_repository_impl.dart';
 import 'package:scr_vendor/features/auth/domain/repositories/auth_repository.dart';
+import 'package:scr_vendor/features/auth/domain/usecases/sign_in_usecase.dart';
 import 'package:scr_vendor/features/auth/domain/usecases/sign_up_usecase.dart';
 import 'package:scr_vendor/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:scr_vendor/features/user/data/datasources/user_remote_data_source.dart';
@@ -69,11 +70,13 @@ void _registerAuthFeatures() {
   serviceLocator.registerFactory(
     () => AuthBloc(
       signUpUseCase: serviceLocator(),
+      signInUseCase: serviceLocator(),
     ),
   );
 
   // Use Cases
   serviceLocator.registerLazySingleton(() => SignUpUseCase(serviceLocator()));
+  serviceLocator.registerLazySingleton(() => SignInUseCase(serviceLocator()));
 
   // Repository
   serviceLocator.registerLazySingleton<AuthRepository>(

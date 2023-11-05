@@ -4,12 +4,12 @@ import 'package:amplify_flutter/amplify_flutter.dart';
 
 // Project imports:
 import 'package:scr_vendor/common/log/log.dart';
-import 'package:scr_vendor/features/auth/data/models/user_cognito_model.dart';
 import 'package:scr_vendor/features/auth/domain/exceptions/user_mobile_already_exists_exception.dart';
 
 /// Abstract definition for the authentication remote data source.
 abstract class AuthRemoteDataSource {
-  Future<void> signUp(UserCognitoModel user);
+  Future<void> signUp(String mobileNumber);
+  Future<void> signIn(String mobileNumber);
 }
 
 /// Implementation of the authentication remote data source using AWS Amplify.
@@ -18,18 +18,12 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
 
   /// Signs up a new user with provided [user] details.
   @override
-  Future<void> signUp(UserCognitoModel user) async {
+  Future<void> signUp(String mobileNumber) async {
     try {
-      log.i('Attempting signup for user: $user');
+      log.i('Attempting signup for user: $mobileNumber');
       SignUpResult res = await Amplify.Auth.signUp(
-        username: user.mobile,
+        username: mobileNumber,
         password: 'Notebook@12', // TODO: Handle password securely
-        options: SignUpOptions(
-          userAttributes: <AuthUserAttributeKey, String>{
-            AuthUserAttributeKey.name: user.name,
-            AuthUserAttributeKey.email: user.email,
-          },
-        ),
       );
       log.i('Signup successful, result: $res');
     } on UsernameExistsException catch (e) {
@@ -37,6 +31,24 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
       throw UserMobileAlreadyExistsException(e.message);
     } on AuthException catch (e) {
       log.e('Signup failed - AuthException: $e');
+      rethrow; // Rethrows the exception for higher-level handling
+    }
+  }
+
+  // @override
+  @override
+  Future<void> signIn(String mobileNumber) async {
+    try {
+      log.i('Attempting sign-in for user: $mobileNumber');
+      SignInResult res = await Amplify.Auth.signIn(
+        username: mobileNumber,
+      );
+      log.i('Sign-in successful, result: $res');
+    } on UserNotFoundException catch (e) {
+      log.e('Sign-in failed - User not found: $e');
+      throw UserNotFoundException(e.message);
+    } on AuthException catch (e) {
+      log.e('Sign-in failed - AuthException: $e');
       rethrow; // Rethrows the exception for higher-level handling
     }
   }

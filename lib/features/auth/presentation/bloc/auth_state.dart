@@ -19,3 +19,12 @@ class SignUpFailure extends AuthState {
 }
 
 class UserMobileAlreadyExists extends AuthState {}
+
+class SignInLoading extends AuthState {}
+
+class SignInSuccess extends AuthState {}
+
+class SignInFailure extends AuthState {
+  final String error;
+  SignInFailure(this.error);
+}
