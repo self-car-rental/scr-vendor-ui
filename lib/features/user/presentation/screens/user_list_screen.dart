@@ -1,10 +1,8 @@
 // Flutter imports:
 import 'package:flutter/material.dart';
-
 // Package imports:
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-
 // Project imports:
 import 'package:scr_vendor/common/bloc/bloc_helper.dart';
 import 'package:scr_vendor/common/bloc/generic_bloc_state.dart';
@@ -140,7 +138,7 @@ class _UserListScreenState extends State<UserListScreen> {
                     break;
                   case Operation.todo:
                     // navigateTo(ToDoListScreen(user: user));
-                    context.goNamed(AppPage.login.name);
+                    context.goNamed(AppPage.signin.name);
                     break;
                   case Operation.delete:
                     deleteUser(user);
