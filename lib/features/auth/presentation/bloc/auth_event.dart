@@ -13,3 +13,9 @@ class SignUpRequested extends AuthEvent {
   /// Constructs a [SignUpRequested] event with the provided [user] information.
   SignUpRequested(this.user);
 }
+
+class SignInRequested extends AuthEvent {
+  final String mobileNumber;
+
+  SignInRequested(this.mobileNumber);
+}
