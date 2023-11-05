@@ -1,10 +1,8 @@
 // Flutter imports:
 import 'package:flutter/material.dart';
-
 // Package imports:
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-
 // Project imports:
 import 'package:scr_vendor/common/dialog/progress_dialog.dart';
 import 'package:scr_vendor/common/dialog/retry_dialog.dart';
@@ -46,7 +44,7 @@ class SignUpScreen extends StatelessWidget {
                 listener: (context, state) {
                   if (state is SignUpSuccess) {
                     WidgetsBinding.instance.addPostFrameCallback((_) {
-                      context.goNamed(AppPage.login.name);
+                      context.goNamed(AppPage.signin.name);
                     });
                   } else if (state is SignUpFailure) {
                     showDialog(
