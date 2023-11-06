@@ -1,55 +1,103 @@
-// Dart imports:
 import 'dart:convert';
 
-// Package imports:
-import 'package:dio/dio.dart';
-
-// Project imports:
-import 'package:scr_vendor/common/network/dio_exception.dart';
+import 'package:amplify_flutter/amplify_flutter.dart';
+import 'package:scr_vendor/common/log/log.dart';
 import 'package:scr_vendor/core/app_extension.dart';
 
-abstract mixin class ApiHelper<T> {
-  late final T data;
+abstract class ApiHelper<T> {
+  final logger = Log();
 
-  Future<bool> _requestMethodTemplate(
-      Future<Response<dynamic>> apiCallback) async {
-    final Response response = await apiCallback;
-    if (response.statusCode.success) {
-      return true;
-    } else {
-      throw DioExceptions;
+  Future<bool> _executeRestOperation(RestOperation restOperation) async {
+    try {
+      final response = await restOperation.response;
+      if (response.statusCode.success) {
+        return true;
+      } else {
+        String errorMessage =
+            'API request failed with status code: ${response.statusCode}';
+        logger.e(errorMessage);
+        return false;
+      }
+    } on ApiException catch (e) {
+      logger.e('API request error: ${e.message}');
+      rethrow;
+    } catch (e) {
+      logger.e('Unexpected error: $e');
+      rethrow;
     }
   }
 
-  //Generic Method template for create item on server
-  Future<bool> makePostRequest(Future<Response<dynamic>> apiCallback) async {
-    return _requestMethodTemplate(apiCallback);
+  Future<bool> createItem(
+      {required String path,
+      required Map<String, dynamic> body,
+      Map<String, String>? queryParameters}) async {
+    return _executeRestOperation(Amplify.API.post(path,
+        body: HttpPayload.json(body), queryParameters: queryParameters));
   }
 
-  //Generic Method template for update item on server
-  Future<bool> makePutRequest(Future<Response<dynamic>> apiCallback) async {
-    return _requestMethodTemplate(apiCallback);
+  Future<bool> updateItem(
+      {required String path,
+      required Map<String, dynamic> body,
+      Map<String, String>? queryParameters}) async {
+    return _executeRestOperation(Amplify.API.put(path,
+        body: HttpPayload.json(body), queryParameters: queryParameters));
   }
 
-  //Generic Method template for delete item from server
-  Future<bool> makeDeleteRequest(Future<Response<dynamic>> apiCallback) async {
-    return _requestMethodTemplate(apiCallback);
+  Future<bool> deleteItem(
+      {required String path,
+      Map<String, dynamic>? body,
+      Map<String, String>? queryParameters}) async {
+    return _executeRestOperation(Amplify.API.delete(path,
+        body: HttpPayload.json(body), queryParameters: queryParameters));
   }
 
-  //Generic Method template for get data from Api
-  Future<List<T>> makeGetRequest(Future<Response<dynamic>> apiCallback,
-      T Function(Map<String, dynamic> json) getJsonCallback) async {
-    final Response response = await apiCallback;
+  Future<List<T>> fetchItems(
+      {required String path,
+      required T Function(Map<String, dynamic>) fromJson,
+      Map<String, String>? queryParameters}) async {
+    return _processGetOperation(
+        Amplify.API.get(path, queryParameters: queryParameters), fromJson);
+  }
 
-    final List<T> items = List<T>.from(
-      json
-          .decode(json.encode(response.data))
-          .map((item) => getJsonCallback(item)),
-    );
-    if (response.statusCode.success) {
-      return items;
-    } else {
-      throw DioExceptions;
+  Future<T> fetchItem(
+      {required String path,
+      required T Function(Map<String, dynamic>) fromJson,
+      Map<String, String>? queryParameters}) async {
+    return _processGetOperationForSingleItem(
+        Amplify.API.get(path, queryParameters: queryParameters), fromJson);
+  }
+
+  Future<List<T>> _processGetOperation(RestOperation restOperation,
+      T Function(Map<String, dynamic>) fromJson) async {
+    try {
+      final response = await restOperation.response;
+      final responseData = response.decodeBody();
+      logger.i('Received response: $responseData');
+      return (json.decode(responseData) as List)
+          .map((jsonItem) => fromJson(jsonItem as Map<String, dynamic>))
+          .toList();
+    } on ApiException catch (e) {
+      logger.e('Error processing get operation: $e');
+      rethrow;
+    } catch (e) {
+      logger.e('Error processing get operation: $e');
+      rethrow;
+    }
+  }
+
+  Future<T> _processGetOperationForSingleItem(RestOperation restOperation,
+      T Function(Map<String, dynamic>) fromJson) async {
+    try {
+      final response = await restOperation.response;
+      final responseData = response.decodeBody();
+      logger.i('Received response: $responseData');
+      return fromJson(json.decode(responseData));
+    } on ApiException catch (e) {
+      logger.e('Error processing get operation for single item: $e');
+      rethrow;
+    } catch (e) {
+      logger.e('Error processing get operation for single item: $e');
+      rethrow;
     }
   }
 }

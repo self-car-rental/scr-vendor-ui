@@ -1,58 +1,45 @@
-// Project imports:
 import 'package:scr_vendor/common/network/api_config.dart';
 import 'package:scr_vendor/common/network/api_helper.dart';
-import 'package:scr_vendor/common/network/dio_client.dart';
-import 'package:scr_vendor/core/service_locator.dart';
 import 'package:scr_vendor/features/user/data/models/user.dart';
 import 'package:scr_vendor/features/user/domain/entities/user_entity.dart';
 
 abstract class UserRemoteDataSource {
   Future<List<User>> getUsers({Gender? gender, UserStatus? status});
-
   Future<bool> createUser(User user);
-
   Future<bool> updateUser(User user);
-
   Future<bool> deleteUser(User user);
 }
 
-class UserRemoteDataSourceImpl
-    with ApiHelper<User>
+class UserRemoteDataSourceImpl extends ApiHelper<User>
     implements UserRemoteDataSource {
-  final DioClient dioClient = serviceLocator<DioClient>();
+  @override
+  Future<List<User>> getUsers({Gender? gender, UserStatus? status}) async {
+    var queryParameters = <String, String>{};
+    if (gender != null && gender != Gender.all) {
+      queryParameters['gender'] = gender.name;
+    }
+    if (status != null && status != UserStatus.all) {
+      queryParameters['status'] = status.name;
+    }
+    return fetchItems(
+        path: ApiConfig.users,
+        fromJson: User.fromJson,
+        queryParameters: queryParameters);
+  }
 
   @override
   Future<bool> createUser(User user) async {
-    return await makePostRequest(
-        dioClient.dio.post(ApiConfig.users, data: user));
+    return createItem(path: ApiConfig.users, body: user.toJson());
   }
 
   @override
   Future<bool> updateUser(User user) async {
-    return await makePutRequest(
-        dioClient.dio.put('${ApiConfig.users}/${user.id}', data: user));
+    return updateItem(
+        path: '${ApiConfig.users}/${user.id}', body: user.toJson());
   }
 
   @override
   Future<bool> deleteUser(User user) async {
-    return await makeDeleteRequest(
-        dioClient.dio.delete('${ApiConfig.users}/${user.id}'));
-  }
-
-  @override
-  Future<List<User>> getUsers({Gender? gender, UserStatus? status}) async {
-    Map<String, String> queryParameters = <String, String>{};
-
-    if (gender != null && gender != Gender.all) {
-      queryParameters.addAll({'gender': gender.name});
-    }
-
-    if (status != null && status != UserStatus.all) {
-      queryParameters.addAll({'status': status.name});
-    }
-
-    return await makeGetRequest(
-        dioClient.dio.get(ApiConfig.users, queryParameters: queryParameters),
-        User.fromJson);
+    return deleteItem(path: '${ApiConfig.users}/${user.id}');
   }
 }
