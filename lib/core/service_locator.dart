@@ -1,8 +1,6 @@
 // Package imports:
-import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 // Project imports:
-import 'package:scr_vendor/common/network/dio_client.dart';
 import 'package:scr_vendor/features/auth/data/datasources/auth_remote_data_source.dart';
 import 'package:scr_vendor/features/auth/data/repositories/auth_repository_impl.dart';
 import 'package:scr_vendor/features/auth/domain/repositories/auth_repository.dart';
@@ -23,11 +21,6 @@ import 'package:scr_vendor/features/user/presentation/bloc/user_bloc.dart';
 final serviceLocator = GetIt.instance;
 
 Future<void> initServiceLocator() async {
-  // Dio
-  serviceLocator.registerLazySingleton<Dio>(() => Dio());
-  serviceLocator
-      .registerLazySingleton<DioClient>(() => DioClient(serviceLocator()));
-
   // User Features
   _registerUserFeatures();
 

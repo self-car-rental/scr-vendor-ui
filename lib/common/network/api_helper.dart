@@ -19,10 +19,10 @@ abstract class ApiHelper<T> {
         return false;
       }
     } on ApiException catch (e) {
-      logger.e('API request error: ${e.message}');
+      logger.e('ApiException in in _executeRestOperation: ${e.message}');
       rethrow;
     } catch (e) {
-      logger.e('Unexpected error: $e');
+      logger.e('Unexpected error in _executeRestOperation: ${e.toString()}');
       rethrow;
     }
   }
@@ -77,10 +77,10 @@ abstract class ApiHelper<T> {
           .map((jsonItem) => fromJson(jsonItem as Map<String, dynamic>))
           .toList();
     } on ApiException catch (e) {
-      logger.e('Error processing get operation: $e');
+      logger.e('Api Exception in _processGetOperation: ${e.message}');
       rethrow;
     } catch (e) {
-      logger.e('Error processing get operation: $e');
+      logger.e('Unexpected error in _processGetOperation: ${e.toString()}');
       rethrow;
     }
   }
@@ -93,10 +93,12 @@ abstract class ApiHelper<T> {
       logger.i('Received response: $responseData');
       return fromJson(json.decode(responseData));
     } on ApiException catch (e) {
-      logger.e('Error processing get operation for single item: $e');
+      logger
+          .e('ApiException in _processGetOperationForSingleItem: ${e.message}');
       rethrow;
     } catch (e) {
-      logger.e('Error processing get operation for single item: $e');
+      logger.e(
+          'Unexpected error in _processGetOperationForSingleItem: ${e.toString()}');
       rethrow;
     }
   }

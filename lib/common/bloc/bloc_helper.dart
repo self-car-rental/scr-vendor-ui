@@ -1,6 +1,5 @@
 // Package imports:
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 // Project imports:
 import 'package:scr_vendor/common/bloc/generic_bloc_state.dart';
 import 'package:scr_vendor/common/network/api_result.dart';
@@ -15,7 +14,8 @@ mixin BlocHelper<T> {
   _checkFailureOrSuccess(ApiResult failureOrSuccess, Emit<T> emit) {
     failureOrSuccess.when(
       failure: (String failure) {
-        emit(GenericBlocState.failure(failure));
+        emit(GenericBlocState.failure(
+            'Sorry, something went wrong. Please try again later.'));
       },
       success: (_) {
         emit(GenericBlocState.success(null));
