@@ -6,7 +6,7 @@ const amplifyConfig = ''' {
       "awsAPIPlugin": {
         "Api": {
           "endpointType": "REST",
-          "endpoint": "https://0d6uzbwjle.execute-api.ap-south-1.amazonaws.com/dev",
+          "endpoint": "https://gpub0fw1i4.execute-api.ap-south-1.amazonaws.com/dev",
           "region": "ap-south-1",
           "authorizationType": "AWS_IAM"
         }
