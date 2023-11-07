@@ -6,7 +6,7 @@ const amplifyConfig = ''' {
       "awsAPIPlugin": {
         "Api": {
           "endpointType": "REST",
-          "endpoint": "https://gpub0fw1i4.execute-api.ap-south-1.amazonaws.com/dev",
+          "endpoint": "https://1ubsx75vi5.execute-api.ap-south-1.amazonaws.com/dev",
           "region": "ap-south-1",
           "authorizationType": "AWS_IAM"
         }
@@ -24,15 +24,15 @@ const amplifyConfig = ''' {
         "CredentialsProvider": {
           "CognitoIdentity": {
             "Default": {
-              "PoolId": "ap-south-1:fb4a35a6-5067-4683-ad12-3d818182f1b2",
+              "PoolId": "ap-south-1:b134905c-2e40-455c-b1d4-802a56941f9c",
               "Region": "ap-south-1"
             }
           }
         },
         "CognitoUserPool": {
           "Default": {
-            "PoolId": "ap-south-1_NtWjcZRnB",
-            "AppClientId": "4m73633uk85mo4ecds5saph8fl",
+            "PoolId": "ap-south-1_94fkvbwAg",
+            "AppClientId": "5795jto817ajla9na16ab37kae",
             "Region": "ap-south-1"
           }
         },

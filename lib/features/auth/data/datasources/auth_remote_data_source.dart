@@ -13,27 +13,28 @@ abstract class AuthRemoteDataSource {
   Future<void> signIn(String mobileNumber);
   Future<void> verifyOtp(String otp);
   Future<void> signOut();
+  Future<bool> checkUserLoggedIn();
 }
 
 /// Implementation of the authentication remote data source using AWS Amplify.
 class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
-  final logger = Log();
+  final _logger = Log();
 
   /// Signs up a new user with provided [user] details.
   @override
   Future<void> signUp(String mobileNumber) async {
     try {
-      logger.i('Attempting signup for user: $mobileNumber');
+      _logger.i('Attempting signup for user: $mobileNumber');
       SignUpResult signUpResult = await Amplify.Auth.signUp(
         username: mobileNumber,
         password: 'Notebook@12', // TODO: Handle password securely
       );
-      logger.i('Signup successful, result: $signUpResult');
+      _logger.i('Signup successful, result: $signUpResult');
     } on UsernameExistsException catch (e) {
-      logger.e('Signup failed - Username already exists: $e');
+      _logger.e('Signup failed - Username already exists: $e');
       throw UserMobileAlreadyExistsException(e.message);
     } on AuthException catch (e) {
-      logger.e('Signup failed - AuthException: $e');
+      _logger.e('Signup failed - AuthException: $e');
       rethrow; // Rethrows the exception for higher-level handling
     }
   }
@@ -42,16 +43,16 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   @override
   Future<void> signIn(String mobileNumber) async {
     try {
-      logger.i('Attempting sign-in for user: $mobileNumber');
+      _logger.i('Attempting sign-in for user: $mobileNumber');
       SignInResult signInResult = await Amplify.Auth.signIn(
         username: mobileNumber,
       );
-      logger.i('Sign-in successful, result: $signInResult');
+      _logger.i('Sign-in successful, result: $signInResult');
     } on UserNotFoundException catch (e) {
-      logger.e('Sign-in failed - User not found: $e');
+      _logger.e('Sign-in failed - User not found: $e');
       throw UserNotFoundException(e.message);
     } on AuthException catch (e) {
-      logger.e('Sign-in failed - AuthException: $e');
+      _logger.e('Sign-in failed - AuthException: $e');
       rethrow; // Rethrows the exception for higher-level handling
     }
   }
@@ -59,20 +60,20 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   @override
   Future<void> verifyOtp(String otp) async {
     try {
-      logger.i('Attempting OTP verification: $otp');
+      _logger.i('Attempting OTP verification: $otp');
       final SignInResult signInResult = await Amplify.Auth.confirmSignIn(
         confirmationValue: otp,
       );
 
       if (signInResult.isSignedIn) {
-        logger.i(
+        _logger.i(
             'OTP verification successful, user signed in result: $signInResult.');
       } else {
-        logger.w('OTP verification successful, but user not signed in.');
+        _logger.w('OTP verification successful, but user not signed in.');
         throw InvalidOtpException();
       }
     } on AuthException catch (e) {
-      logger.e('OTP verification failed - AuthException: $e');
+      _logger.e('OTP verification failed - AuthException: $e');
       rethrow; // Propagates the exception for higher-level handling
     }
   }
@@ -80,12 +81,28 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   @override
   Future<void> signOut() async {
     try {
-      logger.i('Attempting user sign out');
+      _logger.i('Attempting user sign out');
       await Amplify.Auth.signOut();
-      logger.i('User signed out successfully');
+      _logger.i('User signed out successfully');
     } on AuthException catch (e) {
-      logger.e('Sign out failed - AuthException: $e');
+      _logger.e('Sign out failed - AuthException: $e');
       rethrow; // Rethrows the exception for higher-level handling
+    }
+  }
+
+  @override
+  Future<bool> checkUserLoggedIn() async {
+    try {
+      final authSession = await Amplify.Auth.fetchAuthSession();
+      _logger
+          .i('Successfully fetched auth session : ${authSession.isSignedIn}');
+      return authSession.isSignedIn;
+    } on AuthException catch (authException) {
+      _logger.e('AuthException caught: ${authException.message}');
+      return false;
+    } catch (e) {
+      _logger.e('Unexpected error occurred: ${e.toString()}');
+      return false;
     }
   }
 }

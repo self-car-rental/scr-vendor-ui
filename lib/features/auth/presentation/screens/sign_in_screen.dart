@@ -1,10 +1,8 @@
 // Flutter imports:
 import 'package:flutter/material.dart';
-
 // Package imports:
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-
 // Project imports:
 import 'package:scr_vendor/common/dialog/progress_dialog.dart';
 import 'package:scr_vendor/common/dialog/retry_dialog.dart';
@@ -24,7 +22,7 @@ class SignInScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(AppPage.signup.title)),
+      appBar: AppBar(title: Text(AppPage.signin.title)),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),
         child: Form(

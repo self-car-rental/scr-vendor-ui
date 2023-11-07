@@ -6,4 +6,5 @@ abstract class AuthRepository {
   Future<void> signIn(String mobileNumber);
   Future<void> verifyOtp(String otp);
   Future<void> signOut();
+  Future<bool> checkUserLoggedIn();
 }

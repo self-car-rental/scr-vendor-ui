@@ -16,13 +16,15 @@ import 'package:scr_vendor/common/widget/spinkit_indicator.dart';
 import 'package:scr_vendor/core/app_extension.dart';
 import 'package:scr_vendor/core/app_route_constants.dart';
 import 'package:scr_vendor/core/app_style.dart';
+import 'package:scr_vendor/features/auth/presentation/bloc/auth_bloc.dart';
+import 'package:scr_vendor/features/auth/presentation/bloc/auth_event.dart';
 import 'package:scr_vendor/features/user/data/models/user.dart';
 import 'package:scr_vendor/features/user/domain/entities/user_entity.dart';
 import 'package:scr_vendor/features/user/presentation/bloc/user_bloc.dart';
 import 'package:scr_vendor/features/user/presentation/bloc/user_event.dart';
 import 'package:scr_vendor/features/user/presentation/widgets/status_container.dart';
 
-enum Operation { edit, delete, post, todo }
+enum Operation { edit, delete, post, todo, logout }
 
 class UserListScreen extends StatefulWidget {
   const UserListScreen({super.key});
@@ -145,6 +147,9 @@ class _UserListScreenState extends State<UserListScreen> {
                     break;
                   case Operation.edit:
                     editUser(user);
+                  case Operation.logout:
+                    context.read<AuthBloc>().add(SignOutRequested());
+                    context.goNamed(AppPage.home.name);
                 }
               },
             ),

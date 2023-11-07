@@ -31,4 +31,9 @@ class AuthRepositoryImpl extends AuthRepository {
   Future<void> signOut() async {
     return await remoteDataSource.signOut();
   }
+
+  @override
+  Future<bool> checkUserLoggedIn() async {
+    return await remoteDataSource.checkUserLoggedIn();
+  }
 }
