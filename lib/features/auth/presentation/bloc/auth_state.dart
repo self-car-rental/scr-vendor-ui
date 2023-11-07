@@ -48,3 +48,14 @@ class SignOutFailure extends AuthState {
   final String error;
   SignOutFailure(this.error);
 }
+
+class CheckAuthStatusLoading extends AuthState {}
+
+class CheckAuthStatusAuthenticated extends AuthState {}
+
+class CheckAuthStatusUnAuthenticated extends AuthState {}
+
+class CheckAuthStatusFailure extends AuthState {
+  final String error;
+  CheckAuthStatusFailure(this.error);
+}

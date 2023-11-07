@@ -29,3 +29,7 @@ class VerifyOtpRequested extends AuthEvent {
 class SignOutRequested extends AuthEvent {
   SignOutRequested();
 }
+
+class CheckUserLoggedInRequested extends AuthEvent {
+  CheckUserLoggedInRequested();
+}

@@ -1,9 +1,9 @@
 // Package imports:
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 // Project imports:
 import 'package:scr_vendor/features/auth/domain/exceptions/invalid_otp_exception.dart';
 import 'package:scr_vendor/features/auth/domain/exceptions/user_mobile_already_exists_exception.dart';
+import 'package:scr_vendor/features/auth/domain/usecases/check_user_logged_in_usecase.dart';
 import 'package:scr_vendor/features/auth/domain/usecases/sign_in_usecase.dart';
 import 'package:scr_vendor/features/auth/domain/usecases/sign_out_usecase.dart';
 import 'package:scr_vendor/features/auth/domain/usecases/sign_up_usecase.dart';
@@ -19,13 +19,16 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final SignInUseCase signInUseCase;
   final VerifyOtpUseCase verifyOtpUseCase;
   final SignOutUseCase signOutUseCase;
+  final CheckUserLoggedInUseCase checkUserLoggedInUseCase;
 
-  AuthBloc({
-    required this.signUpUseCase,
-    required this.signInUseCase,
-    required this.verifyOtpUseCase,
-    required this.signOutUseCase,
-  }) : super(AuthInitial()) {
+  AuthBloc(
+      {required this.signUpUseCase,
+      required this.signInUseCase,
+      required this.verifyOtpUseCase,
+      required this.signOutUseCase,
+      required this.checkUserLoggedInUseCase})
+      : super(AuthInitial()) {
+    on<CheckUserLoggedInRequested>(_onCheckUserLoggedInRequested);
     on<SignUpRequested>(_onSignUpRequested);
     on<SignInRequested>(_onSignInRequested);
     on<VerifyOtpRequested>(_onVerifyOtpRequested);
@@ -78,6 +81,19 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       emit(SignOutSuccess());
     } on Exception catch (e) {
       emit(SignOutFailure(e.toString()));
+    }
+  }
+
+  Future<void> _onCheckUserLoggedInRequested(
+      CheckUserLoggedInRequested event, Emitter<AuthState> emit) async {
+    emit(CheckAuthStatusLoading());
+    try {
+      final isLoggedIn = await checkUserLoggedInUseCase.execute();
+      emit(isLoggedIn
+          ? CheckAuthStatusAuthenticated()
+          : CheckAuthStatusUnAuthenticated());
+    } on Exception catch (e) {
+      emit(CheckAuthStatusFailure(e.toString()));
     }
   }
 }
