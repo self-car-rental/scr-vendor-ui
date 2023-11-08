@@ -18,98 +18,74 @@ import 'package:scr_vendor/features/user/presentation/screens/user_list_screen.d
 
 /// Manages the routing for the entire application.
 class AppRouter {
-  static final _rootNavigatorKey = GlobalKey<NavigatorState>();
-  static final _shellNavigatorKey = GlobalKey<NavigatorState>();
+  static final GlobalKey<NavigatorState> rootNavigatorKey =
+      GlobalKey<NavigatorState>();
 
   static GoRouter get router => _goRouter;
 
-  static final _goRouter = GoRouter(
-    initialLocation: AppPage.hubs.path,
-    navigatorKey: _rootNavigatorKey,
-    routes: [
-      ShellRoute(
-        navigatorKey: _shellNavigatorKey,
-        builder: (context, state, child) => BlocProvider(
-          create: (context) => BottomNavigationCubit(),
-          child: HomeScreen(screen: child),
-        ),
-        routes: [
-          GoRoute(
-            path: AppPage.hubs.path,
-            name: AppPage.hubs.name,
-            builder: (context, state) => const HubListScreen(),
-            routes: [
-              GoRoute(
-                path: AppPage.create.path,
-                name: AppPage.create.name,
-                builder: (context, state) => const CreateHubScreen(),
-              ),
-              GoRoute(
-                path: AppPage.edit.path,
-                name: AppPage.edit.name,
-                builder: (context, state) {
-                  final hubId = state.pathParameters['id'];
-                  if (hubId == null) {
-                    // Handle the null case, maybe by showing an error or redirecting
-                    return const EditHubScreen(hubId: '');
-// TODO: create Error screen
-                    // return const ErrorScreen(
-                    //     message:
-                    //         'Car ID is missing'); // Or any other appropriate handling
-                  }
-                  return EditHubScreen(hubId: hubId);
-                },
-              ),
-              // Similar route for DeleteCarScreen
-            ],
-          ),
-          GoRoute(
-            path: AppPage.cars.path,
-            name: AppPage.cars.name,
-            builder: (context, state) => const CarListScreen(),
-          ),
-          GoRoute(
-            path: AppPage.user.path,
-            name: AppPage.user.name,
-            builder: (context, state) => const UserListScreen(),
-          ),
-          GoRoute(
-            path: AppPage.profile.path,
-            name: AppPage.profile.name,
-            builder: (context, state) => const ProfileScreen(),
-          ),
-        ],
-      ),
-      GoRoute(
-        path: AppPage.signin.path,
-        name: AppPage.signin.name,
-        builder: (context, state) => SignInScreen(),
-      ),
-      GoRoute(
-        path: AppPage.signup.path,
-        name: AppPage.signup.name,
-        builder: (context, state) => SignUpScreen(),
-      ),
-      GoRoute(
-        path: AppPage.verifyOtp.path,
-        name: AppPage.verifyOtp.name,
-        builder: (context, state) => VerifyOtpScreen(),
-      ),
-    ],
-    redirect: (BuildContext context, GoRouterState state) async {
-      final logger = Log();
-      final userIsLoggedIn =
-          await context.read<AuthBloc>().checkUserLoggedInUseCase.execute();
-
-      if (!userIsLoggedIn &&
-          state.fullPath != AppPage.signin.path &&
-          state.fullPath != AppPage.verifyOtp.path) {
-        logger.i('User not logged in. Redirecting to Sign-in page.');
-        return AppPage.signin.path;
-      }
-
-      logger.i('Proceeding to requested route: ${state.fullPath}');
-      return null;
-    },
+  static final GoRouter _goRouter = GoRouter(
+    initialLocation: AppRoutes.path(AppPage.hubs),
+    navigatorKey: rootNavigatorKey,
+    routes: _getRoutes(),
+    redirect: _redirectLogic,
   );
+
+  static List<RouteBase> _getRoutes() => [
+        ShellRoute(
+          builder: (context, state, child) => BlocProvider(
+            create: (context) => BottomNavigationCubit(),
+            child: HomeScreen(screen: child),
+          ),
+          routes: [
+            _buildGoRoute(
+                AppPage.hubs, (context, state) => const HubListScreen(), [
+              _buildGoRoute(AppPage.hubsCreate,
+                  (context, state) => const CreateHubScreen()),
+              _buildGoRoute(AppPage.hubsEdit, (context, state) {
+                final hubId = state.pathParameters['id'] ?? '';
+                return EditHubScreen(hubId: hubId);
+              }),
+            ]),
+            _buildGoRoute(
+                AppPage.cars, (context, state) => const CarListScreen()),
+            _buildGoRoute(
+                AppPage.users, (context, state) => const UserListScreen()),
+            _buildGoRoute(
+                AppPage.profile, (context, state) => const ProfileScreen()),
+          ],
+        ),
+        _buildGoRoute(AppPage.signin, (context, state) => SignInScreen()),
+        _buildGoRoute(AppPage.signup, (context, state) => SignUpScreen()),
+        _buildGoRoute(AppPage.verifyOtp, (context, state) => VerifyOtpScreen()),
+      ];
+
+  static GoRoute _buildGoRoute(
+      AppPage page,
+      Widget Function(BuildContext, GoRouterState)
+          builder, // Updated parameter type
+      [List<GoRoute>? nestedRoutes]) {
+    return GoRoute(
+      path: AppRoutes.path(page),
+      name: AppRoutes.name(page),
+      builder: builder, // Use the builder function
+      routes: nestedRoutes ?? [],
+    );
+  }
+
+  static Future<String?> _redirectLogic(
+      BuildContext context, GoRouterState state) async {
+    final logger = Log();
+    final authBloc = context.read<AuthBloc>();
+    final userIsLoggedIn = await authBloc.checkUserLoggedInUseCase.execute();
+
+    if (!userIsLoggedIn &&
+        state.uri.toString() != AppRoutes.path(AppPage.signin) &&
+        state.uri.toString() != AppRoutes.path(AppPage.verifyOtp)) {
+      logger.i('User not logged in. Redirecting to Sign-in page.');
+      return AppRoutes.path(AppPage.signin);
+    }
+
+    logger.i('Proceeding to requested route: ${state.uri.toString()}');
+    return null;
+  }
 }

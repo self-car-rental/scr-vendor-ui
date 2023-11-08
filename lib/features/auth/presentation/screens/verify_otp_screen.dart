@@ -22,7 +22,11 @@ class VerifyOtpScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(AppPage.verifyOtp.title)),
+      appBar: AppBar(
+        title: Text(
+          AppRoutes.title(AppPage.verifyOtp),
+        ),
+      ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),
         child: Form(
@@ -66,7 +70,7 @@ class VerifyOtpScreen extends StatelessWidget {
     return BlocConsumer<AuthBloc, AuthState>(
       listener: (context, state) {
         if (state is VerifyOtpSuccess) {
-          context.go(AppPage.hubs.path);
+          context.go(AppRoutes.path(AppPage.hubs));
         } else if (state is VerifyOtpInvalid) {
           _showRetryDialog(context, 'Invalid OTP');
         } else if (state is VerifyOtpFailure) {

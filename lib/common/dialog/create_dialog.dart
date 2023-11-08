@@ -1,6 +1,5 @@
 // Flutter imports:
 import 'package:flutter/material.dart';
-
 // Project imports:
 import 'package:scr_vendor/common/widget/drop_down.dart';
 import 'package:scr_vendor/common/widget/text_input.dart';
@@ -97,7 +96,7 @@ Future<dynamic> createDialog({
                             gender: gender,
                           ),
                         );
-                        Navigator.pop(context, true);
+                        Navigator.of(context, rootNavigator: true).pop(true);
                       }
                     },
                     child: Text(type == Type.create ? 'Create' : 'Update'),
@@ -106,7 +105,8 @@ Future<dynamic> createDialog({
                 SizedBox(
                   width: double.infinity,
                   child: TextButton(
-                    onPressed: () => Navigator.pop(context, false),
+                    onPressed: () =>
+                        Navigator.of(context, rootNavigator: true).pop(false),
                     child: const Text('Cancel'),
                   ),
                 )

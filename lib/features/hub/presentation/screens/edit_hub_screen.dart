@@ -12,7 +12,9 @@ class EditHubScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(AppPage.edit.title),
+        title: Text(
+          AppRoutes.title(AppPage.hubsEdit),
+        ),
       ),
       body: Center(
         child: ElevatedButton(

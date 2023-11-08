@@ -10,7 +10,9 @@ class HubListScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(AppPage.hubs.title),
+        title: Text(
+          AppRoutes.title(AppPage.hubs),
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -34,7 +36,7 @@ class HubListScreen extends StatelessWidget {
   }
 
   void _navigateToCreateHub(BuildContext context) {
-    context.goNamed(AppPage.create.name);
+    context.goNamed(AppRoutes.name(AppPage.hubsCreate));
   }
 
   void _navigateToEditHub(BuildContext context) {
@@ -44,6 +46,7 @@ class HubListScreen extends StatelessWidget {
     // context.goNamed(AppPage.editHub.name, params: {'hubId': selectedHubId});
 
     // For now, using a placeholder
-    context.goNamed(AppPage.edit.name, pathParameters: {'id': '2'});
+    context
+        .goNamed(AppRoutes.name(AppPage.hubsEdit), pathParameters: {'id': '4'});
   }
 }

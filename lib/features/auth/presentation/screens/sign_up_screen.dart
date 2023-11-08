@@ -25,7 +25,11 @@ class SignUpScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(AppPage.signup.title)),
+      appBar: AppBar(
+        title: Text(
+          AppRoutes.title(AppPage.signup),
+        ),
+      ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),
         child: Form(
