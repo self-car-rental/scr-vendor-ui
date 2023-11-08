@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:scr_vendor/common/log/log.dart';
 // Project imports:
 import 'package:scr_vendor/core/app_route_constants.dart';
 import 'package:scr_vendor/features/auth/presentation/bloc/auth_bloc.dart';
@@ -13,7 +14,6 @@ import 'package:scr_vendor/features/user/presentation/screens/user_list_screen.d
 
 class AppRouter {
   static GoRouter get router => _goRouter;
-
   static final _goRouter = GoRouter(
     initialLocation: AppPage.home.path,
     routes: [
@@ -44,17 +44,20 @@ class AppRouter {
       ),
     ],
     redirect: (BuildContext context, GoRouterState state) async {
-      final isLoggedIn =
+      final logger = Log();
+
+      final userIsLoggedIn =
           await context.read<AuthBloc>().checkUserLoggedInUseCase.execute();
 
-      // Define protected route
-      final isProtectedRoute = state.fullPath == AppPage.home.path;
-
-      // Redirect to login if trying to access protected route and not logged in
-      if (isProtectedRoute && !isLoggedIn) {
+      if (!userIsLoggedIn &&
+          state.fullPath != AppPage.signin.path &&
+          state.fullPath != AppPage.verifyOtp.path) {
+        logger.i('User not logged in. Redirecting to Sign-in page.');
         return AppPage.signin.path;
+      } else {
+        logger.i('Proceeding to requested route: ${state.fullPath}');
+        return null;
       }
-      return null;
     },
   );
 }
