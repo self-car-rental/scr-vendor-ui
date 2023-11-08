@@ -8,7 +8,7 @@ import 'package:scr_vendor/common/dialog/progress_dialog.dart';
 import 'package:scr_vendor/common/dialog/retry_dialog.dart';
 import 'package:scr_vendor/common/validators/validators.dart';
 import 'package:scr_vendor/common/widget/text_input.dart';
-import 'package:scr_vendor/core/app_route_constants.dart';
+import 'package:scr_vendor/constants/app_route_constants.dart';
 import 'package:scr_vendor/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:scr_vendor/features/auth/presentation/bloc/auth_event.dart';
 import 'package:scr_vendor/features/auth/presentation/bloc/auth_state.dart';
