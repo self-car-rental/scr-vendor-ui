@@ -10,6 +10,7 @@ abstract class ApiHelper<T> {
   Future<bool> _executeRestOperation(RestOperation restOperation) async {
     try {
       final response = await restOperation.response;
+      logger.i('Received response: ${response.statusCode}');
       if (response.statusCode.success) {
         return true;
       } else {

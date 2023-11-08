@@ -11,7 +11,9 @@ class CreateHubScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(AppPage.create.title),
+        title: Text(
+          AppRoutes.title(AppPage.hubsCreate),
+        ),
       ),
       body: Center(
         child: ElevatedButton(

@@ -13,7 +13,9 @@ class ProfileScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(AppPage.profile.title),
+        title: Text(
+          AppRoutes.title(AppPage.profile),
+        ),
       ),
       body: _buildBody(context),
     );
@@ -34,6 +36,8 @@ class ProfileScreen extends StatelessWidget {
   }
 
   void _navigateToSignIn(BuildContext context) {
-    context.goNamed(AppPage.signin.name);
+    context.goNamed(
+      AppRoutes.name(AppPage.signin),
+    );
   }
 }

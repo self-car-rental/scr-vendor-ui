@@ -1,6 +1,5 @@
 // Flutter imports:
 import 'package:flutter/material.dart';
-
 // Project imports:
 import 'package:scr_vendor/core/app_asset.dart';
 
@@ -54,6 +53,6 @@ extension MapExtension on Map {
 //Helper functions
 void pop(BuildContext context, int returnedLevel) {
   for (var i = 0; i < returnedLevel; ++i) {
-    Navigator.pop(context, true);
+    Navigator.of(context, rootNavigator: true).pop(true);
   }
 }

@@ -14,22 +14,22 @@ class HomeScreen extends StatelessWidget {
   // Making tabs a private member as it's only used within HomeScreen
   final _tabs = [
     NamedNavigationBarItemWidget(
-      initialLocation: AppPage.hubs.name,
+      initialLocation: AppRoutes.name(AppPage.hubs),
       icon: const Icon(Icons.hub),
       label: 'Hubs',
     ),
     NamedNavigationBarItemWidget(
-      initialLocation: AppPage.cars.name,
+      initialLocation: AppRoutes.name(AppPage.cars),
       icon: const Icon(Icons.car_crash),
       label: 'Cars',
     ),
     NamedNavigationBarItemWidget(
-      initialLocation: AppPage.user.name,
+      initialLocation: AppRoutes.name(AppPage.users),
       icon: const Icon(Icons.person_search),
       label: 'Users',
     ),
     NamedNavigationBarItemWidget(
-      initialLocation: AppPage.profile.name,
+      initialLocation: AppRoutes.name(AppPage.profile),
       icon: const Icon(Icons.person),
       label: 'Profile',
     ),

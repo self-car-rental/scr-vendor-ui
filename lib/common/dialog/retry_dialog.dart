@@ -38,7 +38,8 @@ class RetryDialog extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               TextButton(
-                onPressed: () => Navigator.pop(context),
+                onPressed: () =>
+                    Navigator.of(context, rootNavigator: true).pop(),
                 child: const Text('Cancel'),
               ),
               const SizedBox(width: 15),

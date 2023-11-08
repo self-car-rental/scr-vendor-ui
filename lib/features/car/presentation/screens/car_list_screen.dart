@@ -9,7 +9,9 @@ class CarListScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(AppPage.cars.title),
+        title: Text(
+          AppRoutes.title(AppPage.cars),
+        ),
       ),
       body: Center(
         child: ElevatedButton(

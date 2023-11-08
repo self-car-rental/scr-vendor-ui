@@ -20,7 +20,7 @@ import 'package:scr_vendor/features/user/presentation/bloc/user_bloc.dart';
 import 'package:scr_vendor/features/user/presentation/bloc/user_event.dart';
 import 'package:scr_vendor/features/user/presentation/widgets/status_container.dart';
 
-enum Operation { edit, delete, post }
+enum Operation { edit, delete }
 
 class UserListScreen extends StatefulWidget {
   const UserListScreen({super.key});
@@ -92,7 +92,7 @@ class _UserListScreenState extends State<UserListScreen> {
                         title: 'Successfully created',
                         onPressed: () {
                           context.read<UserBloc>().add(UsersFetched());
-                          Navigator.pop(context);
+                          Navigator.of(context, rootNavigator: true).pop();
                         },
                         isProgressed: false,
                       );
@@ -131,9 +131,6 @@ class _UserListScreenState extends State<UserListScreen> {
               items: Operation.values,
               onChanged: (Operation value) async {
                 switch (value) {
-                  case Operation.post:
-                    // navigateTo(PostListScreen(user: user));
-                    break;
                   case Operation.delete:
                     deleteUser(user);
                     break;
@@ -177,7 +174,7 @@ class _UserListScreenState extends State<UserListScreen> {
                     title: 'Successfully deleted',
                     onPressed: () {
                       context.read<UserBloc>().add(UsersFetched());
-                      Navigator.pop(context);
+                      Navigator.of(context, rootNavigator: true).pop();
                     },
                     isProgressed: false,
                   );

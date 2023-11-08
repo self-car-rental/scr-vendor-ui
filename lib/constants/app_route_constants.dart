@@ -1,95 +1,56 @@
 enum AppPage {
-  hubs,
-  cars,
-  profile,
   signup,
   signin,
   verifyOtp,
   home,
-  user,
-  create,
-  edit
+  hubs,
+  hubsCreate,
+  hubsEdit,
+  cars,
+  users,
+  profile,
 }
 
-extension AppPageExtension on AppPage {
-  String get path {
-    switch (this) {
-      case AppPage.home:
-        return '/home';
-      case AppPage.create:
-        return 'create';
-      case AppPage.edit:
-        return 'edit/:id';
-      case AppPage.hubs:
-        return '/hubs';
-      case AppPage.cars:
-        return '/cars';
-      case AppPage.profile:
-        return '/profile';
-      case AppPage.signup:
-        return '/signup';
-      case AppPage.signin:
-        return '/signin';
-      case AppPage.verifyOtp:
-        return '/verifyOtp';
-      case AppPage.user:
-        return '/user';
-      default:
-        return '/';
-    }
-  }
+class AppRoute {
+  final String path;
+  final String name;
+  final String title;
 
-  String get name {
-    switch (this) {
-      case AppPage.home:
-        return 'HOME';
-      case AppPage.create:
-        return 'CREATE';
-      case AppPage.edit:
-        return 'EDIT';
-      case AppPage.hubs:
-        return 'HUBS';
-      case AppPage.cars:
-        return 'CARS';
-      case AppPage.profile:
-        return 'PROFILE';
-      case AppPage.signup:
-        return 'SIGNUP';
-      case AppPage.signin:
-        return 'SIGNIN';
-      case AppPage.verifyOtp:
-        return 'VERIFY-OTP';
-      case AppPage.user:
-        return 'USER';
-      default:
-        return 'HOME';
-    }
-  }
+  const AppRoute({required this.path, required this.name, required this.title});
+}
 
-  String get title {
-    switch (this) {
-      case AppPage.home:
-        return 'Home';
-      case AppPage.create:
-        return 'Create';
-      case AppPage.edit:
-        return 'Edit';
-      case AppPage.hubs:
-        return 'Hubs';
-      case AppPage.cars:
-        return 'Cars';
-      case AppPage.profile:
-        return 'Profile';
-      case AppPage.signup:
-        return 'Signup';
-      case AppPage.signin:
-        return 'Signin';
-      case AppPage.verifyOtp:
-        return 'Verify Otp';
-      case AppPage.user:
-        return 'USER';
-      default:
-        return 'Home';
-    }
-  }
+class AppRoutes {
+  static const Map<AppPage, AppRoute> routes = {
+    ///auth
+    AppPage.signup: AppRoute(path: '/signup', name: 'signup', title: 'Signup'),
+    AppPage.signin: AppRoute(path: '/signin', name: 'signin', title: 'Signin'),
+    AppPage.verifyOtp:
+        AppRoute(path: '/verify-otp', name: 'verifyOtp', title: 'Verify OTP'),
+
+    ///home
+    AppPage.home: AppRoute(path: '/home', name: 'home', title: 'Home'),
+
+    ///hubs
+    AppPage.hubs: AppRoute(path: '/hubs', name: 'hubs', title: 'Hubs'),
+    AppPage.hubsCreate:
+        AppRoute(path: 'create', name: 'hubsCreate', title: 'Create Hub'),
+    AppPage.hubsEdit:
+        AppRoute(path: 'edit/:id', name: 'hubsEdit', title: 'Edit Hub'),
+
+    ///cars
+    AppPage.cars: AppRoute(path: '/cars', name: 'cars', title: 'Cars'),
+
+    ///users
+    AppPage.users: AppRoute(path: '/users', name: 'users', title: 'Users'),
+
+    ///profile
+    AppPage.profile:
+        AppRoute(path: '/profile', name: 'profile', title: 'Profile'),
+
+    // Add other routes as needed
+  };
+
+  static String path(AppPage page) => routes[page]?.path ?? '/home';
+  static String name(AppPage page) => routes[page]?.name ?? 'home';
+  static String title(AppPage page) => routes[page]?.title ?? 'Home';
 }

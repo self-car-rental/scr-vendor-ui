@@ -27,7 +27,8 @@ Future<dynamic> deleteDialog(BuildContext context) {
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 TextButton(
-                  onPressed: () => Navigator.pop(context, false),
+                  onPressed: () =>
+                      Navigator.of(context, rootNavigator: true).pop(false),
                   child: const Text('No'),
                 ),
                 const SizedBox(width: 10),
@@ -35,7 +36,8 @@ Future<dynamic> deleteDialog(BuildContext context) {
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.redAccent,
                   ),
-                  onPressed: () => Navigator.pop(context, true),
+                  onPressed: () =>
+                      Navigator.of(context, rootNavigator: true).pop(true),
                   child: const Text('Yes'),
                 )
               ],
