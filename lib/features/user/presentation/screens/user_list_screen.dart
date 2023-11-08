@@ -2,7 +2,6 @@
 import 'package:flutter/material.dart';
 // Package imports:
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
 // Project imports:
 import 'package:scr_vendor/common/bloc/bloc_helper.dart';
 import 'package:scr_vendor/common/bloc/generic_bloc_state.dart';
@@ -14,17 +13,14 @@ import 'package:scr_vendor/common/widget/empty_widget.dart';
 import 'package:scr_vendor/common/widget/popup_menu.dart';
 import 'package:scr_vendor/common/widget/spinkit_indicator.dart';
 import 'package:scr_vendor/core/app_extension.dart';
-import 'package:scr_vendor/core/app_route_constants.dart';
 import 'package:scr_vendor/core/app_style.dart';
-import 'package:scr_vendor/features/auth/presentation/bloc/auth_bloc.dart';
-import 'package:scr_vendor/features/auth/presentation/bloc/auth_event.dart';
 import 'package:scr_vendor/features/user/data/models/user.dart';
 import 'package:scr_vendor/features/user/domain/entities/user_entity.dart';
 import 'package:scr_vendor/features/user/presentation/bloc/user_bloc.dart';
 import 'package:scr_vendor/features/user/presentation/bloc/user_event.dart';
 import 'package:scr_vendor/features/user/presentation/widgets/status_container.dart';
 
-enum Operation { edit, delete, post, todo, logout }
+enum Operation { edit, delete, post }
 
 class UserListScreen extends StatefulWidget {
   const UserListScreen({super.key});
@@ -138,18 +134,11 @@ class _UserListScreenState extends State<UserListScreen> {
                   case Operation.post:
                     // navigateTo(PostListScreen(user: user));
                     break;
-                  case Operation.todo:
-                    // navigateTo(ToDoListScreen(user: user));
-                    context.goNamed(AppPage.signin.name);
-                    break;
                   case Operation.delete:
                     deleteUser(user);
                     break;
                   case Operation.edit:
                     editUser(user);
-                  case Operation.logout:
-                    context.read<AuthBloc>().add(SignOutRequested());
-                    context.goNamed(AppPage.signin.name);
                 }
               },
             ),
