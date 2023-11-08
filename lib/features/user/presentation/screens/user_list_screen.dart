@@ -149,7 +149,7 @@ class _UserListScreenState extends State<UserListScreen> {
                     editUser(user);
                   case Operation.logout:
                     context.read<AuthBloc>().add(SignOutRequested());
-                    context.goNamed(AppPage.home.name);
+                    context.goNamed(AppPage.signin.name);
                 }
               },
             ),
