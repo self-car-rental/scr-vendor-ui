@@ -266,7 +266,7 @@ packages:
     source: hosted
     version: "1.17.2"
   connectivity_plus:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: connectivity_plus
       sha256: b502a681ba415272ecc41400bd04fe543ed1a62632137dc84d25a91e7746f55f

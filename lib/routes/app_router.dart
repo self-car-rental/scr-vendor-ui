@@ -1,6 +1,11 @@
+// Flutter imports:
 import 'package:flutter/material.dart';
+
+// Package imports:
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+
+// Project imports:
 import 'package:scr_vendor/common/bottom_navigation/bottom_navigation_cubit.dart';
 import 'package:scr_vendor/common/log/log.dart';
 import 'package:scr_vendor/constants/app_route_constants.dart';
@@ -37,6 +42,7 @@ class AppRouter {
             child: HomeScreen(screen: child),
           ),
           routes: [
+            //hubs
             _buildGoRoute(
                 AppPage.hubs, (context, state) => const HubListScreen(), [
               _buildGoRoute(AppPage.hubsCreate,
@@ -46,6 +52,7 @@ class AppRouter {
                 return EditHubScreen(hubId: hubId);
               }),
             ]),
+            //cars
             _buildGoRoute(
                 AppPage.cars, (context, state) => const CarListScreen()),
             _buildGoRoute(

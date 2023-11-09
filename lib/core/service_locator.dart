@@ -1,6 +1,9 @@
 // Package imports:
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:get_it/get_it.dart';
+
 // Project imports:
+import 'package:scr_vendor/common/bloc/connectivity/connectivity_bloc.dart';
 import 'package:scr_vendor/features/auth/data/datasources/auth_remote_data_source.dart';
 import 'package:scr_vendor/features/auth/data/repositories/auth_repository_impl.dart';
 import 'package:scr_vendor/features/auth/domain/repositories/auth_repository.dart';
@@ -27,6 +30,9 @@ Future<void> initServiceLocator() async {
 
   // Auth Features
   _registerAuthFeatures();
+
+  //
+  _registerConnectivity();
 }
 
 void _registerUserFeatures() {
@@ -90,4 +96,10 @@ void _registerAuthFeatures() {
   serviceLocator.registerLazySingleton<AuthRemoteDataSource>(
     () => AuthRemoteDataSourceImpl(),
   );
+}
+
+void _registerConnectivity() {
+  // Connectivity
+  serviceLocator.registerLazySingleton(() => Connectivity());
+  serviceLocator.registerFactory(() => ConnectivityBloc(serviceLocator()));
 }

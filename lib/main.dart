@@ -6,16 +6,19 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 // Project imports:
 import 'package:scr_vendor/amplify/amplify_initializer.dart';
+import 'package:scr_vendor/common/bloc/connectivity/connectivity_bloc.dart';
+import 'package:scr_vendor/common/widget/connectivity_listener.dart';
 import 'package:scr_vendor/core/service_locator.dart';
 import 'package:scr_vendor/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:scr_vendor/features/user/presentation/bloc/user_bloc.dart';
+import 'package:scr_vendor/global_keys.dart';
 import 'package:scr_vendor/routes/app_router.dart';
 
 void main() async {
   WidgetsFlutterBinding
-      .ensureInitialized(); // Ensures Flutter binding initialization
-  await initializeApp(); // Initializes necessary services and plugins
-  runApp(const MainApp()); // Starting point of the application
+      .ensureInitialized(); // Ensures initialization for Flutter engine bindings
+  await initializeApp(); // Initializes Amplify and the service locator
+  runApp(const MainApp());
 }
 
 /// Initializes services and plugins required for the app.
@@ -34,9 +37,17 @@ class MainApp extends StatelessWidget {
       providers: [
         BlocProvider<UserBloc>(create: (context) => serviceLocator<UserBloc>()),
         BlocProvider<AuthBloc>(create: (context) => serviceLocator<AuthBloc>()),
+        BlocProvider<ConnectivityBloc>(
+            create: (context) => serviceLocator<ConnectivityBloc>()),
       ],
       child: MaterialApp.router(
         routerConfig: AppRouter.router, // Configures the routing for the app
+        builder: (context, child) => Scaffold(
+          key: rootScaffoldKey,
+          body: ConnectivityListener(
+            child: child ?? const SizedBox.shrink(),
+          ),
+        ),
       ),
     );
   }
