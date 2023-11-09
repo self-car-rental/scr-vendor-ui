@@ -1,9 +1,11 @@
 // Flutter imports:
 import 'package:flutter/material.dart';
+
 // Package imports:
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 // Project imports:
-import 'package:scr_vendor/amplify_initializer.dart';
+import 'package:scr_vendor/amplify/amplify_initializer.dart';
 import 'package:scr_vendor/core/service_locator.dart';
 import 'package:scr_vendor/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:scr_vendor/features/user/presentation/bloc/user_bloc.dart';
