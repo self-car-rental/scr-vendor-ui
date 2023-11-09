@@ -2,9 +2,10 @@
 import 'package:amplify_api/amplify_api.dart';
 import 'package:amplify_auth_cognito/amplify_auth_cognito.dart';
 import 'package:amplify_flutter/amplify_flutter.dart';
+
 // Project imports:
+import 'package:scr_vendor/amplify/amplify_config.dart';
 import 'package:scr_vendor/common/log/log.dart';
-import 'package:scr_vendor/config/amplify_config.dart';
 
 // Project imports:
 
