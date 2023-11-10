@@ -6,7 +6,7 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 // Project imports:
-import 'package:scr_vendor/common/log/log.dart';
+import 'package:scr_vendor/common/log/app_logger.dart';
 
 enum ConnectivityState { connected, disconnected }
 
@@ -14,7 +14,7 @@ class ConnectivityBloc extends Bloc<ConnectivityState, ConnectivityState> {
   final Connectivity _connectivity;
   late StreamSubscription<ConnectivityResult> _connectivitySubscription;
   late bool _hasCheckedInitialConnectivity = false;
-  final _logger = Log();
+  final AppLogger _logger = AppLogger();
   ConnectivityBloc(this._connectivity) : super(ConnectivityState.disconnected) {
     on<ConnectivityState>((event, emit) => emit(event));
     _initialize();
@@ -47,7 +47,7 @@ class ConnectivityBloc extends Bloc<ConnectivityState, ConnectivityState> {
   // Subsequent connectivity changes (connected/disconnected) are handled normally.
   void _handleConnectivityChange(ConnectivityResult result) {
     bool isConnected = _isInternetConnection(result);
-    _logger.i(
+    _logger.info(
         'Connectivity Change: ${isConnected ? "Connected" : "Disconnected"}');
     if (_hasCheckedInitialConnectivity || !isConnected) {
       add(isConnected
@@ -68,12 +68,12 @@ class ConnectivityBloc extends Bloc<ConnectivityState, ConnectivityState> {
 
 // Error handling for the connectivity stream.
   void _handleError(Object error) {
-    _logger.e('Error in connectivity stream: $error');
+    _logger.error('Error in connectivity stream: $error');
   }
 
 // Handler for when the connectivity stream is closed.
   void _onDone() {
-    _logger.i('Connectivity stream closed');
+    _logger.info('Connectivity stream closed');
   }
 
   @override

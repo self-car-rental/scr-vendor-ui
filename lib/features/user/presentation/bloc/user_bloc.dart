@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 // Project imports:
 import 'package:scr_vendor/common/bloc/bloc_helper.dart';
-import 'package:scr_vendor/common/bloc/generic_bloc_state.dart';
+import 'package:scr_vendor/common/bloc/bloc_state.dart';
 import 'package:scr_vendor/features/user/data/models/user.dart';
 import 'package:scr_vendor/features/user/domain/usecases/create_user_usecase.dart';
 import 'package:scr_vendor/features/user/domain/usecases/delete_user_usecase.dart';
@@ -11,16 +11,15 @@ import 'package:scr_vendor/features/user/domain/usecases/get_users_usecase.dart'
 import 'package:scr_vendor/features/user/domain/usecases/update_user_usecase.dart';
 import 'package:scr_vendor/features/user/presentation/bloc/user_event.dart';
 
-typedef Emit = Emitter<GenericBlocState<User>>;
+typedef Emit = Emitter<BlocState<User>>;
 
-class UserBloc extends Bloc<UserEvent, GenericBlocState<User>>
-    with BlocHelper<User> {
+class UserBloc extends Bloc<UserEvent, BlocState<User>> with BlocHelper<User> {
   UserBloc({
     required this.getUsersUseCase,
     required this.createUserUseCase,
     required this.updateUserUseCase,
     required this.deleteUserUseCase,
-  }) : super(GenericBlocState.loading()) {
+  }) : super(BlocState.loading()) {
     on<UsersFetched>(getUserList);
     on<UserCreated>(createUser);
     on<UserUpdated>(updateUser);

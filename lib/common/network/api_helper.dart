@@ -1,29 +1,34 @@
+// Dart imports:
 import 'dart:convert';
 
+// Package imports:
 import 'package:amplify_flutter/amplify_flutter.dart';
-import 'package:scr_vendor/common/log/log.dart';
+
+// Project imports:
+import 'package:scr_vendor/common/log/app_logger.dart';
 import 'package:scr_vendor/core/app_extension.dart';
 
 abstract class ApiHelper<T> {
-  final logger = Log();
+  final AppLogger _logger = AppLogger();
 
   Future<bool> _executeRestOperation(RestOperation restOperation) async {
     try {
       final response = await restOperation.response;
-      logger.i('Received response: ${response.statusCode}');
+      _logger.info('Received response: ${response.statusCode}');
       if (response.statusCode.success) {
         return true;
       } else {
         String errorMessage =
             'API request failed with status code: ${response.statusCode}';
-        logger.e(errorMessage);
+        _logger.error(errorMessage);
         return false;
       }
     } on ApiException catch (e) {
-      logger.e('ApiException in in _executeRestOperation: ${e.message}');
+      _logger.error('ApiException in in _executeRestOperation: ${e.message}');
       rethrow;
     } catch (e) {
-      logger.e('Unexpected error in _executeRestOperation: ${e.toString()}');
+      _logger
+          .error('Unexpected error in _executeRestOperation: ${e.toString()}');
       rethrow;
     }
   }
@@ -73,15 +78,16 @@ abstract class ApiHelper<T> {
     try {
       final response = await restOperation.response;
       final responseData = response.decodeBody();
-      logger.i('Received response: $responseData');
+      _logger.info('Received response: $responseData');
       return (json.decode(responseData) as List)
           .map((jsonItem) => fromJson(jsonItem as Map<String, dynamic>))
           .toList();
     } on ApiException catch (e) {
-      logger.e('Api Exception in _processGetOperation: ${e.message}');
+      _logger.error('Api Exception in _processGetOperation: ${e.message}');
       rethrow;
     } catch (e) {
-      logger.e('Unexpected error in _processGetOperation: ${e.toString()}');
+      _logger
+          .error('Unexpected error in _processGetOperation: ${e.toString()}');
       rethrow;
     }
   }
@@ -91,14 +97,14 @@ abstract class ApiHelper<T> {
     try {
       final response = await restOperation.response;
       final responseData = response.decodeBody();
-      logger.i('Received response: $responseData');
+      _logger.info('Received response: $responseData');
       return fromJson(json.decode(responseData));
     } on ApiException catch (e) {
-      logger
-          .e('ApiException in _processGetOperationForSingleItem: ${e.message}');
+      _logger.error(
+          'ApiException in _processGetOperationForSingleItem: ${e.message}');
       rethrow;
     } catch (e) {
-      logger.e(
+      _logger.error(
           'Unexpected error in _processGetOperationForSingleItem: ${e.toString()}');
       rethrow;
     }
