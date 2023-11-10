@@ -5,25 +5,25 @@ import 'package:amplify_flutter/amplify_flutter.dart';
 
 // Project imports:
 import 'package:scr_vendor/amplify/amplify_config.dart';
-import 'package:scr_vendor/common/log/log.dart';
+import 'package:scr_vendor/common/log/app_logger.dart';
 
-// Project imports:
-
-final logger = Log();
+final AppLogger _logger = AppLogger();
 
 Future<void> initializeAmplify() async {
   if (Amplify.isConfigured) {
-    logger.i('Amplify is already configured');
+    _logger.info('Amplify is already configured');
     return;
   }
+
   try {
-    logger.i('Configuring Amplify...');
-    await Amplify.addPlugins([AmplifyAPI(), AmplifyAuthCognito()]);
+    _logger.info('Configuring Amplify...');
+    await Amplify.addPlugin(AmplifyAPI());
+    await Amplify.addPlugin(AmplifyAuthCognito());
     await Amplify.configure(amplifyConfig);
-    logger.i('Amplify configured successfully.');
+    _logger.info('Amplify configured successfully.');
   } on AmplifyAlreadyConfiguredException {
-    logger.e('Amplify was already configured. Was the app restarted?');
-  } on Exception catch (e, stacktrace) {
-    logger.e('Error configuring Amplify: $e', e, stacktrace);
+    _logger.error('Amplify was already configured. Was the app restarted?');
+  } catch (e, stacktrace) {
+    _logger.error('Error configuring Amplify: $e', e, stacktrace);
   }
 }

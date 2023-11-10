@@ -7,7 +7,7 @@ import 'package:go_router/go_router.dart';
 
 // Project imports:
 import 'package:scr_vendor/common/bottom_navigation/bottom_navigation_cubit.dart';
-import 'package:scr_vendor/common/log/log.dart';
+import 'package:scr_vendor/common/log/app_logger.dart';
 import 'package:scr_vendor/constants/app_route_constants.dart';
 import 'package:scr_vendor/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:scr_vendor/features/auth/presentation/screens/sign_in_screen.dart';
@@ -81,18 +81,18 @@ class AppRouter {
 
   static Future<String?> _redirectLogic(
       BuildContext context, GoRouterState state) async {
-    final logger = Log();
+    final AppLogger logger = AppLogger();
     final authBloc = context.read<AuthBloc>();
     final userIsLoggedIn = await authBloc.checkUserLoggedInUseCase.execute();
 
     if (!userIsLoggedIn &&
         state.uri.toString() != AppRoutes.path(AppPage.signin) &&
         state.uri.toString() != AppRoutes.path(AppPage.verifyOtp)) {
-      logger.i('User not logged in. Redirecting to Sign-in page.');
+      logger.info('User not logged in. Redirecting to Sign-in page.');
       return AppRoutes.path(AppPage.signin);
     }
 
-    logger.i('Proceeding to requested route: ${state.uri.toString()}');
+    logger.info('Proceeding to requested route: ${state.uri.toString()}');
     return null;
   }
 }

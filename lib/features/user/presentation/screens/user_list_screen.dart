@@ -1,10 +1,12 @@
 // Flutter imports:
 import 'package:flutter/material.dart';
+
 // Package imports:
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 // Project imports:
 import 'package:scr_vendor/common/bloc/bloc_helper.dart';
-import 'package:scr_vendor/common/bloc/generic_bloc_state.dart';
+import 'package:scr_vendor/common/bloc/bloc_state.dart';
 import 'package:scr_vendor/common/dialog/create_dialog.dart';
 import 'package:scr_vendor/common/dialog/delete_dialog.dart';
 import 'package:scr_vendor/common/dialog/progress_dialog.dart';
@@ -71,8 +73,8 @@ class _UserListScreenState extends State<UserListScreen> {
           showDialog(
             context: context,
             builder: (_) {
-              return BlocBuilder<UserBloc, GenericBlocState<User>>(
-                builder: (BuildContext context, GenericBlocState<User> state) {
+              return BlocBuilder<UserBloc, BlocState<User>>(
+                builder: (BuildContext context, BlocState<User> state) {
                   switch (state.status) {
                     case Status.empty:
                       return const SizedBox();
@@ -153,8 +155,8 @@ class _UserListScreenState extends State<UserListScreen> {
       showDialog(
         context: context,
         builder: (_) {
-          return BlocBuilder<UserBloc, GenericBlocState<User>>(
-            builder: (BuildContext context, GenericBlocState<User> state) {
+          return BlocBuilder<UserBloc, BlocState<User>>(
+            builder: (BuildContext context, BlocState<User> state) {
               switch (state.status) {
                 case Status.empty:
                   return const SizedBox();
@@ -203,8 +205,8 @@ class _UserListScreenState extends State<UserListScreen> {
       showDialog(
         context: context,
         builder: (_) {
-          return BlocBuilder<UserBloc, GenericBlocState<User>>(
-            builder: (BuildContext context, GenericBlocState<User> state) {
+          return BlocBuilder<UserBloc, BlocState<User>>(
+            builder: (BuildContext context, BlocState<User> state) {
               switch (state.status) {
                 case Status.empty:
                   return const SizedBox();
@@ -257,13 +259,13 @@ class _UserListScreenState extends State<UserListScreen> {
     return Scaffold(
       floatingActionButton: floatingActionButton,
       appBar: _appBar,
-      body: BlocBuilder<UserBloc, GenericBlocState<User>>(
+      body: BlocBuilder<UserBloc, BlocState<User>>(
         buildWhen: (prevState, curState) {
           return context.read<UserBloc>().operation == ApiOperation.select
               ? true
               : false;
         },
-        builder: (BuildContext context, GenericBlocState<User> state) {
+        builder: (BuildContext context, BlocState<User> state) {
           switch (state.status) {
             case Status.empty:
               return const EmptyWidget(message: 'No user!');

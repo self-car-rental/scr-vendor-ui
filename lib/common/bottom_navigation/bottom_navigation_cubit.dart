@@ -1,41 +1,35 @@
-/// This file defines the BottomNavigationCubit which manages the state
-/// for the bottom navigation bar in the app.
-library;
-
+// Package imports:
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+// Project imports:
 import 'package:scr_vendor/constants/app_route_constants.dart';
 
 part 'bottom_navigation_state.dart';
 
-/// Manages the state of the bottom navigation bar.
 class BottomNavigationCubit extends Cubit<BottomNavigationState> {
   BottomNavigationCubit()
       : super(BottomNavigationState(
             bottomNavItem: AppRoutes.name(AppPage.hubs), index: 0));
 
-  /// Selects a navigation bar item based on the given [index].
   void selectNavBarItem(int index) {
+    String navItem;
     switch (index) {
       case 0:
-        emit(BottomNavigationState(
-            bottomNavItem: AppRoutes.name(AppPage.hubs), index: 0));
+        navItem = AppRoutes.name(AppPage.hubs);
         break;
       case 1:
-        emit(BottomNavigationState(
-            bottomNavItem: AppRoutes.name(AppPage.cars), index: 1));
+        navItem = AppRoutes.name(AppPage.cars);
         break;
       case 2:
-        emit(BottomNavigationState(
-            bottomNavItem: AppRoutes.name(AppPage.users), index: 2));
+        navItem = AppRoutes.name(AppPage.users);
         break;
       case 3:
-        emit(BottomNavigationState(
-            bottomNavItem: AppRoutes.name(AppPage.profile), index: 3));
+        navItem = AppRoutes.name(AppPage.profile);
         break;
       default:
-        // Consider logging an error or using an assertion in development mode.
-        break;
+        return; // Optionally add error handling or logging here
     }
+    emit(BottomNavigationState(bottomNavItem: navItem, index: index));
   }
 }
