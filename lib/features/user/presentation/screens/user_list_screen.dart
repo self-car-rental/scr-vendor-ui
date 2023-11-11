@@ -54,7 +54,7 @@ class _UserListScreenState extends State<UserListScreen> {
           },
         )
       ],
-      title: const Text('Users'),
+      title: Text(context.tr.usersPageTitle),
     );
   }
 
@@ -79,8 +79,8 @@ class _UserListScreenState extends State<UserListScreen> {
                     case Status.empty:
                       return const SizedBox();
                     case Status.loading:
-                      return const ProgressDialog(
-                        title: 'Creating user...',
+                      return ProgressDialog(
+                        title: context.tr.usersProgressCreating,
                         isProgressed: true,
                       );
                     case Status.failure:
@@ -91,7 +91,7 @@ class _UserListScreenState extends State<UserListScreen> {
                       );
                     case Status.success:
                       return ProgressDialog(
-                        title: 'Successfully created',
+                        title: context.tr.usersSuccessfullyCreated,
                         onPressed: () {
                           context.read<UserBloc>().add(UsersFetched());
                           Navigator.of(context, rootNavigator: true).pop();
@@ -161,8 +161,8 @@ class _UserListScreenState extends State<UserListScreen> {
                 case Status.empty:
                   return const SizedBox();
                 case Status.loading:
-                  return const ProgressDialog(
-                    title: 'Deleting user...',
+                  return ProgressDialog(
+                    title: context.tr.usersProgressDeleting,
                     isProgressed: true,
                   );
                 case Status.failure:
@@ -173,7 +173,7 @@ class _UserListScreenState extends State<UserListScreen> {
                   );
                 case Status.success:
                   return ProgressDialog(
-                    title: 'Successfully deleted',
+                    title: context.tr.usersSuccessfullyDeleted,
                     onPressed: () {
                       context.read<UserBloc>().add(UsersFetched());
                       Navigator.of(context, rootNavigator: true).pop();
@@ -211,8 +211,8 @@ class _UserListScreenState extends State<UserListScreen> {
                 case Status.empty:
                   return const SizedBox();
                 case Status.loading:
-                  return const ProgressDialog(
-                    title: 'Updating user...',
+                  return ProgressDialog(
+                    title: context.tr.usersProgressUpdating,
                     isProgressed: true,
                   );
                 case Status.failure:
@@ -223,7 +223,7 @@ class _UserListScreenState extends State<UserListScreen> {
                   );
                 case Status.success:
                   return ProgressDialog(
-                    title: 'Successfully updated',
+                    title: context.tr.usersSuccessfullyUpdated,
                     onPressed: () {
                       context.read<UserBloc>().add(UsersFetched());
                       Navigator.pop(context);
@@ -268,7 +268,7 @@ class _UserListScreenState extends State<UserListScreen> {
         builder: (BuildContext context, BlocState<User> state) {
           switch (state.status) {
             case Status.empty:
-              return const EmptyWidget(message: 'No user!');
+              return EmptyWidget(message: context.tr.usersNoUserMessage);
             case Status.loading:
               return const SpinKitIndicator(type: SpinKitType.circle);
             case Status.failure:

@@ -1,14 +1,17 @@
 // Flutter imports:
 import 'package:flutter/material.dart';
+
 // Package imports:
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+
 // Project imports:
 import 'package:scr_vendor/common/dialog/progress_dialog.dart';
 import 'package:scr_vendor/common/dialog/retry_dialog.dart';
 import 'package:scr_vendor/common/validators/validators.dart';
 import 'package:scr_vendor/common/widget/text_input.dart';
 import 'package:scr_vendor/constants/app_route_constants.dart';
+import 'package:scr_vendor/core/app_extension.dart';
 import 'package:scr_vendor/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:scr_vendor/features/auth/presentation/bloc/auth_event.dart';
 import 'package:scr_vendor/features/auth/presentation/bloc/auth_state.dart';
@@ -24,7 +27,7 @@ class VerifyOtpScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          AppRoutes.title(AppPage.verifyOtp),
+          context.tr.verifyOtpPageTitle,
         ),
       ),
       body: SingleChildScrollView(
@@ -33,7 +36,7 @@ class VerifyOtpScreen extends StatelessWidget {
           key: _formKey,
           child: Column(
             children: <Widget>[
-              _buildOtpInput(),
+              _buildOtpInput(context),
               const SizedBox(height: 30),
               _buildVerifyButton(context),
               const SizedBox(height: 20),
@@ -45,10 +48,10 @@ class VerifyOtpScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildOtpInput() {
+  Widget _buildOtpInput(BuildContext context) {
     return TextInput(
       controller: _otpController,
-      hint: 'Enter OTP',
+      hint: context.tr.verifyOtpEnterOtpHint,
       validator: Validators.validateOtp,
     );
   }
@@ -56,7 +59,7 @@ class VerifyOtpScreen extends StatelessWidget {
   Widget _buildVerifyButton(BuildContext context) {
     return ElevatedButton(
       onPressed: () => _onVerifyOtpPressed(context),
-      child: const Text('Verify OTP'),
+      child: Text(context.tr.verifyOtpButtonTitle),
     );
   }
 
@@ -79,8 +82,8 @@ class VerifyOtpScreen extends StatelessWidget {
       },
       builder: (context, state) {
         if (state is VerifyOtpLoading) {
-          return const ProgressDialog(
-            title: 'Verifying OTP...',
+          return ProgressDialog(
+            title: context.tr.verifyOtpProgressVerifying,
             isProgressed: true,
           );
         }

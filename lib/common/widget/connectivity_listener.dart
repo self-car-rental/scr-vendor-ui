@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 // Project imports:
-import 'package:scr_vendor/common/bloc/connectivity/connectivity_bloc.dart';
+import 'package:scr_vendor/core/connectivity/connectivity_bloc.dart';
 import 'package:scr_vendor/global_keys.dart';
 
 class ConnectivityListener extends StatelessWidget {

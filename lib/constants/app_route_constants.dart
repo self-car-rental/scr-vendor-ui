@@ -14,43 +14,37 @@ enum AppPage {
 class AppRoute {
   final String path;
   final String name;
-  final String title;
 
-  const AppRoute({required this.path, required this.name, required this.title});
+  const AppRoute({required this.path, required this.name});
 }
 
 class AppRoutes {
   static const Map<AppPage, AppRoute> routes = {
     ///auth
-    AppPage.signup: AppRoute(path: '/signup', name: 'signup', title: 'Signup'),
-    AppPage.signin: AppRoute(path: '/signin', name: 'signin', title: 'Signin'),
-    AppPage.verifyOtp:
-        AppRoute(path: '/verify-otp', name: 'verifyOtp', title: 'Verify OTP'),
+    AppPage.signup: AppRoute(path: '/signup', name: 'signup'),
+    AppPage.signin: AppRoute(path: '/signin', name: 'signin'),
+    AppPage.verifyOtp: AppRoute(path: '/verify-otp', name: 'verifyOtp'),
 
     ///home
-    AppPage.home: AppRoute(path: '/home', name: 'home', title: 'Home'),
+    AppPage.home: AppRoute(path: '/home', name: 'home'),
 
     ///hubs
-    AppPage.hubs: AppRoute(path: '/hubs', name: 'hubs', title: 'Hubs'),
-    AppPage.hubsCreate:
-        AppRoute(path: 'create', name: 'hubsCreate', title: 'Create Hub'),
-    AppPage.hubsEdit:
-        AppRoute(path: 'edit/:id', name: 'hubsEdit', title: 'Edit Hub'),
+    AppPage.hubs: AppRoute(path: '/hubs', name: 'hubs'),
+    AppPage.hubsCreate: AppRoute(path: 'create', name: 'hubsCreate'),
+    AppPage.hubsEdit: AppRoute(path: 'edit/:id', name: 'hubsEdit'),
 
     ///cars
-    AppPage.cars: AppRoute(path: '/cars', name: 'cars', title: 'Cars'),
+    AppPage.cars: AppRoute(path: '/cars', name: 'cars'),
 
     ///users
-    AppPage.users: AppRoute(path: '/users', name: 'users', title: 'Users'),
+    AppPage.users: AppRoute(path: '/users', name: 'users'),
 
     ///profile
-    AppPage.profile:
-        AppRoute(path: '/profile', name: 'profile', title: 'Profile'),
+    AppPage.profile: AppRoute(path: '/profile', name: 'profile'),
 
     // Add other routes as needed
   };
 
   static String path(AppPage page) => routes[page]?.path ?? '/home';
   static String name(AppPage page) => routes[page]?.name ?? 'home';
-  static String title(AppPage page) => routes[page]?.title ?? 'Home';
 }

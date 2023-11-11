@@ -1,5 +1,9 @@
 // Flutter imports:
 import 'package:flutter/material.dart';
+
+// Package imports:
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 // Project imports:
 import 'package:scr_vendor/core/app_asset.dart';
 
@@ -55,4 +59,10 @@ void pop(BuildContext context, int returnedLevel) {
   for (var i = 0; i < returnedLevel; ++i) {
     Navigator.of(context, rootNavigator: true).pop(true);
   }
+}
+
+/// Extension on BuildContext to simplify localization access.
+/// 'tr' is shorthand for 'translate' - used to fetch localized strings.
+extension LocalizationExtension on BuildContext {
+  AppLocalizations get tr => AppLocalizations.of(this)!; // 'tr' for translation
 }

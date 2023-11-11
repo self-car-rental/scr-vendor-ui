@@ -1,7 +1,8 @@
 // Flutter imports:
 import 'package:flutter/material.dart';
+
 // Project imports:
-import 'package:scr_vendor/constants/app_route_constants.dart';
+import 'package:scr_vendor/core/app_extension.dart';
 
 /// Represents the Edit Hub screen of the application.
 class EditHubScreen extends StatelessWidget {
@@ -13,7 +14,7 @@ class EditHubScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          AppRoutes.title(AppPage.hubsEdit),
+          context.tr.editHubPageTitle,
         ),
       ),
       body: Center(
@@ -21,7 +22,7 @@ class EditHubScreen extends StatelessWidget {
           onPressed: () {
             // Add your onPressed logic here, if needed
           },
-          child: Text('HubId: $hubId'),
+          child: Text('${context.tr.editHubHubIdLabel}: $hubId'),
         ),
       ),
     );
