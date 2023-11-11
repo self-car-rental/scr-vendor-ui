@@ -1,14 +1,18 @@
 // Flutter imports:
 import 'package:flutter/material.dart';
+
 // Package imports:
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
+
 // Project imports:
 import 'package:scr_vendor/common/dialog/progress_dialog.dart';
 import 'package:scr_vendor/common/dialog/retry_dialog.dart';
 import 'package:scr_vendor/common/validators/validators.dart';
 import 'package:scr_vendor/common/widget/text_input.dart';
 import 'package:scr_vendor/constants/app_route_constants.dart';
+import 'package:scr_vendor/core/app_extension.dart';
 import 'package:scr_vendor/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:scr_vendor/features/auth/presentation/bloc/auth_event.dart';
 import 'package:scr_vendor/features/auth/presentation/bloc/auth_state.dart';
@@ -18,22 +22,23 @@ class SignInScreen extends StatelessWidget {
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final TextEditingController _mobileController = TextEditingController();
+  late final AppLocalizations t;
 
   @override
   Widget build(BuildContext context) {
+    t = AppLocalizations.of(context)!;
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          AppRoutes.title(AppPage.signin),
-        ),
-      ),
+          title: Text(
+        context.tr.signinPageTitle,
+      )),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),
         child: Form(
           key: _formKey,
           child: Column(
             children: <Widget>[
-              _buildMobileInput(),
+              _buildMobileInput(context),
               const SizedBox(height: 30),
               _buildSignInButton(context),
               const SizedBox(height: 20),
@@ -55,8 +60,8 @@ class SignInScreen extends StatelessWidget {
                 },
                 builder: (context, state) {
                   if (state is SignInLoading) {
-                    return const ProgressDialog(
-                      title: 'Send otp...',
+                    return ProgressDialog(
+                      title: context.tr.signinProgressSendingOtp,
                       isProgressed: true,
                     );
                   }
@@ -70,10 +75,10 @@ class SignInScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildMobileInput() {
+  Widget _buildMobileInput(BuildContext context) {
     return TextInput(
       controller: _mobileController,
-      hint: 'Enter Mobile',
+      hint: context.tr.signinEnterMobileNumberPlaceholder,
       validator: Validators.validateMobile,
     );
   }
@@ -81,7 +86,7 @@ class SignInScreen extends StatelessWidget {
   Widget _buildSignInButton(BuildContext context) {
     return ElevatedButton(
       onPressed: () => _onSignInPressed(context),
-      child: const Text('Sign In'),
+      child: Text(context.tr.signinButtonTitle),
     );
   }
 

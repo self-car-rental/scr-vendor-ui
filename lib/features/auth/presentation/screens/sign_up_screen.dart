@@ -1,14 +1,17 @@
 // Flutter imports:
 import 'package:flutter/material.dart';
+
 // Package imports:
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+
 // Project imports:
 import 'package:scr_vendor/common/dialog/progress_dialog.dart';
 import 'package:scr_vendor/common/dialog/retry_dialog.dart';
 import 'package:scr_vendor/common/validators/validators.dart';
 import 'package:scr_vendor/common/widget/text_input.dart';
 import 'package:scr_vendor/constants/app_route_constants.dart';
+import 'package:scr_vendor/core/app_extension.dart';
 import 'package:scr_vendor/features/auth/data/models/user_cognito_model.dart';
 import 'package:scr_vendor/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:scr_vendor/features/auth/presentation/bloc/auth_event.dart';
@@ -27,7 +30,7 @@ class SignUpScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          AppRoutes.title(AppPage.signup),
+          context.tr.signupPageTitle,
         ),
       ),
       body: SingleChildScrollView(
@@ -36,11 +39,11 @@ class SignUpScreen extends StatelessWidget {
           key: _formKey,
           child: Column(
             children: <Widget>[
-              _buildNameInput(),
+              _buildNameInput(context),
               const SizedBox(height: 15),
-              _buildEmailInput(),
+              _buildEmailInput(context),
               const SizedBox(height: 15),
-              _buildMobileInput(),
+              _buildMobileInput(context),
               const SizedBox(height: 30),
               _buildSignUpButton(context),
               const SizedBox(height: 20),
@@ -61,8 +64,8 @@ class SignUpScreen extends StatelessWidget {
                   } else if (state is UserMobileAlreadyExists) {
                     showDialog(
                       context: context,
-                      builder: (_) => const ProgressDialog(
-                        title: 'Mobile number already exists',
+                      builder: (_) => ProgressDialog(
+                        title: context.tr.signupMobileExistsMessage,
                         isProgressed: false,
                       ),
                     );
@@ -70,8 +73,8 @@ class SignUpScreen extends StatelessWidget {
                 },
                 builder: (context, state) {
                   if (state is SignUpLoading) {
-                    return const ProgressDialog(
-                      title: 'Creating user...',
+                    return ProgressDialog(
+                      title: context.tr.usersProgressCreating,
                       isProgressed: true,
                     );
                   }
@@ -85,26 +88,26 @@ class SignUpScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildNameInput() {
+  Widget _buildNameInput(BuildContext context) {
     return TextInput(
       controller: _nameController,
-      hint: 'Enter Name',
+      hint: context.tr.signupEnterNameHint,
       validator: Validators.validateName,
     );
   }
 
-  Widget _buildEmailInput() {
+  Widget _buildEmailInput(BuildContext context) {
     return TextInput(
       controller: _emailController,
-      hint: 'Enter Email',
+      hint: context.tr.signupEnterEmailHint,
       validator: Validators.validateEmail,
     );
   }
 
-  Widget _buildMobileInput() {
+  Widget _buildMobileInput(BuildContext context) {
     return TextInput(
       controller: _mobileController,
-      hint: 'Enter Mobile',
+      hint: context.tr.signupEnterMobileHint,
       validator: Validators.validateMobile,
     );
   }
@@ -112,7 +115,7 @@ class SignUpScreen extends StatelessWidget {
   Widget _buildSignUpButton(BuildContext context) {
     return ElevatedButton(
       onPressed: () => _onSignUpPressed(context),
-      child: const Text('Sign Up'),
+      child: Text(context.tr.signupButtonTitle),
     );
   }
 

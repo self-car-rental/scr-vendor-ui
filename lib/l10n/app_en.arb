@@ -1,0 +1,48 @@
+{
+  "signinPageTitle": "Signin",
+  "signinEnterMobileNumberPlaceholder": "Enter Mobile Number",
+  "signinButtonTitle": "Sign In",
+  "signinProgressSendingOtp": "Send otp...",
+
+  "verifyOtpPageTitle": "Verify OTP",
+  "verifyOtpEnterOtpHint": "Enter OTP",
+  "verifyOtpButtonTitle": "Verify OTP",
+  "verifyOtpProgressVerifying": "Verifying OTP...",
+
+  "signupPageTitle": "Sign Up",
+  "signupEnterNameHint": "Enter Name",
+  "signupEnterEmailHint": "Enter Email",
+  "signupEnterMobileHint": "Enter Mobile",
+  "signupButtonTitle": "Sign Up",
+  "signupProgressCreatingUser": "Creating user...",
+  "signupMobileExistsMessage": "Mobile number already exists",
+
+  "profilePageTitle": "Profile",
+  "profileLogoutButtonTitle": "Logout",
+
+  "createHubPageTitle": "Create Hub",
+  "createHubButtonTitle": "Create",
+
+  "editHubPageTitle": "Edit Hub",
+  "editHubHubIdLabel": "Hub ID",
+
+  "hubsPageTitle": "Hubs",
+  "hubsCreateHubButtonTitle": "Create Hub",
+  "hubsEditHubButtonTitle": "Edit Hub",
+
+  "bottomNavHubs": "Hubs",
+  "bottomNavCars": "Cars",
+  "bottomNavUsers": "Users",
+  "bottomNavProfile": "Profile",
+
+  "usersPageTitle": "Users",
+  "usersNoUserMessage": "No users!",
+  "usersProgressCreating": "Creating user...",
+  "usersProgressDeleting": "Deleting user...",
+  "usersProgressUpdating": "Updating user...",
+  "usersSuccessfullyCreated": "Successfully created",
+  "usersSuccessfullyDeleted": "Successfully deleted",
+  "usersSuccessfullyUpdated": "Successfully updated",
+
+  "carsPageTitle": "Cars"
+}

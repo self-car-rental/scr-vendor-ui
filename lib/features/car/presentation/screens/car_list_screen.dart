@@ -1,5 +1,8 @@
+// Flutter imports:
 import 'package:flutter/material.dart';
-import 'package:scr_vendor/constants/app_route_constants.dart';
+
+// Project imports:
+import 'package:scr_vendor/core/app_extension.dart';
 
 /// Represents the car screen of the application.
 class CarListScreen extends StatelessWidget {
@@ -10,17 +13,10 @@ class CarListScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          AppRoutes.title(AppPage.cars),
+          context.tr.carsPageTitle,
         ),
       ),
-      body: Center(
-        child: ElevatedButton(
-          onPressed: () {
-            // Add your onPressed logic here, if needed
-          },
-          child: const Text('Cars'),
-        ),
-      ),
+      body: const Center(),
     );
   }
 }

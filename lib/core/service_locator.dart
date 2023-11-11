@@ -3,7 +3,8 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:get_it/get_it.dart';
 
 // Project imports:
-import 'package:scr_vendor/common/bloc/connectivity/connectivity_bloc.dart';
+import 'package:scr_vendor/core/connectivity/connectivity_bloc.dart';
+import 'package:scr_vendor/core/localization/localization_bloc.dart';
 import 'package:scr_vendor/features/auth/data/datasources/auth_remote_data_source.dart';
 import 'package:scr_vendor/features/auth/data/repositories/auth_repository_impl.dart';
 import 'package:scr_vendor/features/auth/domain/repositories/auth_repository.dart';
@@ -25,14 +26,17 @@ import 'package:scr_vendor/features/user/presentation/bloc/user_bloc.dart';
 final serviceLocator = GetIt.instance;
 
 Future<void> initServiceLocator() async {
-  // User Features
-  _registerUserFeatures();
+  // Connectivity
+  _registerConnectivity();
+
+  // Localization
+  _registerLocalization();
 
   // Auth Features
   _registerAuthFeatures();
 
-  //
-  _registerConnectivity();
+  // User Features
+  _registerUserFeatures();
 }
 
 void _registerUserFeatures() {
@@ -99,7 +103,10 @@ void _registerAuthFeatures() {
 }
 
 void _registerConnectivity() {
-  // Connectivity
   serviceLocator.registerLazySingleton(() => Connectivity());
   serviceLocator.registerFactory(() => ConnectivityBloc(serviceLocator()));
+}
+
+void _registerLocalization() {
+  serviceLocator.registerLazySingleton(() => LocalizationBloc());
 }

@@ -1,6 +1,12 @@
+// Flutter imports:
 import 'package:flutter/material.dart';
+
+// Package imports:
 import 'package:go_router/go_router.dart';
+
+// Project imports:
 import 'package:scr_vendor/constants/app_route_constants.dart';
+import 'package:scr_vendor/core/app_extension.dart';
 
 /// Represents the screen listing hubs with options to create and edit.
 class HubListScreen extends StatelessWidget {
@@ -11,7 +17,7 @@ class HubListScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          AppRoutes.title(AppPage.hubs),
+          context.tr.hubsPageTitle,
         ),
       ),
       body: Padding(
@@ -22,12 +28,12 @@ class HubListScreen extends StatelessWidget {
           children: <Widget>[
             ElevatedButton(
               onPressed: () => _navigateToCreateHub(context),
-              child: const Text('Create Hub'),
+              child: Text(context.tr.hubsCreateHubButtonTitle),
             ),
             const SizedBox(height: 16), // Space between the buttons
             ElevatedButton(
               onPressed: () => _navigateToEditHub(context),
-              child: const Text('Edit Hub'),
+              child: Text(context.tr.hubsEditHubButtonTitle),
             ),
           ],
         ),

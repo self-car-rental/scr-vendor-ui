@@ -1,7 +1,8 @@
 // Flutter imports:
 import 'package:flutter/material.dart';
+
 // Project imports:
-import 'package:scr_vendor/constants/app_route_constants.dart';
+import 'package:scr_vendor/core/app_extension.dart';
 
 /// Represents the Create Hub screen of the application.
 class CreateHubScreen extends StatelessWidget {
@@ -12,7 +13,7 @@ class CreateHubScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          AppRoutes.title(AppPage.hubsCreate),
+          context.tr.createHubPageTitle,
         ),
       ),
       body: Center(
@@ -20,7 +21,7 @@ class CreateHubScreen extends StatelessWidget {
           onPressed: () {
             // Add your onPressed logic here, if needed
           },
-          child: const Text('Create'),
+          child: Text(context.tr.createHubButtonTitle),
         ),
       ),
     );
