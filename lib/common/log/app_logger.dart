@@ -7,20 +7,26 @@ class AppLogger {
 
   AppLogger._internal()
       : _logger = Logger(
-          level: Level.all,
+          // Setting the logging level to be verbose during development
+          // can be dynamically adjusted based on the app's environment or build mode.
+          level: Level.debug, // Consider Level.verbose for detailed logs
+
           printer: PrettyPrinter(
-            methodCount: 0, // Number of method calls to be displayed
-            errorMethodCount: 8, // Number of method calls if an error is logged
-            lineLength: 120, // Width of the log print
-            colors: true, // Colorful log messages
-            printEmojis: true, // Print an emoji for each log message
-            printTime: true, // Include a timestamp in each log message
+            methodCount:
+                2, // Displaying method calls can help trace the log origin
+            errorMethodCount:
+                8, // Extensive method calls for error logs for better debugging
+            lineLength: 120, // Adjust line length for readability
+            colors: true, // Enables colored log messages for easier distinction
+            printEmojis:
+                true, // Emoji inclusion for visual emphasis on log severity
+            printTime: true, // Timestamps for correlating logs with events
           ),
         );
 
   factory AppLogger() => _instance;
 
-  void trace(dynamic message) => _logger.v(message);
+  void trace(dynamic message) => _logger.t(message);
   void debug(dynamic message) => _logger.d(message);
   void info(dynamic message) => _logger.i(message);
   void warning(dynamic message) => _logger.w(message);
