@@ -44,7 +44,7 @@ class ProfileScreen extends StatelessWidget {
         if (newValue != null) {
           context
               .read<LocalizationBloc>()
-              .add(LocalizationEvent(Locale(newValue)));
+              .add(ChangeLanguageEvent(Locale(newValue)));
         }
       },
     );

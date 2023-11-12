@@ -4,7 +4,7 @@ import 'package:get_it/get_it.dart';
 
 // Project imports:
 import 'package:scr_vendor/core/connectivity/connectivity_bloc.dart';
-import 'package:scr_vendor/core/localization/localization_bloc.dart';
+import 'package:scr_vendor/core/services/language_preference_service.dart';
 import 'package:scr_vendor/features/auth/data/datasources/auth_remote_data_source.dart';
 import 'package:scr_vendor/features/auth/data/repositories/auth_repository_impl.dart';
 import 'package:scr_vendor/features/auth/domain/repositories/auth_repository.dart';
@@ -108,5 +108,5 @@ void _registerConnectivity() {
 }
 
 void _registerLocalization() {
-  serviceLocator.registerLazySingleton(() => LocalizationBloc());
+  serviceLocator.registerLazySingleton(() => LanguagePreferenceService());
 }

@@ -1,8 +1,12 @@
 // Dart imports:
 import 'dart:ui';
 
-class LocalizationEvent {
-  final Locale locale;
+// localization_event.dart
+abstract class LocalizationEvent {}
 
-  LocalizationEvent(this.locale);
+class LoadStoredLanguageEvent extends LocalizationEvent {}
+
+class ChangeLanguageEvent extends LocalizationEvent {
+  final Locale newLocale;
+  ChangeLanguageEvent(this.newLocale);
 }
