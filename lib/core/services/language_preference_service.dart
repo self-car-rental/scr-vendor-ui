@@ -2,7 +2,7 @@
 import 'package:hive/hive.dart';
 
 // Project imports:
-import 'package:scr_vendor/constants/language_constants.dart';
+import 'package:scr_vendor/constants/app_language_constants.dart';
 
 class LanguagePreferenceService {
   static const _boxName = 'languagePreferences';
