@@ -5,17 +5,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 // Project imports:
-import 'package:scr_vendor/common/bloc/bloc_helper.dart';
-import 'package:scr_vendor/common/bloc/bloc_state.dart';
-import 'package:scr_vendor/common/dialog/create_dialog.dart';
-import 'package:scr_vendor/common/dialog/delete_dialog.dart';
-import 'package:scr_vendor/common/dialog/progress_dialog.dart';
-import 'package:scr_vendor/common/dialog/retry_dialog.dart';
-import 'package:scr_vendor/common/widget/empty_widget.dart';
-import 'package:scr_vendor/common/widget/popup_menu.dart';
-import 'package:scr_vendor/common/widget/spinkit_indicator.dart';
-import 'package:scr_vendor/core/app_extension.dart';
-import 'package:scr_vendor/core/app_style.dart';
+import 'package:scr_vendor/common/dialogs/create_dialog.dart';
+import 'package:scr_vendor/common/dialogs/delete_dialog.dart';
+import 'package:scr_vendor/common/dialogs/progress_dialog.dart';
+import 'package:scr_vendor/common/dialogs/retry_dialog.dart';
+import 'package:scr_vendor/common/widgets/empty_widget.dart';
+import 'package:scr_vendor/common/widgets/popup_menu.dart';
+import 'package:scr_vendor/common/widgets/spinkit_indicator.dart';
+import 'package:scr_vendor/core/bloc/bloc_helpers/app_bloc_state.dart';
+import 'package:scr_vendor/core/bloc/bloc_helpers/bloc_api_helper.dart';
+import 'package:scr_vendor/core/themes/app_style.dart';
+import 'package:scr_vendor/core/utils/app_extension.dart';
 import 'package:scr_vendor/features/user/data/models/user.dart';
 import 'package:scr_vendor/features/user/domain/entities/user_entity.dart';
 import 'package:scr_vendor/features/user/presentation/bloc/user_bloc.dart';

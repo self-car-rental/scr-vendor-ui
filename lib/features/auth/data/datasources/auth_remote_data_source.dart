@@ -3,12 +3,11 @@ import 'package:amplify_auth_cognito/amplify_auth_cognito.dart';
 import 'package:amplify_flutter/amplify_flutter.dart';
 
 // Project imports:
-import 'package:scr_vendor/common/log/app_logger.dart';
+import 'package:scr_vendor/core/utils/app_logger.dart';
 import 'package:scr_vendor/features/auth/domain/exceptions/invalid_otp_exception.dart';
 import 'package:scr_vendor/features/auth/domain/exceptions/user_mobile_already_exists_exception.dart';
 
 // Project imports:
-
 
 /// Abstract definition for the authentication remote data source.
 abstract class AuthRemoteDataSource {
