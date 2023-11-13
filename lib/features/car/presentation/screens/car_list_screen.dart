@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 
 // Project imports:
-import 'package:scr_vendor/core/app_extension.dart';
+import 'package:scr_vendor/core/utils/app_extension.dart';
 
 /// Represents the car screen of the application.
 class CarListScreen extends StatelessWidget {

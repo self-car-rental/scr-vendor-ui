@@ -1,5 +1,6 @@
-import 'package:scr_vendor/common/network/api_config.dart';
-import 'package:scr_vendor/common/network/api_helper.dart';
+// Project imports:
+import 'package:scr_vendor/core/network/api_endpoints.dart';
+import 'package:scr_vendor/core/network/api_helper.dart';
 import 'package:scr_vendor/features/user/data/models/user.dart';
 import 'package:scr_vendor/features/user/domain/entities/user_entity.dart';
 
@@ -22,24 +23,24 @@ class UserRemoteDataSourceImpl extends ApiHelper<User>
       queryParameters['status'] = status.name;
     }
     return fetchItems(
-        path: ApiConfig.users,
+        path: ApiEndpoints.users,
         fromJson: User.fromJson,
         queryParameters: queryParameters);
   }
 
   @override
   Future<bool> createUser(User user) async {
-    return createItem(path: ApiConfig.users, body: user.toJson());
+    return createItem(path: ApiEndpoints.users, body: user.toJson());
   }
 
   @override
   Future<bool> updateUser(User user) async {
     return updateItem(
-        path: '${ApiConfig.users}/${user.id}', body: user.toJson());
+        path: ApiEndpoints.userById(user.id), body: user.toJson());
   }
 
   @override
   Future<bool> deleteUser(User user) async {
-    return deleteItem(path: '${ApiConfig.users}/${user.id}');
+    return deleteItem(path: ApiEndpoints.userById(user.id));
   }
 }

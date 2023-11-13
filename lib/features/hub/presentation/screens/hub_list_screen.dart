@@ -6,7 +6,7 @@ import 'package:go_router/go_router.dart';
 
 // Project imports:
 import 'package:scr_vendor/constants/app_route_constants.dart';
-import 'package:scr_vendor/core/app_extension.dart';
+import 'package:scr_vendor/core/utils/app_extension.dart';
 
 /// Represents the screen listing hubs with options to create and edit.
 class HubListScreen extends StatelessWidget {

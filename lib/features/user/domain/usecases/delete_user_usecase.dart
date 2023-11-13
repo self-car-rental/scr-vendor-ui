@@ -2,8 +2,8 @@
 import 'package:flutter/foundation.dart' show immutable;
 
 // Project imports:
-import 'package:scr_vendor/common/network/api_result.dart';
-import 'package:scr_vendor/common/usecase/usecase.dart';
+import 'package:scr_vendor/core/network/api_result.dart';
+import 'package:scr_vendor/core/usecase/usecase_helper.dart';
 import 'package:scr_vendor/features/user/data/models/user.dart';
 import 'package:scr_vendor/features/user/domain/repositories/user_repository.dart';
 

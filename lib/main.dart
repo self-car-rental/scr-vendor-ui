@@ -8,17 +8,17 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 // Project imports:
-import 'package:scr_vendor/amplify/amplify_initializer.dart';
-import 'package:scr_vendor/common/widget/connectivity_listener.dart';
+import 'package:scr_vendor/common/widgets/connectivity_listener.dart';
 import 'package:scr_vendor/constants/language_constants.dart';
-import 'package:scr_vendor/core/connectivity/connectivity_bloc.dart';
-import 'package:scr_vendor/core/localization/localization_bloc.dart';
-import 'package:scr_vendor/core/service_locator.dart';
+import 'package:scr_vendor/core/amplify/amplify_initializer.dart';
+import 'package:scr_vendor/core/bloc/connectivity/connectivity_bloc.dart';
+import 'package:scr_vendor/core/bloc/localization/localization_bloc.dart';
+import 'package:scr_vendor/core/routes/app_router.dart';
 import 'package:scr_vendor/core/services/language_preference_service.dart';
+import 'package:scr_vendor/core/utils/app_keys.dart';
 import 'package:scr_vendor/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:scr_vendor/features/user/presentation/bloc/user_bloc.dart';
-import 'package:scr_vendor/global_keys.dart';
-import 'package:scr_vendor/routes/app_router.dart';
+import 'package:scr_vendor/service_locator.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -59,10 +59,10 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (_) => serviceLocator<UserBloc>()),
-        BlocProvider(create: (_) => serviceLocator<AuthBloc>()),
-        BlocProvider(create: (_) => serviceLocator<ConnectivityBloc>()),
         BlocProvider(create: (_) => serviceLocator<LocalizationBloc>()),
+        BlocProvider(create: (_) => serviceLocator<ConnectivityBloc>()),
+        BlocProvider(create: (_) => serviceLocator<AuthBloc>()),
+        BlocProvider(create: (_) => serviceLocator<UserBloc>()),
       ],
       child: BlocBuilder<LocalizationBloc, Locale>(
         builder: (context, locale) {

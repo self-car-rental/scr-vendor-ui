@@ -8,9 +8,9 @@ import 'package:go_router/go_router.dart';
 // Project imports:
 import 'package:scr_vendor/constants/app_route_constants.dart';
 import 'package:scr_vendor/constants/language_constants.dart';
-import 'package:scr_vendor/core/app_extension.dart';
-import 'package:scr_vendor/core/localization/localization_bloc.dart';
-import 'package:scr_vendor/core/localization/localization_event.dart';
+import 'package:scr_vendor/core/bloc/localization/localization_bloc.dart';
+import 'package:scr_vendor/core/bloc/localization/localization_event.dart';
+import 'package:scr_vendor/core/utils/app_extension.dart';
 import 'package:scr_vendor/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:scr_vendor/features/auth/presentation/bloc/auth_event.dart';
 

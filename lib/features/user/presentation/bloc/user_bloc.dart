@@ -2,8 +2,8 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 // Project imports:
-import 'package:scr_vendor/common/bloc/bloc_helper.dart';
-import 'package:scr_vendor/common/bloc/bloc_state.dart';
+import 'package:scr_vendor/core/bloc/bloc_helpers/app_bloc_state.dart';
+import 'package:scr_vendor/core/bloc/bloc_helpers/bloc_api_helper.dart';
 import 'package:scr_vendor/features/user/data/models/user.dart';
 import 'package:scr_vendor/features/user/domain/usecases/create_user_usecase.dart';
 import 'package:scr_vendor/features/user/domain/usecases/delete_user_usecase.dart';
