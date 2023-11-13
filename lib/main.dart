@@ -9,7 +9,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 
 // Project imports:
 import 'package:scr_vendor/common/widgets/connectivity_listener.dart';
-import 'package:scr_vendor/constants/language_constants.dart';
+import 'package:scr_vendor/constants/app_language_constants.dart';
 import 'package:scr_vendor/core/amplify/amplify_initializer.dart';
 import 'package:scr_vendor/core/bloc/connectivity/connectivity_bloc.dart';
 import 'package:scr_vendor/core/bloc/localization/localization_bloc.dart';
