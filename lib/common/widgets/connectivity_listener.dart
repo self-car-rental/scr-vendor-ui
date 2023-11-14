@@ -21,7 +21,7 @@ class ConnectivityListener extends StatelessWidget {
           content: Text(state == ConnectivityState.connected
               ? 'Connected to the Internet'
               : 'No Internet Connection'),
-          duration: const Duration(seconds: 3),
+          duration: const Duration(seconds: 0),
         );
 
         // Using rootScaffoldKey defined in global_keys.dart

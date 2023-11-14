@@ -5,6 +5,7 @@ import 'package:get_it/get_it.dart';
 // Project imports:
 import 'package:scr_vendor/core/bloc/connectivity/connectivity_bloc.dart';
 import 'package:scr_vendor/core/services/language_preference_service.dart';
+import 'package:scr_vendor/core/services/theme_preference_service.dart';
 import 'package:scr_vendor/features/auth/data/datasources/auth_remote_data_source.dart';
 import 'package:scr_vendor/features/auth/data/repositories/auth_repository_impl.dart';
 import 'package:scr_vendor/features/auth/domain/repositories/auth_repository.dart';
@@ -32,6 +33,8 @@ Future<void> initServiceLocator() async {
   // Localization
   _registerLocalization();
 
+  // Theme
+  _registerTheme();
   // Auth Features
   _registerAuthFeatures();
 
@@ -109,4 +112,8 @@ void _registerConnectivity() {
 
 void _registerLocalization() {
   serviceLocator.registerLazySingleton(() => LanguagePreferenceService());
+}
+
+void _registerTheme() {
+  serviceLocator.registerLazySingleton(() => ThemePreferenceService());
 }

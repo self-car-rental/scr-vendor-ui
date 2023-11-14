@@ -35,6 +35,7 @@ Future<dynamic> createDialog({
         title: Text(
           type == Type.create ? 'Create new user' : 'Update user',
           textAlign: TextAlign.center,
+          style: Theme.of(context).textTheme.displayMedium,
         ),
         content: Form(
           key: formKey,

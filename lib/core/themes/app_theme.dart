@@ -45,6 +45,12 @@ class AppThemes {
         backgroundColor: Colors.white,
         selectedItemColor: LightThemeColor.accent,
       ),
+      popupMenuTheme: const PopupMenuThemeData(
+        color: LightThemeColor.primaryLight,
+      ),
+      dialogTheme: const DialogTheme(
+        backgroundColor: LightThemeColor.primaryLight,
+      ),
       textTheme: const TextTheme(
         displayLarge: h1Style,
         displayMedium: h2Style,
@@ -91,6 +97,12 @@ class AppThemes {
         backgroundColor: DarkThemeColor.primaryLight,
         selectedItemColor: LightThemeColor.accent,
         unselectedItemColor: Colors.white70,
+      ),
+      popupMenuTheme: const PopupMenuThemeData(
+        color: DarkThemeColor.primaryLight,
+      ),
+      dialogTheme: const DialogTheme(
+        backgroundColor: DarkThemeColor.primaryLight,
       ),
       textTheme: TextTheme(
         displayLarge: h1Style.copyWith(color: Colors.white),
