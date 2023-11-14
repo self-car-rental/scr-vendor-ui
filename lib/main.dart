@@ -6,9 +6,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:sentry_flutter/sentry_flutter.dart';
 
 // Project imports:
 import 'package:scr_vendor/common/widgets/connectivity_listener.dart';
+import 'package:scr_vendor/config/app_config.dart';
 import 'package:scr_vendor/constants/app_language_constants.dart';
 import 'package:scr_vendor/core/amplify/amplify_initializer.dart';
 import 'package:scr_vendor/core/bloc/connectivity/connectivity_bloc.dart';
@@ -25,7 +27,6 @@ import 'package:scr_vendor/service_locator.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await initializeApp();
-  runApp(const MainApp());
 }
 
 /// Initializes services and plugins required for the app.
@@ -35,6 +36,7 @@ Future<void> initializeApp() async {
   await initializeAmplify(); // AWS Amplify setup
   await initializeLanguageSettings(); // Language settings initialization
   await initializeThemeSettings();
+  await initializeSentry();
 }
 
 // Initialize language settings separately
@@ -54,12 +56,29 @@ Future<void> initializeLanguageSettings() async {
   );
 }
 
-// Initialize theme settings separately
+// Initialize theme
 Future<void> initializeThemeSettings() async {
   final themePreferenceService = serviceLocator<ThemePreferenceService>();
   final storedTheme = await themePreferenceService.getSelectedTheme();
   serviceLocator.registerFactory<ThemeBloc>(
     () => ThemeBloc(themePreferenceService, storedTheme),
+  );
+}
+
+// Initialize theme
+Future<void> initializeSentry() async {
+  await SentryFlutter.init(
+    (options) {
+      options.dsn = AppConfig.sentryDsn;
+      options.tracesSampleRate = 1.0;
+    },
+    // Init your App.
+    appRunner: () => runApp(
+      DefaultAssetBundle(
+        bundle: SentryAssetBundle(),
+        child: const MainApp(),
+      ),
+    ),
   );
 }
 
