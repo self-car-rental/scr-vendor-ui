@@ -14,6 +14,7 @@ class CreateHubScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text(
           context.tr.createHubPageTitle,
+          style: Theme.of(context).textTheme.displayMedium,
         ),
       ),
       body: Center(
@@ -21,7 +22,9 @@ class CreateHubScreen extends StatelessWidget {
           onPressed: () {
             // Add your onPressed logic here, if needed
           },
-          child: Text(context.tr.createHubButtonTitle),
+          child: Text(
+            context.tr.createHubButtonTitle,
+          ),
         ),
       ),
     );

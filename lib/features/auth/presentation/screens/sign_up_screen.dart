@@ -115,7 +115,10 @@ class SignUpScreen extends StatelessWidget {
   Widget _buildSignUpButton(BuildContext context) {
     return ElevatedButton(
       onPressed: () => _onSignUpPressed(context),
-      child: Text(context.tr.signupButtonTitle),
+      child: Text(
+        context.tr.signupButtonTitle,
+        style: Theme.of(context).textTheme.displayMedium,
+      ),
     );
   }
 

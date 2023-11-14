@@ -14,6 +14,7 @@ class CarListScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text(
           context.tr.carsPageTitle,
+          style: Theme.of(context).textTheme.displayMedium,
         ),
       ),
       body: const Center(),

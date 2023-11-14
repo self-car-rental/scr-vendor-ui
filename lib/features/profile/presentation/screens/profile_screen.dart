@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 // Package imports:
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
 
 // Project imports:
@@ -10,6 +11,7 @@ import 'package:scr_vendor/constants/app_language_constants.dart';
 import 'package:scr_vendor/constants/app_route_constants.dart';
 import 'package:scr_vendor/core/bloc/localization/localization_bloc.dart';
 import 'package:scr_vendor/core/bloc/localization/localization_event.dart';
+import 'package:scr_vendor/core/bloc/theme/theme_bloc.dart';
 import 'package:scr_vendor/core/utils/app_extension.dart';
 import 'package:scr_vendor/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:scr_vendor/features/auth/presentation/bloc/auth_event.dart';
@@ -22,7 +24,14 @@ class ProfileScreen extends StatelessWidget {
     final currentLocale = Localizations.localeOf(context).languageCode;
     return Scaffold(
       appBar: AppBar(
-        title: Text(context.tr.profilePageTitle),
+        leading: IconButton(
+          icon: const FaIcon(FontAwesomeIcons.dice),
+          onPressed: () => context.read<ThemeBloc>().add(const ThemeEvent()),
+        ),
+        title: Text(
+          context.tr.profilePageTitle,
+          style: Theme.of(context).textTheme.displayMedium,
+        ),
         actions: <Widget>[
           _buildLanguageDropdown(context, currentLocale),
         ],

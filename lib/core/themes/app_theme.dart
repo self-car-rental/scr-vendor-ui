@@ -2,78 +2,109 @@
 import 'package:flutter/material.dart';
 
 // Project imports:
+import 'package:scr_vendor/core/themes/app_color.dart';
 import 'package:scr_vendor/core/themes/app_style.dart';
-import 'package:scr_vendor/core/themes/theme_constants.dart';
 
-class AppTheme {
-  AppTheme._();
+enum AppTheme { lightTheme, darkTheme }
 
-  static ThemeData lightAppTheme = ThemeData(
-    appBarTheme: const AppBarTheme(color: Color(0xFFF4511E), centerTitle: true),
-    dialogTheme: const DialogTheme(
-      shape: RoundedRectangleBorder(
-        side: BorderSide(color: Color(0xFFF4511E), width: 1.0),
-        borderRadius: BorderRadius.all(Radius.circular(15.0)),
+class AppThemes {
+  const AppThemes._();
+
+  static final appThemeData = {
+    AppTheme.lightTheme: ThemeData(
+      scaffoldBackgroundColor: LightThemeColor.primaryDark,
+      canvasColor: LightThemeColor.primaryLight,
+      floatingActionButtonTheme: const FloatingActionButtonThemeData(
+        backgroundColor: LightThemeColor.accent,
       ),
-    ),
-    inputDecorationTheme: const InputDecorationTheme(
-        enabledBorder: enabledBorder,
-        focusedBorder: focusedBorder,
-        errorBorder: errorBorder,
-        border: inputBorder),
-    elevatedButtonTheme: ElevatedButtonThemeData(
-      style: ElevatedButton.styleFrom(backgroundColor: const Color(0xFFF4511E)),
-    ),
-    floatingActionButtonTheme: const FloatingActionButtonThemeData(
-      backgroundColor: Color(0xFFF4511E),
-    ),
-    fontFamily: AppString.appFont,
-    textButtonTheme: TextButtonThemeData(
-      style: TextButton.styleFrom(
-        foregroundColor: Colors.black54,
-        shape: const RoundedRectangleBorder(
-          side: BorderSide(color: Colors.grey),
+      appBarTheme: const AppBarTheme(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        iconTheme: IconThemeData(color: Colors.black45),
+        centerTitle: true,
+        titleTextStyle: h2Style,
+      ),
+      elevatedButtonTheme: ElevatedButtonThemeData(
+        style: ButtonStyle(
+          backgroundColor: MaterialStateProperty.all<Color>(
+            LightThemeColor.accent,
+          ),
         ),
       ),
+      hintColor: Colors.black45,
+      inputDecorationTheme: InputDecorationTheme(
+        border: const OutlineInputBorder(borderSide: BorderSide.none),
+        enabledBorder: textFieldStyle,
+        focusedBorder: textFieldStyle,
+        filled: true,
+        contentPadding: const EdgeInsets.all(20),
+        fillColor: Colors.white,
+      ),
+      bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+        type: BottomNavigationBarType.fixed,
+        backgroundColor: Colors.white,
+        selectedItemColor: LightThemeColor.accent,
+      ),
+      textTheme: const TextTheme(
+        displayLarge: h1Style,
+        displayMedium: h2Style,
+        displaySmall: h3Style,
+        headlineMedium: h4StyleLight,
+        headlineSmall: h5StyleLight,
+        bodyLarge: bodyTextLight,
+        titleMedium: subtitleLight,
+      ),
+      iconTheme: const IconThemeData(color: Colors.black45),
+      bottomAppBarTheme: const BottomAppBarTheme(color: Colors.white),
     ),
-    timePickerTheme: TimePickerThemeData(
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.all(Radius.circular(8)),
-        side: BorderSide(color: Colors.grey, width: 2),
+    AppTheme.darkTheme: ThemeData(
+      scaffoldBackgroundColor: DarkThemeColor.primaryDark,
+      canvasColor: DarkThemeColor.primaryLight,
+      floatingActionButtonTheme: const FloatingActionButtonThemeData(
+        backgroundColor: LightThemeColor.accent,
       ),
-      dialHandColor: const Color(0xFFF4511E),
-      hourMinuteColor: MaterialStateColor.resolveWith(
-        (states) => states.contains(MaterialState.selected)
-            ? const Color(0xFFF4511E)
-            : Colors.black12,
+      appBarTheme: const AppBarTheme(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        toolbarTextStyle: TextStyle(color: Colors.white),
+        centerTitle: true,
+        iconTheme: IconThemeData(color: Colors.white),
+        titleTextStyle: h2Style,
       ),
-      hourMinuteTextColor: MaterialStateColor.resolveWith(
-        (states) => states.contains(MaterialState.selected)
-            ? Colors.black54
-            : Colors.grey,
-      ),
-      dayPeriodBorderSide: const BorderSide(color: Colors.grey),
-      dayPeriodShape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(5),
-      ),
-      dayPeriodColor: Colors.transparent,
-      dayPeriodTextColor: MaterialStateColor.resolveWith(
-        (states) => states.contains(MaterialState.selected)
-            ? const Color(0xFFF4511E)
-            : Colors.black12,
-      ),
-      hourMinuteShape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(10),
-        side: const BorderSide(color: Colors.black12),
-      ),
-    ),
-    bottomSheetTheme: const BottomSheetThemeData(
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(20),
-          topRight: Radius.circular(20),
+      elevatedButtonTheme: ElevatedButtonThemeData(
+        style: ButtonStyle(
+          backgroundColor: MaterialStateProperty.all<Color>(
+            LightThemeColor.accent,
+          ),
         ),
       ),
-    ),
-  );
+      hintColor: Colors.white60,
+      inputDecorationTheme: InputDecorationTheme(
+        enabledBorder: textFieldStyle,
+        focusedBorder: textFieldStyle,
+        filled: true,
+        contentPadding: const EdgeInsets.all(20),
+        fillColor: DarkThemeColor.primaryLight,
+      ),
+      bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+        type: BottomNavigationBarType.fixed,
+        backgroundColor: DarkThemeColor.primaryLight,
+        selectedItemColor: LightThemeColor.accent,
+        unselectedItemColor: Colors.white70,
+      ),
+      textTheme: TextTheme(
+        displayLarge: h1Style.copyWith(color: Colors.white),
+        displayMedium: h2Style.copyWith(color: Colors.white),
+        displaySmall: h3Style.copyWith(color: Colors.white),
+        headlineMedium: h4StyleLight.copyWith(color: Colors.white),
+        headlineSmall: h5StyleLight.copyWith(color: Colors.white),
+        bodyLarge: bodyTextLight.copyWith(color: Colors.white),
+        titleMedium: subtitleLight.copyWith(color: Colors.white60),
+      ),
+      iconTheme: const IconThemeData(color: Colors.white),
+      bottomAppBarTheme: const BottomAppBarTheme(
+        color: DarkThemeColor.primaryLight,
+      ),
+    )
+  };
 }

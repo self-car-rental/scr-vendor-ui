@@ -13,6 +13,7 @@ import 'package:scr_vendor/constants/app_language_constants.dart';
 import 'package:scr_vendor/core/amplify/amplify_initializer.dart';
 import 'package:scr_vendor/core/bloc/connectivity/connectivity_bloc.dart';
 import 'package:scr_vendor/core/bloc/localization/localization_bloc.dart';
+import 'package:scr_vendor/core/bloc/theme/theme_bloc.dart';
 import 'package:scr_vendor/core/routes/app_router.dart';
 import 'package:scr_vendor/core/services/language_preference_service.dart';
 import 'package:scr_vendor/core/utils/app_keys.dart';
@@ -63,9 +64,10 @@ class MainApp extends StatelessWidget {
         BlocProvider(create: (_) => serviceLocator<ConnectivityBloc>()),
         BlocProvider(create: (_) => serviceLocator<AuthBloc>()),
         BlocProvider(create: (_) => serviceLocator<UserBloc>()),
+        BlocProvider(create: (_) => ThemeBloc()), // Add ThemeBloc
       ],
-      child: BlocBuilder<LocalizationBloc, Locale>(
-        builder: (context, locale) {
+      child: BlocBuilder<ThemeBloc, ThemeState>(
+        builder: (context, themeState) {
           return MaterialApp.router(
             routerConfig: AppRouter.router,
             localizationsDelegates: const [
@@ -77,7 +79,8 @@ class MainApp extends StatelessWidget {
             supportedLocales: LanguageConstants.languages.keys
                 .map((langCode) => Locale(langCode))
                 .toList(),
-            locale: locale,
+            locale: context.watch<LocalizationBloc>().state,
+            theme: themeState.theme, // Apply the theme from ThemeBloc's state
             builder: (context, child) => Scaffold(
               key: rootScaffoldKey,
               body:
