@@ -56,18 +56,10 @@ class HomeScreen extends StatelessWidget {
       buildWhen: (previous, current) => previous.index != current.index,
       builder: (context, state) {
         return BottomNavigationBar(
+          currentIndex: state.index,
           onTap: (index) => _onNavItemTapped(context, state, tabs, index),
           showSelectedLabels: true,
-          showUnselectedLabels: true,
-          elevation: 0,
-          backgroundColor: Colors.black,
-          unselectedItemColor: Colors.white,
-          selectedIconTheme: IconThemeData(
-            size: (IconTheme.of(context).size ?? 24) * 1.3,
-          ),
           items: tabs,
-          currentIndex: state.index,
-          type: BottomNavigationBarType.fixed,
         );
       },
     );

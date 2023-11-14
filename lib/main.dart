@@ -16,6 +16,7 @@ import 'package:scr_vendor/core/bloc/localization/localization_bloc.dart';
 import 'package:scr_vendor/core/bloc/theme/theme_bloc.dart';
 import 'package:scr_vendor/core/routes/app_router.dart';
 import 'package:scr_vendor/core/services/language_preference_service.dart';
+import 'package:scr_vendor/core/services/theme_preference_service.dart';
 import 'package:scr_vendor/core/utils/app_keys.dart';
 import 'package:scr_vendor/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:scr_vendor/features/user/presentation/bloc/user_bloc.dart';
@@ -33,6 +34,7 @@ Future<void> initializeApp() async {
   await Hive.initFlutter(); // Local storage initialization
   await initializeAmplify(); // AWS Amplify setup
   await initializeLanguageSettings(); // Language settings initialization
+  await initializeThemeSettings();
 }
 
 // Initialize language settings separately
@@ -52,6 +54,15 @@ Future<void> initializeLanguageSettings() async {
   );
 }
 
+// Initialize theme settings separately
+Future<void> initializeThemeSettings() async {
+  final themePreferenceService = serviceLocator<ThemePreferenceService>();
+  final storedTheme = await themePreferenceService.getSelectedTheme();
+  serviceLocator.registerFactory<ThemeBloc>(
+    () => ThemeBloc(themePreferenceService, storedTheme),
+  );
+}
+
 /// The main application widget.
 class MainApp extends StatelessWidget {
   const MainApp({super.key});
@@ -64,7 +75,7 @@ class MainApp extends StatelessWidget {
         BlocProvider(create: (_) => serviceLocator<ConnectivityBloc>()),
         BlocProvider(create: (_) => serviceLocator<AuthBloc>()),
         BlocProvider(create: (_) => serviceLocator<UserBloc>()),
-        BlocProvider(create: (_) => ThemeBloc()), // Add ThemeBloc
+        BlocProvider(create: (_) => serviceLocator<ThemeBloc>()),
       ],
       child: BlocBuilder<ThemeBloc, ThemeState>(
         builder: (context, themeState) {
