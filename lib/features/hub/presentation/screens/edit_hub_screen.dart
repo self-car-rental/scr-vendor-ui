@@ -15,6 +15,7 @@ class EditHubScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text(
           context.tr.editHubPageTitle,
+          style: Theme.of(context).textTheme.displayMedium,
         ),
       ),
       body: Center(

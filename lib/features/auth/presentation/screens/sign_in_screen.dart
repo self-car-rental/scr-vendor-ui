@@ -31,6 +31,7 @@ class SignInScreen extends StatelessWidget {
       appBar: AppBar(
           title: Text(
         context.tr.signinPageTitle,
+        style: Theme.of(context).textTheme.displayMedium,
       )),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),

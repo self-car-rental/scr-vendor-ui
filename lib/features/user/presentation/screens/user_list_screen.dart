@@ -14,7 +14,6 @@ import 'package:scr_vendor/common/widgets/popup_menu.dart';
 import 'package:scr_vendor/common/widgets/spinkit_indicator.dart';
 import 'package:scr_vendor/core/bloc/bloc_helpers/app_bloc_state.dart';
 import 'package:scr_vendor/core/bloc/bloc_helpers/bloc_api_helper.dart';
-import 'package:scr_vendor/core/themes/app_style.dart';
 import 'package:scr_vendor/core/utils/app_extension.dart';
 import 'package:scr_vendor/features/user/data/models/user.dart';
 import 'package:scr_vendor/features/user/domain/entities/user_entity.dart';
@@ -54,7 +53,10 @@ class _UserListScreenState extends State<UserListScreen> {
           },
         )
       ],
-      title: Text(context.tr.usersPageTitle),
+      title: Text(
+        context.tr.usersPageTitle,
+        style: Theme.of(context).textTheme.displayMedium,
+      ),
     );
   }
 
@@ -113,17 +115,24 @@ class _UserListScreenState extends State<UserListScreen> {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 10),
       child: Card(
+        color: Theme.of(context).canvasColor,
         child: Row(
           children: [
-            Image.asset(user.gender.name.getGenderWidget, height: 75),
+            Image.asset(user.gender.name.getGenderWidget, scale: 3),
             const SizedBox(width: 10),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(user.name, style: headLine4),
-                  const SizedBox(height: 10),
-                  Text(user.email, style: headLine6)
+                  Text(
+                    user.name,
+                    style: Theme.of(context).textTheme.displayMedium,
+                  ),
+                  const SizedBox(height: 5),
+                  Text(
+                    user.email,
+                    style: Theme.of(context).textTheme.headlineSmall,
+                  )
                 ],
               ),
             ),

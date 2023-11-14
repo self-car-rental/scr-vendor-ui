@@ -18,6 +18,7 @@ class HubListScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text(
           context.tr.hubsPageTitle,
+          style: Theme.of(context).textTheme.displayMedium,
         ),
       ),
       body: Padding(

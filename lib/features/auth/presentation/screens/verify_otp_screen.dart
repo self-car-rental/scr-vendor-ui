@@ -28,6 +28,7 @@ class VerifyOtpScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text(
           context.tr.verifyOtpPageTitle,
+          style: Theme.of(context).textTheme.displayMedium,
         ),
       ),
       body: SingleChildScrollView(
