@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 // Package imports:
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 // Project imports:
 import 'package:scr_vendor/core/bloc/error/error_bloc.dart';
@@ -19,7 +20,7 @@ class ErrorDisplay extends StatelessWidget {
     return BlocListener<ErrorBloc, ErrorState>(
       listener: (context, state) {
         if (state.status != ErrorBlocStatus.nothing) {
-          _showErrorSnackbar(context, state.message);
+          _showErrorToast(context, state.message);
           _resetErrorState(context);
         }
       },
@@ -27,14 +28,16 @@ class ErrorDisplay extends StatelessWidget {
     );
   }
 
-  void _showErrorSnackbar(BuildContext context, String? message) {
-    final snackBar = SnackBar(
-      content: Text(message ?? 'An unexpected error occurred'),
-      duration: const Duration(seconds: 1),
+  void _showErrorToast(BuildContext context, String? message) {
+    Fluttertoast.showToast(
+      msg: message ?? 'An unexpected error occurred',
+      toastLength: Toast.LENGTH_SHORT,
+      gravity: ToastGravity.BOTTOM,
+      timeInSecForIosWeb: 1,
+      backgroundColor: Colors.red,
+      textColor: Colors.white,
+      fontSize: 16.0,
     );
-    ScaffoldMessenger.of(context)
-      ..hideCurrentSnackBar()
-      ..showSnackBar(snackBar);
   }
 
   void _resetErrorState(BuildContext context) {
