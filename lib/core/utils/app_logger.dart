@@ -13,7 +13,7 @@ class AppLogger {
 
           printer: PrettyPrinter(
             methodCount:
-                2, // Displaying method calls can help trace the log origin
+                5, // Displaying method calls can help trace the log origin
             errorMethodCount:
                 8, // Extensive method calls for error logs for better debugging
             lineLength: 120, // Adjust line length for readability

@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 
 // Package imports:
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 
 // Project imports:
@@ -22,11 +21,9 @@ class SignInScreen extends StatelessWidget {
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final TextEditingController _mobileController = TextEditingController();
-  late final AppLocalizations t;
 
   @override
   Widget build(BuildContext context) {
-    t = AppLocalizations.of(context)!;
     return Scaffold(
       appBar: AppBar(
           title: Text(
