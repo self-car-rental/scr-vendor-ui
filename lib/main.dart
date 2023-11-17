@@ -117,7 +117,7 @@ class MainApp extends StatelessWidget {
             locale: context.watch<LocalizationBloc>().state,
             theme: themeState.theme, // Apply the theme from ThemeBloc's state
             builder: (context, child) => Scaffold(
-              body: ConnectivityListener(
+              body: ConnectivityStatusListener(
                 child: ErrorDisplay(
                   child: child ?? const SizedBox.shrink(),
                 ),

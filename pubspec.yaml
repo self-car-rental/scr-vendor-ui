@@ -27,6 +27,7 @@ dependencies:
   hive_flutter: 1.1.0
   font_awesome_flutter: 10.6.0
   sentry_flutter: 7.12.0
+  fluttertoast: 8.2.4
   flutter_localizations:
     sdk: flutter
 
