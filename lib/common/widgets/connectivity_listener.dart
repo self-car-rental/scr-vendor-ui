@@ -6,7 +6,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 // Project imports:
 import 'package:scr_vendor/core/bloc/connectivity/connectivity_bloc.dart';
-import 'package:scr_vendor/core/utils/app_keys.dart';
 
 class ConnectivityListener extends StatelessWidget {
   final Widget child;
@@ -21,12 +20,12 @@ class ConnectivityListener extends StatelessWidget {
           content: Text(state == ConnectivityState.connected
               ? 'Connected to the Internet'
               : 'No Internet Connection'),
-          duration: const Duration(seconds: 0),
+          duration: const Duration(seconds: 1),
         );
 
-        // Using rootScaffoldKey defined in global_keys.dart
-        ScaffoldMessenger.of(rootScaffoldKey.currentContext!)
-            .showSnackBar(snackBar);
+        ScaffoldMessenger.of(context)
+          ..hideCurrentSnackBar()
+          ..showSnackBar(snackBar);
       },
       child: child,
     );

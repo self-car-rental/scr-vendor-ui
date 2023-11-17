@@ -11,28 +11,6 @@ import 'package:scr_vendor/core/utils/app_logger.dart';
 abstract class ApiHelper<T> {
   final AppLogger _logger = AppLogger();
 
-  Future<bool> _executeRestOperation(RestOperation restOperation) async {
-    try {
-      final response = await restOperation.response;
-      _logger.info('Received response: ${response.statusCode}');
-      if (response.statusCode.success) {
-        return true;
-      } else {
-        String errorMessage =
-            'API request failed with status code: ${response.statusCode}';
-        _logger.error(errorMessage);
-        return false;
-      }
-    } on ApiException catch (e) {
-      _logger.error('ApiException in in _executeRestOperation: ${e.message}');
-      rethrow;
-    } catch (e) {
-      _logger
-          .error('Unexpected error in _executeRestOperation: ${e.toString()}');
-      rethrow;
-    }
-  }
-
   Future<bool> createItem(
       {required String path,
       required Map<String, dynamic> body,
@@ -82,9 +60,6 @@ abstract class ApiHelper<T> {
       return (json.decode(responseData) as List)
           .map((jsonItem) => fromJson(jsonItem as Map<String, dynamic>))
           .toList();
-    } on ApiException catch (e) {
-      _logger.error('Api Exception in _processGetOperation: ${e.message}');
-      rethrow;
     } catch (e) {
       _logger
           .error('Unexpected error in _processGetOperation: ${e.toString()}');
@@ -99,13 +74,28 @@ abstract class ApiHelper<T> {
       final responseData = response.decodeBody();
       _logger.info('Received response: $responseData');
       return fromJson(json.decode(responseData));
-    } on ApiException catch (e) {
-      _logger.error(
-          'ApiException in _processGetOperationForSingleItem: ${e.message}');
-      rethrow;
     } catch (e) {
       _logger.error(
           'Unexpected error in _processGetOperationForSingleItem: ${e.toString()}');
+      rethrow;
+    }
+  }
+
+  Future<bool> _executeRestOperation(RestOperation restOperation) async {
+    try {
+      final response = await restOperation.response;
+      _logger.info('Received response: ${response.statusCode}');
+      if (response.statusCode.success) {
+        return true;
+      } else {
+        String errorMessage =
+            'API request failed with status code: ${response.statusCode}';
+        _logger.error(errorMessage);
+        return false;
+      }
+    } catch (e) {
+      _logger
+          .error('Unexpected error in _executeRestOperation: ${e.toString()}');
       rethrow;
     }
   }

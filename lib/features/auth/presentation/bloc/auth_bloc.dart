@@ -1,5 +1,6 @@
 // Package imports:
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 // Project imports:
 import 'package:scr_vendor/features/auth/domain/exceptions/invalid_otp_exception.dart';
 import 'package:scr_vendor/features/auth/domain/exceptions/user_mobile_already_exists_exception.dart';

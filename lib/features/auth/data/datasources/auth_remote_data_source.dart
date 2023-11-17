@@ -3,6 +3,7 @@ import 'package:amplify_auth_cognito/amplify_auth_cognito.dart';
 import 'package:amplify_flutter/amplify_flutter.dart';
 
 // Project imports:
+import 'package:scr_vendor/core/utils/app_error_handler.dart';
 import 'package:scr_vendor/core/utils/app_logger.dart';
 import 'package:scr_vendor/features/auth/domain/exceptions/invalid_otp_exception.dart';
 import 'package:scr_vendor/features/auth/domain/exceptions/user_mobile_already_exists_exception.dart';
@@ -36,6 +37,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
       _logger.error('Signup failed - Username already exists: $e');
       throw UserMobileAlreadyExistsException(e.message);
     } on AuthException catch (e) {
+      ErrorHandler.handleException(e);
       _logger.error('Signup failed - AuthException: $e');
       rethrow; // Rethrows the exception for higher-level handling
     }
@@ -54,6 +56,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
       _logger.error('Sign-in failed - User not found: $e');
       throw UserNotFoundException(e.message);
     } on AuthException catch (e) {
+      ErrorHandler.handleException(e);
       _logger.error('Sign-in failed - AuthException: $e');
       rethrow; // Rethrows the exception for higher-level handling
     }
@@ -75,6 +78,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
         throw InvalidOtpException();
       }
     } on AuthException catch (e) {
+      ErrorHandler.handleException(e);
       _logger.error('OTP verification failed - AuthException: $e');
       rethrow; // Propagates the exception for higher-level handling
     }
@@ -87,6 +91,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
       await Amplify.Auth.signOut();
       _logger.info('User signed out successfully');
     } on AuthException catch (e) {
+      ErrorHandler.handleException(e);
       _logger.error('Sign out failed - AuthException: $e');
       rethrow; // Rethrows the exception for higher-level handling
     }
@@ -103,6 +108,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
       _logger.error('AuthException caught: ${authException.message}');
       return false;
     } catch (e) {
+      ErrorHandler.handleException(e);
       _logger.error('Unexpected error occurred: ${e.toString()}');
       return false;
     }

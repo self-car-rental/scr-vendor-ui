@@ -1,4 +1,5 @@
 // Flutter imports:
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -11,16 +12,17 @@ import 'package:sentry_flutter/sentry_flutter.dart';
 
 // Project imports:
 import 'package:scr_vendor/common/widgets/connectivity_listener.dart';
+import 'package:scr_vendor/common/widgets/error_display.dart';
 import 'package:scr_vendor/config/app_config.dart';
 import 'package:scr_vendor/constants/app_language_constants.dart';
 import 'package:scr_vendor/core/amplify/amplify_initializer.dart';
 import 'package:scr_vendor/core/bloc/connectivity/connectivity_bloc.dart';
+import 'package:scr_vendor/core/bloc/error/error_bloc.dart';
 import 'package:scr_vendor/core/bloc/localization/localization_bloc.dart';
 import 'package:scr_vendor/core/bloc/theme/theme_bloc.dart';
 import 'package:scr_vendor/core/routes/app_router.dart';
 import 'package:scr_vendor/core/services/language_preference_service.dart';
 import 'package:scr_vendor/core/services/theme_preference_service.dart';
-import 'package:scr_vendor/core/utils/app_keys.dart';
 import 'package:scr_vendor/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:scr_vendor/features/user/presentation/bloc/user_bloc.dart';
 import 'package:scr_vendor/service_locator.dart';
@@ -71,7 +73,7 @@ Future<void> initializeThemeSettings() async {
 Future<void> initializeSentry() async {
   await SentryFlutter.init(
     (options) {
-      options.dsn = AppConfig.sentryDsn;
+      options.dsn = kDebugMode ? '' : AppConfig.sentryDsn;
       options.tracesSampleRate = 1.0;
     },
     // Init your App.
@@ -97,6 +99,7 @@ class MainApp extends StatelessWidget {
         BlocProvider(create: (_) => serviceLocator<AuthBloc>()),
         BlocProvider(create: (_) => serviceLocator<UserBloc>()),
         BlocProvider(create: (_) => serviceLocator<ThemeBloc>()),
+        BlocProvider(create: (_) => serviceLocator<ErrorBloc>()),
       ],
       child: BlocBuilder<ThemeBloc, ThemeState>(
         builder: (context, themeState) {
@@ -114,9 +117,11 @@ class MainApp extends StatelessWidget {
             locale: context.watch<LocalizationBloc>().state,
             theme: themeState.theme, // Apply the theme from ThemeBloc's state
             builder: (context, child) => Scaffold(
-              key: rootScaffoldKey,
-              body:
-                  ConnectivityListener(child: child ?? const SizedBox.shrink()),
+              body: ConnectivityListener(
+                child: ErrorDisplay(
+                  child: child ?? const SizedBox.shrink(),
+                ),
+              ),
             ),
           );
         },

@@ -2,6 +2,7 @@
 
 // Project imports:
 import 'package:scr_vendor/core/network/api_result.dart';
+import 'package:scr_vendor/core/utils/app_error_handler.dart';
 
 mixin RepositoryHelper<T> {
   Future<ApiResult<List<T>>> checkItemsFailOrSuccess(
@@ -10,6 +11,7 @@ mixin RepositoryHelper<T> {
       final List<T> items = await apiCallback;
       return ApiResult.success(items);
     } on Exception catch (e) {
+      ErrorHandler.handleException(e);
       return ApiResult.failure(e.toString());
     }
   }
@@ -20,6 +22,7 @@ mixin RepositoryHelper<T> {
       await apiCallback;
       return const ApiResult.success(true);
     } on Exception catch (e) {
+      ErrorHandler.handleException(e);
       return ApiResult.failure(e.toString());
     }
   }
