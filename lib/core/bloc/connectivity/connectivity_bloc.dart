@@ -35,10 +35,24 @@ class ConnectivityBloc extends Bloc<ConnectivityState, ConnectivityState> {
 // Check the initial connectivity. If there's no internet connection, handle this state accordingly.
   // This is to ensure that we show a 'no internet' state when the app opens without internet.
   Future<void> _checkInitialConnectivity() async {
-    final currentResult = await _connectivity.checkConnectivity();
-    bool isConnected = _isInternetConnection(currentResult);
-    if (!isConnected) {
-      _handleConnectivityChange(currentResult);
+    try {
+      final currentResult = await _connectivity.checkConnectivity().timeout(
+        const Duration(seconds: 2), // Set an appropriate timeout duration
+        onTimeout: () {
+          // Handle the timeout case
+          _logger.warning('ConnectivityBloc: Connectivity check timed out');
+          return ConnectivityResult.none; // Return a default value
+        },
+      );
+
+      bool isConnected = _isInternetConnection(currentResult);
+      if (!isConnected) {
+        _handleConnectivityChange(currentResult);
+      }
+    } catch (e) {
+      _logger.error(
+          'ConnectivityBloc: Error during initial connectivity check: ${e.toString()}');
+      // You might want to handle the error state or emit a specific state
     }
   }
 
@@ -48,7 +62,7 @@ class ConnectivityBloc extends Bloc<ConnectivityState, ConnectivityState> {
   void _handleConnectivityChange(ConnectivityResult result) {
     bool isConnected = _isInternetConnection(result);
     _logger.info(
-        'Connectivity Change: ${isConnected ? "Connected" : "Disconnected"}');
+        'ConnectivityBloc: Connectivity Change: ${isConnected ? "Connected" : "Disconnected"}');
     if (_hasCheckedInitialConnectivity || !isConnected) {
       add(isConnected
           ? ConnectivityState.connected
@@ -68,12 +82,12 @@ class ConnectivityBloc extends Bloc<ConnectivityState, ConnectivityState> {
 
 // Error handling for the connectivity stream.
   void _handleError(Object error) {
-    _logger.error('Error in connectivity stream: $error');
+    _logger.error('ConnectivityBloc: Error in connectivity stream: $error');
   }
 
 // Handler for when the connectivity stream is closed.
   void _onDone() {
-    _logger.info('Connectivity stream closed');
+    _logger.info('ConnectivityBloc: Connectivity stream closed');
   }
 
   @override
