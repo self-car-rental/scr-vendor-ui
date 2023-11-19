@@ -8,6 +8,7 @@ import 'package:go_router/go_router.dart';
 // Project imports:
 import 'package:scr_vendor/constants/app_route_constants.dart';
 import 'package:scr_vendor/core/bottom_navigation/bottom_navigation_cubit.dart';
+import 'package:scr_vendor/core/services/auth_preference_service.dart';
 import 'package:scr_vendor/core/utils/app_logger.dart';
 import 'package:scr_vendor/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:scr_vendor/features/auth/presentation/screens/sign_in_screen.dart';
@@ -79,20 +80,49 @@ class AppRouter {
     );
   }
 
+  /// Redirects to the appropriate page based on the user's login status.
+  ///
+  /// This function first checks the local preference for login status. If true,
+  /// it then confirms the user's session with AWS Cognito using Amplify. This
+  /// approach addresses an issue where fetching the auth session directly
+  /// from AWS Cognito could lead to errors on the first launch.
+  ///
+  /// If the user is not logged in, they are redirected to the sign-in page.
+  /// Otherwise, they proceed to the requested route.
+  ///
+  /// [context]: The BuildContext for widget tree access.
+  /// [state]: The current GoRouterState.
+  ///
+  /// Returns a string URI to redirect to, or null for no redirection.
   static Future<String?> _redirectLogic(
       BuildContext context, GoRouterState state) async {
     final AppLogger logger = AppLogger();
     final authBloc = context.read<AuthBloc>();
-    final userIsLoggedIn = await authBloc.checkUserLoggedInUseCase.execute();
+    final authPreferenceService = AuthPreferenceService();
 
+    // Check local preference for logged in status
+    final bool isPreferenceLoggedIn = await authPreferenceService.isLoggedIn();
+
+    // Determine if user is logged in based on local preference and AWS Cognito session
+    final bool userIsLoggedIn = isPreferenceLoggedIn
+        ? await authBloc.checkUserLoggedInUseCase.execute()
+        : false;
+
+    // Define paths that don't require login
+    final String currentPath = state.uri.toString();
+    final String signInPath = AppRoutes.path(AppPage.signin);
+    final String verifyOtpPath = AppRoutes.path(AppPage.verifyOtp);
+
+    // Redirect to sign-in if user is not logged in and trying to access restricted paths
     if (!userIsLoggedIn &&
-        state.uri.toString() != AppRoutes.path(AppPage.signin) &&
-        state.uri.toString() != AppRoutes.path(AppPage.verifyOtp)) {
+        currentPath != signInPath &&
+        currentPath != verifyOtpPath) {
       logger.info('User not logged in. Redirecting to Sign-in page.');
-      return AppRoutes.path(AppPage.signin);
+      return signInPath;
     }
 
-    logger.info('Proceeding to requested route: ${state.uri.toString()}');
+    // Log and allow access to the requested route
+    logger.info('Proceeding to requested route: $currentPath');
     return null;
   }
 }

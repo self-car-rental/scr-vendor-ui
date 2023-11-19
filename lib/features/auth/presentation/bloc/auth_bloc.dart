@@ -1,4 +1,5 @@
 // Package imports:
+import 'package:amplify_auth_cognito/amplify_auth_cognito.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 // Project imports:
@@ -22,13 +23,13 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final SignOutUseCase signOutUseCase;
   final CheckUserLoggedInUseCase checkUserLoggedInUseCase;
 
-  AuthBloc(
-      {required this.signUpUseCase,
-      required this.signInUseCase,
-      required this.verifyOtpUseCase,
-      required this.signOutUseCase,
-      required this.checkUserLoggedInUseCase})
-      : super(AuthInitial()) {
+  AuthBloc({
+    required this.signUpUseCase,
+    required this.signInUseCase,
+    required this.verifyOtpUseCase,
+    required this.signOutUseCase,
+    required this.checkUserLoggedInUseCase,
+  }) : super(AuthInitial()) {
     on<CheckUserLoggedInRequested>(_onCheckUserLoggedInRequested);
     on<SignUpRequested>(_onSignUpRequested);
     on<SignInRequested>(_onSignInRequested);
@@ -45,7 +46,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       emit(SignUpSuccess());
     } on UserMobileAlreadyExistsException {
       emit(UserMobileAlreadyExists());
-    } on Exception catch (e) {
+    } catch (e) {
       emit(SignUpFailure(e.toString()));
     }
   }
@@ -56,7 +57,9 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     try {
       await signInUseCase.execute(SignInParams(event.mobileNumber));
       emit(SignInSuccess());
-    } on Exception catch (e) {
+    } on NotAuthorizedServiceException catch (exception) {
+      emit(SignInFailure(exception.message));
+    } catch (e) {
       emit(SignInFailure(e.toString()));
     }
   }
@@ -69,7 +72,9 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       emit(VerifyOtpSuccess());
     } on InvalidOtpException {
       emit(VerifyOtpInvalid());
-    } on Exception catch (e) {
+    } on NotAuthorizedServiceException {
+      emit(VerifyOtpFailedThrice());
+    } catch (e) {
       emit(VerifyOtpFailure(e.toString()));
     }
   }
@@ -80,7 +85,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     try {
       await signOutUseCase.execute();
       emit(SignOutSuccess());
-    } on Exception catch (e) {
+    } catch (e) {
       emit(SignOutFailure(e.toString()));
     }
   }
@@ -93,7 +98,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       emit(isLoggedIn
           ? CheckAuthStatusAuthenticated()
           : CheckAuthStatusUnAuthenticated());
-    } on Exception catch (e) {
+    } catch (e) {
       emit(CheckAuthStatusFailure(e.toString()));
     }
   }

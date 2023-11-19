@@ -2,24 +2,47 @@
 import 'package:flutter/foundation.dart';
 
 // Project imports:
+import 'package:scr_vendor/core/services/auth_preference_service.dart';
+import 'package:scr_vendor/core/utils/app_logger.dart';
+import 'package:scr_vendor/features/auth/domain/exceptions/invalid_otp_exception.dart';
 import 'package:scr_vendor/features/auth/domain/repositories/auth_repository.dart';
+import 'package:scr_vendor/service_locator.dart';
 
 @immutable
 class VerifyOtpUseCase {
   final AuthRepository _repository;
+  final AppLogger _logger = AppLogger(); // Add AppLogger instance
 
-  const VerifyOtpUseCase(this._repository);
+  VerifyOtpUseCase(this._repository);
 
-  Future<void> execute(VerifyOtpParams params) async {
+  Future<bool> execute(VerifyOtpParams params) async {
     try {
-      await _repository.verifyOtp(params.otp);
+      _logger.info('VerifyOtpUseCase: Attempting to verify OTP: ${params.otp}');
+      bool isLoggedIn = await _repository.verifyOtp(params.otp);
+
+      if (!isLoggedIn) {
+        _logger.warning('VerifyOtpUseCase: Invalid OTP provided.');
+        throw InvalidOtpException();
+      }
+
+      await _setLoggedInStatus(true);
+      return true;
     } catch (e) {
-      // Handle other exceptions
+      _logger.error(
+          'VerifyOtpUseCase: Error during OTP verification: ${e.toString()}');
       rethrow;
     }
   }
+
+  Future<void> _setLoggedInStatus(bool status) async {
+    final AuthPreferenceService authPreferenceService =
+        serviceLocator<AuthPreferenceService>();
+    await authPreferenceService.setLoggedIn(status);
+    _logger.info('VerifyOtpUseCase: User login status set to $status');
+  }
 }
 
+/// This class holds the data required to execute the OTP verification use case.
 @immutable
 class VerifyOtpParams {
   final String otp;

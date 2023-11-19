@@ -35,6 +35,8 @@ class VerifyOtpSuccess extends AuthState {}
 
 class VerifyOtpInvalid extends AuthState {}
 
+class VerifyOtpFailedThrice extends AuthState {}
+
 class VerifyOtpFailure extends AuthState {
   final String error;
   VerifyOtpFailure(this.error);

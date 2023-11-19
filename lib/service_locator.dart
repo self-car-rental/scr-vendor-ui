@@ -5,6 +5,7 @@ import 'package:get_it/get_it.dart';
 // Project imports:
 import 'package:scr_vendor/core/bloc/connectivity/connectivity_bloc.dart';
 import 'package:scr_vendor/core/bloc/error/error_bloc.dart';
+import 'package:scr_vendor/core/services/auth_preference_service.dart';
 import 'package:scr_vendor/core/services/language_preference_service.dart';
 import 'package:scr_vendor/core/services/theme_preference_service.dart';
 import 'package:scr_vendor/features/auth/data/datasources/auth_remote_data_source.dart';
@@ -108,6 +109,9 @@ void _registerAuthFeatures() {
   serviceLocator.registerLazySingleton<AuthRemoteDataSource>(
     () => AuthRemoteDataSourceImpl(),
   );
+
+  // Preference Service
+  serviceLocator.registerLazySingleton(() => AuthPreferenceService());
 }
 
 void _registerConnectivity() {
