@@ -3,15 +3,14 @@ import 'package:flutter/material.dart';
 
 // Package imports:
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
 
 // Project imports:
 import 'package:scr_vendor/common/dialogs/progress_dialog.dart';
 import 'package:scr_vendor/common/dialogs/retry_dialog.dart';
 import 'package:scr_vendor/common/validators/validators.dart';
 import 'package:scr_vendor/common/widgets/text_input.dart';
-import 'package:scr_vendor/constants/app_route_constants.dart';
-import 'package:scr_vendor/core/utils/app_extension.dart';
+import 'package:scr_vendor/core/utils/extension.dart';
+import 'package:scr_vendor/core/utils/navigation_utils.dart';
 import 'package:scr_vendor/features/auth/data/models/user_cognito_model.dart';
 import 'package:scr_vendor/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:scr_vendor/features/auth/presentation/bloc/auth_event.dart';
@@ -51,7 +50,7 @@ class SignUpScreen extends StatelessWidget {
                 listener: (context, state) {
                   if (state is SignUpSuccess) {
                     WidgetsBinding.instance.addPostFrameCallback((_) {
-                      context.goNamed(AppPage.signin.name);
+                      NavigationUtils.navigateToSignIn(context);
                     });
                   } else if (state is SignUpFailure) {
                     showDialog(

@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 
 // Project imports:
-import 'package:scr_vendor/core/utils/app_extension.dart';
+import 'package:scr_vendor/core/utils/extension.dart';
 
 /// Represents the Edit Hub screen of the application.
 class EditHubScreen extends StatelessWidget {

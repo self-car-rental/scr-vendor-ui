@@ -9,7 +9,7 @@ import 'package:go_router/go_router.dart';
 import 'package:scr_vendor/common/widgets/named_navigation_bar_item_widget.dart';
 import 'package:scr_vendor/constants/app_route_constants.dart';
 import 'package:scr_vendor/core/bottom_navigation/bottom_navigation_cubit.dart';
-import 'package:scr_vendor/core/utils/app_extension.dart';
+import 'package:scr_vendor/core/utils/extension.dart';
 
 class HomeScreen extends StatelessWidget {
   final Widget screen;

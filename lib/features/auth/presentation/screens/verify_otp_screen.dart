@@ -3,15 +3,14 @@ import 'package:flutter/material.dart';
 
 // Package imports:
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
 
 // Project imports:
 import 'package:scr_vendor/common/dialogs/progress_dialog.dart';
 import 'package:scr_vendor/common/dialogs/retry_dialog.dart';
 import 'package:scr_vendor/common/validators/validators.dart';
 import 'package:scr_vendor/common/widgets/text_input.dart';
-import 'package:scr_vendor/constants/app_route_constants.dart';
-import 'package:scr_vendor/core/utils/app_extension.dart';
+import 'package:scr_vendor/core/utils/extension.dart';
+import 'package:scr_vendor/core/utils/navigation_utils.dart';
 import 'package:scr_vendor/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:scr_vendor/features/auth/presentation/bloc/auth_event.dart';
 import 'package:scr_vendor/features/auth/presentation/bloc/auth_state.dart';
@@ -74,11 +73,11 @@ class VerifyOtpScreen extends StatelessWidget {
     return BlocConsumer<AuthBloc, AuthState>(
       listener: (context, state) {
         if (state is VerifyOtpSuccess) {
-          context.goNamed(AppRoutes.name(AppPage.hubs));
+          NavigationUtils.navigateToHubs(context);
         } else if (state is VerifyOtpInvalid) {
           _showRetryDialog(context, 'Invalid OTP');
         } else if (state is VerifyOtpFailedThrice) {
-          context.goNamed(AppRoutes.name(AppPage.signin));
+          NavigationUtils.navigateToSignIn(context);
         } else if (state is VerifyOtpFailure) {
           _showRetryDialog(context, state.error);
         }

@@ -9,7 +9,7 @@ import 'package:go_router/go_router.dart';
 import 'package:scr_vendor/constants/app_route_constants.dart';
 import 'package:scr_vendor/core/bottom_navigation/bottom_navigation_cubit.dart';
 import 'package:scr_vendor/core/services/auth_preference_service.dart';
-import 'package:scr_vendor/core/utils/app_logger.dart';
+import 'package:scr_vendor/core/utils/logger.dart';
 import 'package:scr_vendor/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:scr_vendor/features/auth/presentation/screens/sign_in_screen.dart';
 import 'package:scr_vendor/features/auth/presentation/screens/sign_up_screen.dart';
