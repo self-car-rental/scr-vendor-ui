@@ -9,7 +9,6 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:scr_vendor/core/bloc/error/error_bloc.dart';
 import 'package:scr_vendor/core/bloc/error/error_event.dart';
 import 'package:scr_vendor/core/bloc/error/error_state.dart';
-import 'package:scr_vendor/core/utils/navigation_utils.dart';
 
 class ErrorDisplay extends StatelessWidget {
   final Widget child;
@@ -20,13 +19,16 @@ class ErrorDisplay extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocListener<ErrorBloc, ErrorState>(
       listener: (context, state) {
-        if (state.status == ErrorBlocStatus.sessionFailure) {
-          NavigationUtils.navigateToSignIn(context);
+        // Check for any state other than 'nothing'
+        if (state.status != ErrorBlocStatus.nothing) {
           _showErrorToast(context, state.message);
           _resetErrorState(context);
-        } else if (state.status != ErrorBlocStatus.nothing) {
-          _showErrorToast(context, state.message);
-          _resetErrorState(context);
+
+          // Additional action specifically for session failure
+          if (state.status == ErrorBlocStatus.sessionFailure) {
+            // Navigate or perform other actions specific to session failure
+            // Example: NavigationUtils.navigateToSignIn(context);
+          }
         }
       },
       child: child,
