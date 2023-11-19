@@ -74,9 +74,11 @@ class VerifyOtpScreen extends StatelessWidget {
     return BlocConsumer<AuthBloc, AuthState>(
       listener: (context, state) {
         if (state is VerifyOtpSuccess) {
-          context.go(AppRoutes.path(AppPage.hubs));
+          context.goNamed(AppRoutes.name(AppPage.hubs));
         } else if (state is VerifyOtpInvalid) {
           _showRetryDialog(context, 'Invalid OTP');
+        } else if (state is VerifyOtpFailedThrice) {
+          context.goNamed(AppRoutes.name(AppPage.signin));
         } else if (state is VerifyOtpFailure) {
           _showRetryDialog(context, state.error);
         }

@@ -4,8 +4,10 @@ import 'package:flutter/material.dart';
 // Package imports:
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:go_router/go_router.dart';
 
 // Project imports:
+import 'package:scr_vendor/constants/app_route_constants.dart';
 import 'package:scr_vendor/core/bloc/error/error_bloc.dart';
 import 'package:scr_vendor/core/bloc/error/error_event.dart';
 import 'package:scr_vendor/core/bloc/error/error_state.dart';
@@ -19,7 +21,11 @@ class ErrorDisplay extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocListener<ErrorBloc, ErrorState>(
       listener: (context, state) {
-        if (state.status != ErrorBlocStatus.nothing) {
+        if (state.status == ErrorBlocStatus.sessionFailure) {
+          context.goNamed(AppRoutes.name(AppPage.signin));
+          _showErrorToast(context, state.message);
+          _resetErrorState(context);
+        } else if (state.status != ErrorBlocStatus.nothing) {
           _showErrorToast(context, state.message);
           _resetErrorState(context);
         }
@@ -33,7 +39,7 @@ class ErrorDisplay extends StatelessWidget {
       msg: message ?? 'An unexpected error occurred',
       toastLength: Toast.LENGTH_SHORT,
       gravity: ToastGravity.BOTTOM,
-      timeInSecForIosWeb: 1,
+      timeInSecForIosWeb: 10,
       backgroundColor: Colors.red,
       textColor: Colors.white,
       fontSize: 16.0,

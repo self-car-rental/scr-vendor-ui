@@ -21,6 +21,11 @@ class ServiceErrorEvent extends ErrorEvent {
   const ServiceErrorEvent(this.message);
 }
 
+class SessionExpiredErrorEvent extends ErrorEvent {
+  final String message;
+  const SessionExpiredErrorEvent(this.message);
+}
+
 /// Event to reset the error state.
 class ErrorHandledEvent extends ErrorEvent {
   const ErrorHandledEvent();

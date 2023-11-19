@@ -26,6 +26,8 @@ class ErrorHandler {
       return 'No Internet connection';
     } else if (exception is ApiException) {
       return 'API Service Error';
+    } else if (exception is SessionExpiredException) {
+      return 'Session Expired Error';
     } else {
       return 'An unexpected error occurred';
     }
@@ -38,6 +40,8 @@ class ErrorHandler {
       return ConnectivityErrorEvent(message);
     } else if (exception is ApiException) {
       return ServiceErrorEvent(message);
+    } else if (exception is SessionExpiredException) {
+      return SessionExpiredErrorEvent(message);
     } else {
       return UnexpectedErrorEvent(message);
     }

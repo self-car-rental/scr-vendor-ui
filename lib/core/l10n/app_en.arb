@@ -19,6 +19,7 @@
 
   "profilePageTitle": "Profile",
   "profileLogoutButtonTitle": "Logout",
+  "profileProgressLogout": "Logout...",
 
   "createHubPageTitle": "Create Hub",
   "createHubButtonTitle": "Create",

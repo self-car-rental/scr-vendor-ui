@@ -1,4 +1,6 @@
 // Flutter imports:
+
+// Flutter imports:
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -9,6 +11,7 @@ enum ErrorBlocStatus {
   nothing,
   unexpectedFailure,
   connectivityFailure,
+  sessionFailure,
   serviceFailure,
 }
 

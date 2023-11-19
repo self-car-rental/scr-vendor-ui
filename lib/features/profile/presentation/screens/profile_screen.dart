@@ -7,6 +7,8 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
 
 // Project imports:
+import 'package:scr_vendor/common/dialogs/progress_dialog.dart';
+import 'package:scr_vendor/common/dialogs/retry_dialog.dart';
 import 'package:scr_vendor/constants/app_language_constants.dart';
 import 'package:scr_vendor/constants/app_route_constants.dart';
 import 'package:scr_vendor/core/bloc/localization/localization_bloc.dart';
@@ -15,6 +17,7 @@ import 'package:scr_vendor/core/bloc/theme/theme_bloc.dart';
 import 'package:scr_vendor/core/utils/app_extension.dart';
 import 'package:scr_vendor/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:scr_vendor/features/auth/presentation/bloc/auth_event.dart';
+import 'package:scr_vendor/features/auth/presentation/bloc/auth_state.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -61,16 +64,56 @@ class ProfileScreen extends StatelessWidget {
 
   Widget _buildBody(BuildContext context) {
     return Center(
-      child: ElevatedButton(
-        onPressed: () => _handleLogout(context),
-        child: Text(context.tr.profileLogoutButtonTitle),
+      child: SingleChildScrollView(
+        padding: const EdgeInsets.all(16.0),
+        child: Form(
+          child: Column(
+            children: <Widget>[
+              const SizedBox(height: 30),
+              _buildSignOutButton(context),
+              const SizedBox(height: 20),
+              BlocConsumer<AuthBloc, AuthState>(
+                listener: (context, state) {
+                  if (state is SignOutSuccess) {
+                    WidgetsBinding.instance.addPostFrameCallback((_) {
+                      _navigateToSignIn(context);
+                    });
+                  } else if (state is SignOutFailure) {
+                    showDialog(
+                      context: context,
+                      builder: (_) => RetryDialog(
+                        title: state.error,
+                        onRetryPressed: () => _buildSignOutButton(context),
+                      ),
+                    );
+                  }
+                },
+                builder: (context, state) {
+                  if (state is SignOutLoading) {
+                    return ProgressDialog(
+                      title: context.tr.profileProgressLogout,
+                      isProgressed: true,
+                    );
+                  }
+                  return const SizedBox.shrink();
+                },
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }
 
-  void _handleLogout(BuildContext context) {
+  Widget _buildSignOutButton(BuildContext context) {
+    return ElevatedButton(
+      onPressed: () => _onSignOutPressed(context),
+      child: Text(context.tr.profileLogoutButtonTitle),
+    );
+  }
+
+  void _onSignOutPressed(BuildContext context) {
     context.read<AuthBloc>().add(SignOutRequested());
-    _navigateToSignIn(context);
   }
 
   void _navigateToSignIn(BuildContext context) {
