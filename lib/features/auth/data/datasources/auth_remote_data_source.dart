@@ -85,8 +85,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   @override
   Future<bool> checkUserLoggedIn() async {
     try {
-      final authSession = await Amplify.Auth.fetchAuthSession(
-          options: const FetchAuthSessionOptions(forceRefresh: true));
+      final authSession = await Amplify.Auth.fetchAuthSession();
       _logger.info(
           'AuthRemoteDataSourceImpl: Successfully fetched auth session: ${authSession.isSignedIn}');
       return authSession.isSignedIn;
