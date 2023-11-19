@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 // Project imports:
 import 'package:scr_vendor_ui/core/utils/extension.dart';
-import 'package:scr_vendor_ui/core/utils/navigation_utils.dart';
+import 'package:scr_vendor_ui/core/utils/navigation.dart';
 
 /// Represents the screen listing hubs with options to create and edit.
 class HubListScreen extends StatelessWidget {
@@ -40,7 +40,7 @@ class HubListScreen extends StatelessWidget {
   }
 
   void _navigateToCreateHub(BuildContext context) {
-    NavigationUtils.navigateToCreateHub(context);
+    Navigation.navigateToCreateHub(context);
   }
 
   void _navigateToEditHub(BuildContext context) {
@@ -49,6 +49,6 @@ class HubListScreen extends StatelessWidget {
     // String selectedHubId = ...;
 
     // For now, using a placeholder
-    NavigationUtils.navigateToEditHub(context, '4');
+    Navigation.navigateToEditHub(context, '4');
   }
 }
