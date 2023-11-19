@@ -8,7 +8,7 @@ import 'package:go_router/go_router.dart';
 import 'package:scr_vendor_ui/constants/app_route_constants.dart';
 import 'package:scr_vendor_ui/core/utils/logger.dart';
 
-class NavigationUtils {
+class Navigation {
   static final AppLogger _logger = AppLogger();
 
   /// Navigates to a specified page based on the given [pageName].
@@ -19,7 +19,7 @@ class NavigationUtils {
       context.goNamed(pageName);
     } catch (e) {
       _logger.error(
-          'NavigationUtils: Failed to navigate to $pageName: ${e.toString()}');
+          'Navigation: Failed to navigate to $pageName: ${e.toString()}');
       rethrow; // Rethrow the exception to preserve the stack trace
     }
   }

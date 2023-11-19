@@ -10,7 +10,7 @@ import 'package:scr_vendor_ui/common/dialogs/retry_dialog.dart';
 import 'package:scr_vendor_ui/common/validators/validators.dart';
 import 'package:scr_vendor_ui/common/widgets/text_input.dart';
 import 'package:scr_vendor_ui/core/utils/extension.dart';
-import 'package:scr_vendor_ui/core/utils/navigation_utils.dart';
+import 'package:scr_vendor_ui/core/utils/navigation.dart';
 import 'package:scr_vendor_ui/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:scr_vendor_ui/features/auth/presentation/bloc/auth_event.dart';
 import 'package:scr_vendor_ui/features/auth/presentation/bloc/auth_state.dart';
@@ -73,11 +73,11 @@ class VerifyOtpScreen extends StatelessWidget {
     return BlocConsumer<AuthBloc, AuthState>(
       listener: (context, state) {
         if (state is VerifyOtpSuccess) {
-          NavigationUtils.navigateToHubs(context);
+          Navigation.navigateToHubs(context);
         } else if (state is VerifyOtpInvalid) {
           _showRetryDialog(context, 'Invalid OTP');
         } else if (state is VerifyOtpFailedThrice) {
-          NavigationUtils.navigateToSignIn(context);
+          Navigation.navigateToSignIn(context);
         } else if (state is VerifyOtpFailure) {
           _showRetryDialog(context, state.error);
         }

@@ -10,7 +10,7 @@ import 'package:scr_vendor_ui/common/dialogs/retry_dialog.dart';
 import 'package:scr_vendor_ui/common/validators/validators.dart';
 import 'package:scr_vendor_ui/common/widgets/text_input.dart';
 import 'package:scr_vendor_ui/core/utils/extension.dart';
-import 'package:scr_vendor_ui/core/utils/navigation_utils.dart';
+import 'package:scr_vendor_ui/core/utils/navigation.dart';
 import 'package:scr_vendor_ui/features/auth/data/models/user_cognito_model.dart';
 import 'package:scr_vendor_ui/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:scr_vendor_ui/features/auth/presentation/bloc/auth_event.dart';
@@ -50,7 +50,7 @@ class SignUpScreen extends StatelessWidget {
                 listener: (context, state) {
                   if (state is SignUpSuccess) {
                     WidgetsBinding.instance.addPostFrameCallback((_) {
-                      NavigationUtils.navigateToSignIn(context);
+                      Navigation.navigateToSignIn(context);
                     });
                   } else if (state is SignUpFailure) {
                     showDialog(

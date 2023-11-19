@@ -13,7 +13,7 @@ import 'package:scr_vendor_ui/core/bloc/localization/localization_bloc.dart';
 import 'package:scr_vendor_ui/core/bloc/localization/localization_event.dart';
 import 'package:scr_vendor_ui/core/bloc/theme/theme_bloc.dart';
 import 'package:scr_vendor_ui/core/utils/extension.dart';
-import 'package:scr_vendor_ui/core/utils/navigation_utils.dart';
+import 'package:scr_vendor_ui/core/utils/navigation.dart';
 import 'package:scr_vendor_ui/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:scr_vendor_ui/features/auth/presentation/bloc/auth_event.dart';
 import 'package:scr_vendor_ui/features/auth/presentation/bloc/auth_state.dart';
@@ -116,6 +116,6 @@ class ProfileScreen extends StatelessWidget {
   }
 
   void _navigateToSignIn(BuildContext context) {
-    NavigationUtils.navigateToSignIn(context);
+    Navigation.navigateToSignIn(context);
   }
 }

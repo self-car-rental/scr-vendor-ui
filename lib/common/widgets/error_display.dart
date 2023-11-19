@@ -27,7 +27,7 @@ class ErrorDisplay extends StatelessWidget {
           // Additional action specifically for session failure
           if (state.status == ErrorBlocStatus.sessionFailure) {
             // Navigate or perform other actions specific to session failure
-            // Example: NavigationUtils.navigateToSignIn(context);
+            // Example: Navigation.navigateToSignIn(context);
           }
         }
       },
