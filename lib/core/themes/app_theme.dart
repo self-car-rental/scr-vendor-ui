@@ -2,8 +2,8 @@
 import 'package:flutter/material.dart';
 
 // Project imports:
-import 'package:scr_vendor/core/themes/app_color.dart';
-import 'package:scr_vendor/core/themes/app_style.dart';
+import 'package:scr_vendor_ui/core/themes/app_color.dart';
+import 'package:scr_vendor_ui/core/themes/app_style.dart';
 
 enum AppTheme { lightTheme, darkTheme }
 

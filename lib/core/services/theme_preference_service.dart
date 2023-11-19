@@ -2,7 +2,7 @@
 import 'package:hive/hive.dart';
 
 // Project imports:
-import 'package:scr_vendor/core/themes/app_theme.dart';
+import 'package:scr_vendor_ui/core/themes/app_theme.dart';
 
 class ThemePreferenceService {
   static const _boxName = 'themePreferences';

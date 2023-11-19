@@ -5,21 +5,21 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 // Project imports:
-import 'package:scr_vendor/common/dialogs/create_dialog.dart';
-import 'package:scr_vendor/common/dialogs/delete_dialog.dart';
-import 'package:scr_vendor/common/dialogs/progress_dialog.dart';
-import 'package:scr_vendor/common/dialogs/retry_dialog.dart';
-import 'package:scr_vendor/common/widgets/empty_widget.dart';
-import 'package:scr_vendor/common/widgets/popup_menu.dart';
-import 'package:scr_vendor/common/widgets/spinkit_indicator.dart';
-import 'package:scr_vendor/core/bloc/bloc_helpers/app_bloc_state.dart';
-import 'package:scr_vendor/core/bloc/bloc_helpers/bloc_api_helper.dart';
-import 'package:scr_vendor/core/utils/extension.dart';
-import 'package:scr_vendor/features/user/data/models/user.dart';
-import 'package:scr_vendor/features/user/domain/entities/user_entity.dart';
-import 'package:scr_vendor/features/user/presentation/bloc/user_bloc.dart';
-import 'package:scr_vendor/features/user/presentation/bloc/user_event.dart';
-import 'package:scr_vendor/features/user/presentation/widgets/status_container.dart';
+import 'package:scr_vendor_ui/common/dialogs/create_dialog.dart';
+import 'package:scr_vendor_ui/common/dialogs/delete_dialog.dart';
+import 'package:scr_vendor_ui/common/dialogs/progress_dialog.dart';
+import 'package:scr_vendor_ui/common/dialogs/retry_dialog.dart';
+import 'package:scr_vendor_ui/common/widgets/empty_widget.dart';
+import 'package:scr_vendor_ui/common/widgets/popup_menu.dart';
+import 'package:scr_vendor_ui/common/widgets/spinkit_indicator.dart';
+import 'package:scr_vendor_ui/core/bloc/bloc_helpers/app_bloc_state.dart';
+import 'package:scr_vendor_ui/core/bloc/bloc_helpers/bloc_api_helper.dart';
+import 'package:scr_vendor_ui/core/utils/extension.dart';
+import 'package:scr_vendor_ui/features/user/data/models/user.dart';
+import 'package:scr_vendor_ui/features/user/domain/entities/user_entity.dart';
+import 'package:scr_vendor_ui/features/user/presentation/bloc/user_bloc.dart';
+import 'package:scr_vendor_ui/features/user/presentation/bloc/user_event.dart';
+import 'package:scr_vendor_ui/features/user/presentation/widgets/status_container.dart';
 
 enum Operation { edit, delete }
 

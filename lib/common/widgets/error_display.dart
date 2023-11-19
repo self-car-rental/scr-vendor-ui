@@ -6,9 +6,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 // Project imports:
-import 'package:scr_vendor/core/bloc/error/error_bloc.dart';
-import 'package:scr_vendor/core/bloc/error/error_event.dart';
-import 'package:scr_vendor/core/bloc/error/error_state.dart';
+import 'package:scr_vendor_ui/core/bloc/error/error_bloc.dart';
+import 'package:scr_vendor_ui/core/bloc/error/error_event.dart';
+import 'package:scr_vendor_ui/core/bloc/error/error_state.dart';
 
 class ErrorDisplay extends StatelessWidget {
   final Widget child;

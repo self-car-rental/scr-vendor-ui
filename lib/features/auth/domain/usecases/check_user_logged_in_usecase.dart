@@ -4,10 +4,10 @@
 import 'package:flutter/foundation.dart' show immutable;
 
 // Project imports:
-import 'package:scr_vendor/core/services/auth_preference_service.dart';
-import 'package:scr_vendor/core/utils/logger.dart';
-import 'package:scr_vendor/features/auth/domain/repositories/auth_repository.dart';
-import 'package:scr_vendor/service_locator.dart';
+import 'package:scr_vendor_ui/core/services/auth_preference_service.dart';
+import 'package:scr_vendor_ui/core/utils/logger.dart';
+import 'package:scr_vendor_ui/features/auth/domain/repositories/auth_repository.dart';
+import 'package:scr_vendor_ui/service_locator.dart';
 
 @immutable
 class CheckUserLoggedInUseCase {

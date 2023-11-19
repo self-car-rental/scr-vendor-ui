@@ -3,15 +3,15 @@ import 'package:amplify_auth_cognito/amplify_auth_cognito.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 // Project imports:
-import 'package:scr_vendor/features/auth/domain/exceptions/invalid_otp_exception.dart';
-import 'package:scr_vendor/features/auth/domain/exceptions/user_mobile_already_exists_exception.dart';
-import 'package:scr_vendor/features/auth/domain/usecases/check_user_logged_in_usecase.dart';
-import 'package:scr_vendor/features/auth/domain/usecases/sign_in_usecase.dart';
-import 'package:scr_vendor/features/auth/domain/usecases/sign_out_usecase.dart';
-import 'package:scr_vendor/features/auth/domain/usecases/sign_up_usecase.dart';
-import 'package:scr_vendor/features/auth/domain/usecases/verify_otp_usecase.dart';
-import 'package:scr_vendor/features/auth/presentation/bloc/auth_event.dart';
-import 'package:scr_vendor/features/auth/presentation/bloc/auth_state.dart';
+import 'package:scr_vendor_ui/features/auth/domain/exceptions/invalid_otp_exception.dart';
+import 'package:scr_vendor_ui/features/auth/domain/exceptions/user_mobile_already_exists_exception.dart';
+import 'package:scr_vendor_ui/features/auth/domain/usecases/check_user_logged_in_usecase.dart';
+import 'package:scr_vendor_ui/features/auth/domain/usecases/sign_in_usecase.dart';
+import 'package:scr_vendor_ui/features/auth/domain/usecases/sign_out_usecase.dart';
+import 'package:scr_vendor_ui/features/auth/domain/usecases/sign_up_usecase.dart';
+import 'package:scr_vendor_ui/features/auth/domain/usecases/verify_otp_usecase.dart';
+import 'package:scr_vendor_ui/features/auth/presentation/bloc/auth_event.dart';
+import 'package:scr_vendor_ui/features/auth/presentation/bloc/auth_state.dart';
 
 /// A BLoC (Business Logic Component) for handling authentication-related operations.
 ///

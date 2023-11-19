@@ -6,17 +6,17 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 // Project imports:
-import 'package:scr_vendor/common/dialogs/progress_dialog.dart';
-import 'package:scr_vendor/common/dialogs/retry_dialog.dart';
-import 'package:scr_vendor/constants/app_language_constants.dart';
-import 'package:scr_vendor/core/bloc/localization/localization_bloc.dart';
-import 'package:scr_vendor/core/bloc/localization/localization_event.dart';
-import 'package:scr_vendor/core/bloc/theme/theme_bloc.dart';
-import 'package:scr_vendor/core/utils/extension.dart';
-import 'package:scr_vendor/core/utils/navigation_utils.dart';
-import 'package:scr_vendor/features/auth/presentation/bloc/auth_bloc.dart';
-import 'package:scr_vendor/features/auth/presentation/bloc/auth_event.dart';
-import 'package:scr_vendor/features/auth/presentation/bloc/auth_state.dart';
+import 'package:scr_vendor_ui/common/dialogs/progress_dialog.dart';
+import 'package:scr_vendor_ui/common/dialogs/retry_dialog.dart';
+import 'package:scr_vendor_ui/constants/app_language_constants.dart';
+import 'package:scr_vendor_ui/core/bloc/localization/localization_bloc.dart';
+import 'package:scr_vendor_ui/core/bloc/localization/localization_event.dart';
+import 'package:scr_vendor_ui/core/bloc/theme/theme_bloc.dart';
+import 'package:scr_vendor_ui/core/utils/extension.dart';
+import 'package:scr_vendor_ui/core/utils/navigation_utils.dart';
+import 'package:scr_vendor_ui/features/auth/presentation/bloc/auth_bloc.dart';
+import 'package:scr_vendor_ui/features/auth/presentation/bloc/auth_event.dart';
+import 'package:scr_vendor_ui/features/auth/presentation/bloc/auth_state.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});

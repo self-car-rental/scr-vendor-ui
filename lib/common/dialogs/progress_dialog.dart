@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 
 // Project imports:
-import 'package:scr_vendor/common/widgets/spinkit_indicator.dart';
+import 'package:scr_vendor_ui/common/widgets/spinkit_indicator.dart';
 
 class ProgressDialog extends StatelessWidget {
   const ProgressDialog({

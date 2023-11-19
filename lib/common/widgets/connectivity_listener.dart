@@ -6,7 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 // Project imports:
-import 'package:scr_vendor/core/bloc/connectivity/connectivity_bloc.dart';
+import 'package:scr_vendor_ui/core/bloc/connectivity/connectivity_bloc.dart';
 
 class ConnectivityStatusListener extends StatelessWidget {
   final Widget child;

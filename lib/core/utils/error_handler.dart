@@ -5,9 +5,9 @@ import 'dart:io';
 import 'package:amplify_flutter/amplify_flutter.dart';
 
 // Project imports:
-import 'package:scr_vendor/core/bloc/error/error_bloc.dart';
-import 'package:scr_vendor/core/bloc/error/error_event.dart';
-import 'package:scr_vendor/service_locator.dart';
+import 'package:scr_vendor_ui/core/bloc/error/error_bloc.dart';
+import 'package:scr_vendor_ui/core/bloc/error/error_event.dart';
+import 'package:scr_vendor_ui/service_locator.dart';
 
 class ErrorHandler {
   static void handleException(Object exception) {

@@ -2,11 +2,11 @@
 import 'package:amplify_auth_cognito/amplify_auth_cognito.dart';
 
 // Project imports:
-import 'package:scr_vendor/core/utils/error_handler.dart';
-import 'package:scr_vendor/core/utils/logger.dart';
-import 'package:scr_vendor/features/auth/data/datasources/auth_remote_data_source.dart';
+import 'package:scr_vendor_ui/core/utils/error_handler.dart';
+import 'package:scr_vendor_ui/core/utils/logger.dart';
+import 'package:scr_vendor_ui/features/auth/data/datasources/auth_remote_data_source.dart';
 
-import 'package:scr_vendor/features/auth/domain/repositories/auth_repository.dart'; // Import AppLogger
+import 'package:scr_vendor_ui/features/auth/domain/repositories/auth_repository.dart'; // Import AppLogger
 
 class AuthRepositoryImpl extends AuthRepository {
   final AuthRemoteDataSource remoteDataSource;

@@ -1,6 +1,6 @@
 // Project imports:
-import 'package:scr_vendor/features/user/data/models/user.dart';
-import 'package:scr_vendor/features/user/domain/entities/user_entity.dart';
+import 'package:scr_vendor_ui/features/user/data/models/user.dart';
+import 'package:scr_vendor_ui/features/user/domain/entities/user_entity.dart';
 
 /// Events should be named in the past tense because events are things
 /// that have already occurred from the bloc's perspective.

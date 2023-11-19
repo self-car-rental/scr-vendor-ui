@@ -3,7 +3,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 // Project imports:
-import 'package:scr_vendor/constants/app_route_constants.dart';
+import 'package:scr_vendor_ui/constants/app_route_constants.dart';
 
 part 'bottom_navigation_state.dart';
 

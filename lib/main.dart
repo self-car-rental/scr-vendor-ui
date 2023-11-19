@@ -11,21 +11,21 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 
 // Project imports:
-import 'package:scr_vendor/common/widgets/connectivity_listener.dart';
-import 'package:scr_vendor/common/widgets/error_display.dart';
-import 'package:scr_vendor/config/app_config.dart';
-import 'package:scr_vendor/constants/app_language_constants.dart';
-import 'package:scr_vendor/core/amplify/amplify_initializer.dart';
-import 'package:scr_vendor/core/bloc/connectivity/connectivity_bloc.dart';
-import 'package:scr_vendor/core/bloc/error/error_bloc.dart';
-import 'package:scr_vendor/core/bloc/localization/localization_bloc.dart';
-import 'package:scr_vendor/core/bloc/theme/theme_bloc.dart';
-import 'package:scr_vendor/core/routes/app_router.dart';
-import 'package:scr_vendor/core/services/language_preference_service.dart';
-import 'package:scr_vendor/core/services/theme_preference_service.dart';
-import 'package:scr_vendor/features/auth/presentation/bloc/auth_bloc.dart';
-import 'package:scr_vendor/features/user/presentation/bloc/user_bloc.dart';
-import 'package:scr_vendor/service_locator.dart';
+import 'package:scr_vendor_ui/common/widgets/connectivity_listener.dart';
+import 'package:scr_vendor_ui/common/widgets/error_display.dart';
+import 'package:scr_vendor_ui/config/app_config.dart';
+import 'package:scr_vendor_ui/constants/app_language_constants.dart';
+import 'package:scr_vendor_ui/core/amplify/amplify_initializer.dart';
+import 'package:scr_vendor_ui/core/bloc/connectivity/connectivity_bloc.dart';
+import 'package:scr_vendor_ui/core/bloc/error/error_bloc.dart';
+import 'package:scr_vendor_ui/core/bloc/localization/localization_bloc.dart';
+import 'package:scr_vendor_ui/core/bloc/theme/theme_bloc.dart';
+import 'package:scr_vendor_ui/core/routes/app_router.dart';
+import 'package:scr_vendor_ui/core/services/language_preference_service.dart';
+import 'package:scr_vendor_ui/core/services/theme_preference_service.dart';
+import 'package:scr_vendor_ui/features/auth/presentation/bloc/auth_bloc.dart';
+import 'package:scr_vendor_ui/features/user/presentation/bloc/user_bloc.dart';
+import 'package:scr_vendor_ui/service_locator.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
