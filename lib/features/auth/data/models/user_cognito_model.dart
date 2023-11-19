@@ -2,7 +2,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 // Project imports:
-import 'package:scr_vendor/features/auth/domain/entities/user_cognito_entity.dart';
+import 'package:scr_vendor_ui/features/auth/domain/entities/user_cognito_entity.dart';
 
 // This file is part of the UserCognitoModel class which is used for JSON serialization
 // and represents a user entity for Cognito authentication.

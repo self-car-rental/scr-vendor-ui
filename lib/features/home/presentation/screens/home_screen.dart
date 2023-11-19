@@ -6,10 +6,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 // Project imports:
-import 'package:scr_vendor/common/widgets/named_navigation_bar_item_widget.dart';
-import 'package:scr_vendor/constants/app_route_constants.dart';
-import 'package:scr_vendor/core/bottom_navigation/bottom_navigation_cubit.dart';
-import 'package:scr_vendor/core/utils/extension.dart';
+import 'package:scr_vendor_ui/common/widgets/named_navigation_bar_item_widget.dart';
+import 'package:scr_vendor_ui/constants/app_route_constants.dart';
+import 'package:scr_vendor_ui/core/bottom_navigation/bottom_navigation_cubit.dart';
+import 'package:scr_vendor_ui/core/utils/extension.dart';
 
 class HomeScreen extends StatelessWidget {
   final Widget screen;

@@ -6,7 +6,7 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 // Project imports:
-import 'package:scr_vendor/core/utils/logger.dart';
+import 'package:scr_vendor_ui/core/utils/logger.dart';
 
 enum ConnectivityState { connected, disconnected }
 

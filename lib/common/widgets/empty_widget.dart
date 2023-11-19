@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 
 // Project imports:
-import 'package:scr_vendor/core/themes/app_asset.dart';
+import 'package:scr_vendor_ui/core/themes/app_asset.dart';
 
 // Project imports:
 

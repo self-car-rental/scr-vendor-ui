@@ -8,8 +8,8 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 // Project imports:
-import 'package:scr_vendor/core/services/theme_preference_service.dart';
-import 'package:scr_vendor/core/themes/app_theme.dart';
+import 'package:scr_vendor_ui/core/services/theme_preference_service.dart';
+import 'package:scr_vendor_ui/core/themes/app_theme.dart';
 
 part 'theme_event.dart';
 part 'theme_state.dart';

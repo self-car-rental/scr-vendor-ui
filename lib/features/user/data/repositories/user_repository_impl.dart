@@ -1,10 +1,10 @@
 // Project imports:
-import 'package:scr_vendor/core/network/api_result.dart';
-import 'package:scr_vendor/core/repository/repository_helper.dart';
-import 'package:scr_vendor/features/user/data/datasources/user_remote_data_source.dart';
-import 'package:scr_vendor/features/user/data/models/user.dart';
-import 'package:scr_vendor/features/user/domain/entities/user_entity.dart';
-import 'package:scr_vendor/features/user/domain/repositories/user_repository.dart';
+import 'package:scr_vendor_ui/core/network/api_result.dart';
+import 'package:scr_vendor_ui/core/repository/repository_helper.dart';
+import 'package:scr_vendor_ui/features/user/data/datasources/user_remote_data_source.dart';
+import 'package:scr_vendor_ui/features/user/data/models/user.dart';
+import 'package:scr_vendor_ui/features/user/domain/entities/user_entity.dart';
+import 'package:scr_vendor_ui/features/user/domain/repositories/user_repository.dart';
 
 class UserRepositoryImpl extends UserRepository with RepositoryHelper<User> {
   final UserRemoteDataSource remoteDataSource;

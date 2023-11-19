@@ -6,21 +6,21 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 // Project imports:
-import 'package:scr_vendor/constants/app_route_constants.dart';
-import 'package:scr_vendor/core/bottom_navigation/bottom_navigation_cubit.dart';
-import 'package:scr_vendor/core/services/auth_preference_service.dart';
-import 'package:scr_vendor/core/utils/logger.dart';
-import 'package:scr_vendor/features/auth/presentation/bloc/auth_bloc.dart';
-import 'package:scr_vendor/features/auth/presentation/screens/sign_in_screen.dart';
-import 'package:scr_vendor/features/auth/presentation/screens/sign_up_screen.dart';
-import 'package:scr_vendor/features/auth/presentation/screens/verify_otp_screen.dart';
-import 'package:scr_vendor/features/car/presentation/screens/car_list_screen.dart';
-import 'package:scr_vendor/features/home/presentation/screens/home_screen.dart';
-import 'package:scr_vendor/features/hub/presentation/screens/create_hub_screen.dart';
-import 'package:scr_vendor/features/hub/presentation/screens/edit_hub_screen.dart';
-import 'package:scr_vendor/features/hub/presentation/screens/hub_list_screen.dart';
-import 'package:scr_vendor/features/profile/presentation/screens/profile_screen.dart';
-import 'package:scr_vendor/features/user/presentation/screens/user_list_screen.dart';
+import 'package:scr_vendor_ui/constants/app_route_constants.dart';
+import 'package:scr_vendor_ui/core/bottom_navigation/bottom_navigation_cubit.dart';
+import 'package:scr_vendor_ui/core/services/auth_preference_service.dart';
+import 'package:scr_vendor_ui/core/utils/logger.dart';
+import 'package:scr_vendor_ui/features/auth/presentation/bloc/auth_bloc.dart';
+import 'package:scr_vendor_ui/features/auth/presentation/screens/sign_in_screen.dart';
+import 'package:scr_vendor_ui/features/auth/presentation/screens/sign_up_screen.dart';
+import 'package:scr_vendor_ui/features/auth/presentation/screens/verify_otp_screen.dart';
+import 'package:scr_vendor_ui/features/car/presentation/screens/car_list_screen.dart';
+import 'package:scr_vendor_ui/features/home/presentation/screens/home_screen.dart';
+import 'package:scr_vendor_ui/features/hub/presentation/screens/create_hub_screen.dart';
+import 'package:scr_vendor_ui/features/hub/presentation/screens/edit_hub_screen.dart';
+import 'package:scr_vendor_ui/features/hub/presentation/screens/hub_list_screen.dart';
+import 'package:scr_vendor_ui/features/profile/presentation/screens/profile_screen.dart';
+import 'package:scr_vendor_ui/features/user/presentation/screens/user_list_screen.dart';
 
 /// Manages the routing for the entire application.
 class AppRouter {

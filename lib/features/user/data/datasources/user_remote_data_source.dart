@@ -1,8 +1,8 @@
 // Project imports:
-import 'package:scr_vendor/core/network/api_endpoints.dart';
-import 'package:scr_vendor/core/network/api_helper.dart';
-import 'package:scr_vendor/features/user/data/models/user.dart';
-import 'package:scr_vendor/features/user/domain/entities/user_entity.dart';
+import 'package:scr_vendor_ui/core/network/api_endpoints.dart';
+import 'package:scr_vendor_ui/core/network/api_helper.dart';
+import 'package:scr_vendor_ui/features/user/data/models/user.dart';
+import 'package:scr_vendor_ui/features/user/domain/entities/user_entity.dart';
 
 abstract class UserRemoteDataSource {
   Future<List<User>> getUsers({Gender? gender, UserStatus? status});

@@ -2,14 +2,14 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 // Project imports:
-import 'package:scr_vendor/core/bloc/bloc_helpers/app_bloc_state.dart';
-import 'package:scr_vendor/core/bloc/bloc_helpers/bloc_api_helper.dart';
-import 'package:scr_vendor/features/user/data/models/user.dart';
-import 'package:scr_vendor/features/user/domain/usecases/create_user_usecase.dart';
-import 'package:scr_vendor/features/user/domain/usecases/delete_user_usecase.dart';
-import 'package:scr_vendor/features/user/domain/usecases/get_users_usecase.dart';
-import 'package:scr_vendor/features/user/domain/usecases/update_user_usecase.dart';
-import 'package:scr_vendor/features/user/presentation/bloc/user_event.dart';
+import 'package:scr_vendor_ui/core/bloc/bloc_helpers/app_bloc_state.dart';
+import 'package:scr_vendor_ui/core/bloc/bloc_helpers/bloc_api_helper.dart';
+import 'package:scr_vendor_ui/features/user/data/models/user.dart';
+import 'package:scr_vendor_ui/features/user/domain/usecases/create_user_usecase.dart';
+import 'package:scr_vendor_ui/features/user/domain/usecases/delete_user_usecase.dart';
+import 'package:scr_vendor_ui/features/user/domain/usecases/get_users_usecase.dart';
+import 'package:scr_vendor_ui/features/user/domain/usecases/update_user_usecase.dart';
+import 'package:scr_vendor_ui/features/user/presentation/bloc/user_event.dart';
 
 typedef Emit = Emitter<BlocState<User>>;
 

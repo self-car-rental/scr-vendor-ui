@@ -2,10 +2,10 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 // Project imports:
-import 'package:scr_vendor/core/bloc/error/error_event.dart';
-import 'package:scr_vendor/core/bloc/error/error_state.dart';
-import 'package:scr_vendor/core/services/auth_preference_service.dart';
-import 'package:scr_vendor/service_locator.dart';
+import 'package:scr_vendor_ui/core/bloc/error/error_event.dart';
+import 'package:scr_vendor_ui/core/bloc/error/error_state.dart';
+import 'package:scr_vendor_ui/core/services/auth_preference_service.dart';
+import 'package:scr_vendor_ui/service_locator.dart';
 
 class ErrorBloc extends Bloc<ErrorEvent, ErrorState> {
   ErrorBloc() : super(const ErrorState()) {

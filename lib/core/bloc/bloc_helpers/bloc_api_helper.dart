@@ -2,8 +2,8 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 // Project imports:
-import 'package:scr_vendor/core/bloc/bloc_helpers/app_bloc_state.dart';
-import 'package:scr_vendor/core/network/api_result.dart';
+import 'package:scr_vendor_ui/core/bloc/bloc_helpers/app_bloc_state.dart';
+import 'package:scr_vendor_ui/core/network/api_result.dart';
 
 typedef Emit<T> = Emitter<BlocState<T>>;
 

@@ -1,5 +1,5 @@
 // Project imports:
-import 'package:scr_vendor/features/auth/data/models/user_cognito_model.dart';
+import 'package:scr_vendor_ui/features/auth/data/models/user_cognito_model.dart';
 
 /// events are handled by the bloc to trigger corresponding state changes.
 

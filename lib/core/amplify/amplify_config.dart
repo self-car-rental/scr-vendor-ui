@@ -1,5 +1,5 @@
 // Project imports:
-import 'package:scr_vendor/config/app_config.dart';
+import 'package:scr_vendor_ui/config/app_config.dart';
 
 const amplifyConfig = ''' {
   "UserAgent": "aws-amplify-cli/2.0",

@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 
 // Project imports:
-import 'package:scr_vendor/features/user/domain/entities/user_entity.dart';
+import 'package:scr_vendor_ui/features/user/domain/entities/user_entity.dart';
 
 class StatusContainer extends StatelessWidget {
   const StatusContainer({super.key, required this.status});

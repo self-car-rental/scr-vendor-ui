@@ -5,8 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 // Project imports:
-import 'package:scr_vendor/constants/app_route_constants.dart';
-import 'package:scr_vendor/core/utils/logger.dart';
+import 'package:scr_vendor_ui/constants/app_route_constants.dart';
+import 'package:scr_vendor_ui/core/utils/logger.dart';
 
 class NavigationUtils {
   static final AppLogger _logger = AppLogger();

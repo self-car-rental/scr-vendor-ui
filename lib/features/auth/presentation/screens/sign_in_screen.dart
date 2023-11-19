@@ -5,15 +5,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 // Project imports:
-import 'package:scr_vendor/common/dialogs/progress_dialog.dart';
-import 'package:scr_vendor/common/dialogs/retry_dialog.dart';
-import 'package:scr_vendor/common/validators/validators.dart';
-import 'package:scr_vendor/common/widgets/text_input.dart';
-import 'package:scr_vendor/core/utils/extension.dart';
-import 'package:scr_vendor/core/utils/navigation_utils.dart';
-import 'package:scr_vendor/features/auth/presentation/bloc/auth_bloc.dart';
-import 'package:scr_vendor/features/auth/presentation/bloc/auth_event.dart';
-import 'package:scr_vendor/features/auth/presentation/bloc/auth_state.dart';
+import 'package:scr_vendor_ui/common/dialogs/progress_dialog.dart';
+import 'package:scr_vendor_ui/common/dialogs/retry_dialog.dart';
+import 'package:scr_vendor_ui/common/validators/validators.dart';
+import 'package:scr_vendor_ui/common/widgets/text_input.dart';
+import 'package:scr_vendor_ui/core/utils/extension.dart';
+import 'package:scr_vendor_ui/core/utils/navigation_utils.dart';
+import 'package:scr_vendor_ui/features/auth/presentation/bloc/auth_bloc.dart';
+import 'package:scr_vendor_ui/features/auth/presentation/bloc/auth_event.dart';
+import 'package:scr_vendor_ui/features/auth/presentation/bloc/auth_state.dart';
 
 class SignInScreen extends StatelessWidget {
   SignInScreen({super.key});

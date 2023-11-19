@@ -5,8 +5,8 @@ import 'dart:convert';
 import 'package:amplify_flutter/amplify_flutter.dart';
 
 // Project imports:
-import 'package:scr_vendor/core/utils/extension.dart';
-import 'package:scr_vendor/core/utils/logger.dart';
+import 'package:scr_vendor_ui/core/utils/extension.dart';
+import 'package:scr_vendor_ui/core/utils/logger.dart';
 
 abstract class ApiHelper<T> {
   final AppLogger _logger = AppLogger();

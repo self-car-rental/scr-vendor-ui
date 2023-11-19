@@ -4,8 +4,8 @@ import 'package:amplify_auth_cognito/amplify_auth_cognito.dart';
 import 'package:amplify_flutter/amplify_flutter.dart';
 
 // Project imports:
-import 'package:scr_vendor/core/amplify/amplify_config.dart';
-import 'package:scr_vendor/core/utils/logger.dart';
+import 'package:scr_vendor_ui/core/amplify/amplify_config.dart';
+import 'package:scr_vendor_ui/core/utils/logger.dart';
 
 final AppLogger _logger = AppLogger();
 

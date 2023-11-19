@@ -2,10 +2,10 @@
 import 'package:flutter/material.dart';
 
 // Project imports:
-import 'package:scr_vendor/common/widgets/drop_down.dart';
-import 'package:scr_vendor/common/widgets/text_input.dart';
-import 'package:scr_vendor/features/user/data/models/user.dart';
-import 'package:scr_vendor/features/user/domain/entities/user_entity.dart';
+import 'package:scr_vendor_ui/common/widgets/drop_down.dart';
+import 'package:scr_vendor_ui/common/widgets/text_input.dart';
+import 'package:scr_vendor_ui/features/user/data/models/user.dart';
+import 'package:scr_vendor_ui/features/user/domain/entities/user_entity.dart';
 
 enum Type { create, update }
 

@@ -1,8 +1,8 @@
 // Package imports:
 
 // Project imports:
-import 'package:scr_vendor/core/network/api_result.dart';
-import 'package:scr_vendor/core/utils/error_handler.dart';
+import 'package:scr_vendor_ui/core/network/api_result.dart';
+import 'package:scr_vendor_ui/core/utils/error_handler.dart';
 
 mixin RepositoryHelper<T> {
   Future<ApiResult<List<T>>> checkItemsFailOrSuccess(
