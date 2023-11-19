@@ -14,7 +14,7 @@ import 'package:scr_vendor/common/widgets/popup_menu.dart';
 import 'package:scr_vendor/common/widgets/spinkit_indicator.dart';
 import 'package:scr_vendor/core/bloc/bloc_helpers/app_bloc_state.dart';
 import 'package:scr_vendor/core/bloc/bloc_helpers/bloc_api_helper.dart';
-import 'package:scr_vendor/core/utils/app_extension.dart';
+import 'package:scr_vendor/core/utils/extension.dart';
 import 'package:scr_vendor/features/user/data/models/user.dart';
 import 'package:scr_vendor/features/user/domain/entities/user_entity.dart';
 import 'package:scr_vendor/features/user/presentation/bloc/user_bloc.dart';

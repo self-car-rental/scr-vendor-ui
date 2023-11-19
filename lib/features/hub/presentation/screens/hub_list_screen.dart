@@ -1,12 +1,9 @@
 // Flutter imports:
 import 'package:flutter/material.dart';
 
-// Package imports:
-import 'package:go_router/go_router.dart';
-
 // Project imports:
-import 'package:scr_vendor/constants/app_route_constants.dart';
-import 'package:scr_vendor/core/utils/app_extension.dart';
+import 'package:scr_vendor/core/utils/extension.dart';
+import 'package:scr_vendor/core/utils/navigation_utils.dart';
 
 /// Represents the screen listing hubs with options to create and edit.
 class HubListScreen extends StatelessWidget {
@@ -43,17 +40,15 @@ class HubListScreen extends StatelessWidget {
   }
 
   void _navigateToCreateHub(BuildContext context) {
-    context.goNamed(AppRoutes.name(AppPage.hubsCreate));
+    NavigationUtils.navigateToCreateHub(context);
   }
 
   void _navigateToEditHub(BuildContext context) {
     // Assuming you have a way to select or determine which hub to edit
     // For example, a selectedHubId variable
     // String selectedHubId = ...;
-    // context.goNamed(AppPage.editHub.name, params: {'hubId': selectedHubId});
 
     // For now, using a placeholder
-    context
-        .goNamed(AppRoutes.name(AppPage.hubsEdit), pathParameters: {'id': '4'});
+    NavigationUtils.navigateToEditHub(context, '4');
   }
 }

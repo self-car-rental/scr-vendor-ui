@@ -5,7 +5,7 @@ import 'package:amplify_flutter/amplify_flutter.dart';
 
 // Project imports:
 import 'package:scr_vendor/core/amplify/amplify_config.dart';
-import 'package:scr_vendor/core/utils/app_logger.dart';
+import 'package:scr_vendor/core/utils/logger.dart';
 
 final AppLogger _logger = AppLogger();
 

@@ -3,7 +3,7 @@ import 'package:flutter/foundation.dart';
 
 // Project imports:
 import 'package:scr_vendor/core/services/auth_preference_service.dart';
-import 'package:scr_vendor/core/utils/app_logger.dart';
+import 'package:scr_vendor/core/utils/logger.dart';
 import 'package:scr_vendor/features/auth/domain/exceptions/invalid_otp_exception.dart';
 import 'package:scr_vendor/features/auth/domain/repositories/auth_repository.dart';
 import 'package:scr_vendor/service_locator.dart';

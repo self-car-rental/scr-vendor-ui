@@ -4,13 +4,12 @@ import 'package:flutter/material.dart';
 // Package imports:
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:go_router/go_router.dart';
 
 // Project imports:
-import 'package:scr_vendor/constants/app_route_constants.dart';
 import 'package:scr_vendor/core/bloc/error/error_bloc.dart';
 import 'package:scr_vendor/core/bloc/error/error_event.dart';
 import 'package:scr_vendor/core/bloc/error/error_state.dart';
+import 'package:scr_vendor/core/utils/navigation_utils.dart';
 
 class ErrorDisplay extends StatelessWidget {
   final Widget child;
@@ -22,7 +21,7 @@ class ErrorDisplay extends StatelessWidget {
     return BlocListener<ErrorBloc, ErrorState>(
       listener: (context, state) {
         if (state.status == ErrorBlocStatus.sessionFailure) {
-          context.goNamed(AppRoutes.name(AppPage.signin));
+          NavigationUtils.navigateToSignIn(context);
           _showErrorToast(context, state.message);
           _resetErrorState(context);
         } else if (state.status != ErrorBlocStatus.nothing) {

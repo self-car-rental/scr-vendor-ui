@@ -7,7 +7,7 @@ import 'package:flutter/foundation.dart';
 import 'package:amplify_auth_cognito/amplify_auth_cognito.dart';
 
 // Project imports:
-import 'package:scr_vendor/core/utils/app_logger.dart';
+import 'package:scr_vendor/core/utils/logger.dart';
 import 'package:scr_vendor/features/auth/domain/repositories/auth_repository.dart';
 import 'package:scr_vendor/features/auth/domain/usecases/sign_up_usecase.dart';
 
