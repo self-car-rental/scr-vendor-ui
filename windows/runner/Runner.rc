@@ -92,7 +92,7 @@ BEGIN
             VALUE "CompanyName", "com.example" "\0"
             VALUE "FileDescription", "scr_vendor" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
-            VALUE "InternalName", "scr_vendor" "\0"
+            VALUE "InternalName", "scr_vendor_ui" "\0"
             VALUE "LegalCopyright", "Copyright (C) 2023 com.example. All rights reserved." "\0"
             VALUE "OriginalFilename", "scr_vendor.exe" "\0"
             VALUE "ProductName", "scr_vendor" "\0"
